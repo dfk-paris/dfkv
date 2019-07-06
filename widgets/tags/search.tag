@@ -113,6 +113,14 @@
     }
 
     var newCriteria = function(criteria) {
+      var current = wApp.routing.query();
+      for (var k in criteria) {
+        if (criteria[k] !== current[k]) {
+          criteria['page'] = 1;
+          break;
+        }
+      }
+
       wApp.routing.query(criteria);
     }
 

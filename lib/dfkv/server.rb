@@ -37,7 +37,6 @@ class Dfkv::Server
 
   def search
     @records = Dfkv::Record.
-      # joins(:contributions, :attributions).
       # includes(
       #   # :journal, :volume, :project, :rubric, :location, :editor,
       #   contributions: :person,
