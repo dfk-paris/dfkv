@@ -1,5 +1,5 @@
 <dfkv-search>
-  <form class="header" if={data}>
+  <form class="header" if={data} onsubmit={submit}>
     <strong>Suche</strong>
     <input placeholder="search" onchange={search} value={initialTerms} ref="terms" />
     <!-- a href="#" onclick={newCriteria({terms: null})}>x</a -->
@@ -10,48 +10,53 @@
         if={person && role}
         onclick={newCriteria({person: null, role: null})}
         href="#"
-        class="filter"
+        class="dfkv-filter"
       >
-        {t(role)}:
+        {tDe(role)}:
         {person.display_name}
       </a>
       <a
         if={attrib}
         onclick={newCriteria({attrib: null})}
         href="#"
-        class="filter"
-      >{t(attrib)}</a>
+        class="dfkv-filter"
+      >{tDe(attrib)}</a>
       <a
         if={journal}
         onclick={newCriteria({journal: null})}
         href="#"
-        class="filter"
-      >{t(journal)}</a>
+        class="dfkv-filter"
+      >{tDe(journal)}</a>
       <a
         if={volume}
         onclick={newCriteria({volume: null})}
         href="#"
-        class="filter"
-      >{t(volume)}</a>
+        class="dfkv-filter"
+      >{tDe(volume)}</a>
       <a
         if={rubric}
         onclick={newCriteria({rubric: null})}
         href="#"
-        class="filter"
-      >{t(rubric)}</a>
+        class="dfkv-filter"
+      >{tDe(rubric)}</a>
       <a
         if={location}
         onclick={newCriteria({location: null})}
         href="#"
-        class="filter"
-      >{t(location)}</a>
+        class="dfkv-filter"
+      >{tDe(location)}</a>
       <a
         if={editor}
         onclick={newCriteria({editor: null})}
         href="#"
-        class="filter"
-      >{t(editor)}</a>
+        class="dfkv-filter"
+      >{tDe(editor)}</a>
     </div>
+
+    <label>
+      <input type="checkbox" onchange={toggle} />
+      Ergebnisse immer vollständig anzeigen
+    </label>
   </form>
 
   <div if={data}>
@@ -62,7 +67,11 @@
       <a href="#" onclick={sort('date')}>Datum</a>
     </div>
 
-    <dfkv-result each={result in data.records} data={result} />
+    <dfkv-result
+      each={result in data.records}
+      data={result}
+      always-expand={expand}
+    />
   </div>
 
   <script type="text/javascript">
@@ -110,6 +119,17 @@
         event.preventDefault();
         newCriteria(criteria);
       }
+    }
+
+    tag.submit = function(event) {
+      event.preventDefault();
+    }
+
+    tag.toggle = function(event) {
+      var v = jQuery(event.target).prop('checked');
+      tag.expand = v;
+      tag.update();
+      console.log(v);
     }
 
     var newCriteria = function(criteria) {

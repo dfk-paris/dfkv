@@ -5,5 +5,7 @@ wApp.i18n = {
       for l in ['de', 'fr', 'en']
         result.push(object[l]) if object[l]
       result.join(' / ')
+    tDe: (object) ->
+      object['de'] || object['fr'] || object['en']
   }
 }

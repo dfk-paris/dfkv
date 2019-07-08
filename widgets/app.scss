@@ -1,28 +1,62 @@
-body {
-  background-color: gray;
-}
+body.development {
+  background-color: #FFD3D3;
 
-.badge {
-  display: inline-block;
-  background-color: white;
-  margin: 5px;
-  padding: 5px;
-}
-
-.filter {
-  display: block;
+  dfkv-result {
+    background-color: white;
+  }
 }
 
 dfkv-search {
   display: flex;
   flex-direction: row;
-
-  form {
-    // float: left;
-  }
 }
 
 dfkv-pagination {
   display: block;
   float: right;
+}
+
+dfkv-result {
+  display: block;
+  margin-bottom: 2rem;
+  padding: 1rem;
+
+  .expand-collapse {
+    float: right;
+  }
+}
+
+.dfkv-filter {
+  display: block;
+}
+
+.dfkv-longread {
+  transition: max-height 0ms 0ms, opacity 400ms 0ms;
+}
+
+.hidden {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0ms 600ms, opacity 600ms 0ms;
+}
+
+.dfkv-badge {
+  display: inline-block;
+  background-color: gray;
+  margin: 5px;
+  padding: 5px;
+}
+
+
+.dfkv-bold {
+  font-weight: bold;
+}
+
+.dfkv-italic {
+  font-style: italic;
+}
+
+.dfkv-muted {
+  color: gray;
 }
