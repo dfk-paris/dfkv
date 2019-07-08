@@ -5,8 +5,6 @@ require 'bundler'
 Bundler.setup
 
 require 'active_record'
-require 'pry'
-
 
 module Dfkv
   CONFIG = YAML.load_file('app.yml')

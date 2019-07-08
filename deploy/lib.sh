@@ -88,3 +88,11 @@ function cleanup {
 function finalize {
   echo -e "${GREEN}deployment successful${NOCOLOR}"
 }
+
+function upload {
+  FROM=$1
+  TO=$2
+  OPTS="-rvqtzh --rsh=ssh -e 'ssh -i $SSH_KEY -p $PORT'"
+
+  local "rsync $OPTS $FROM $HOST:$TO"
+}

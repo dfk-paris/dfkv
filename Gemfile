@@ -8,4 +8,5 @@ gem 'rack-cors'
 
 group :development do
   gem 'proweb', git: 'https://github.com/dfk-paris/proweb.git'
+  gem 'pry'
 end
