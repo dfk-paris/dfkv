@@ -20,9 +20,10 @@ function deploy {
   # app
   remote "echo 2.4.2 > $CURRENT_PATH/.ruby-version"
   within_do $CURRENT_PATH "bundle --clean --quiet --deployment --without test development --path $SHARED_PATH/bundle"
+  remote "mkdir $CURRENT_PATH/public"
   upload "public/app.*" "$CURRENT_PATH/public/"
   remote "touch $CURRENT_PATH/tmp/restart.txt"
-  
+
   finalize
 }
 
