@@ -13,7 +13,7 @@ class Dfkv::Record < ActiveRecord::Base
 
   def self.search(terms)
     return all unless terms
-    where('title LIKE :t OR citation LIKE :t', t: "%#{terms}%")
+    where('title LIKE :t OR citation LIKE :t OR transcription LIKE :t or comment LIKE :t', t: "%#{terms}%")
   end
 
   def self.by_attrib(attrib)

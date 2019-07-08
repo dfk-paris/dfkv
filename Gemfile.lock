@@ -65,6 +65,7 @@ DEPENDENCIES
   activerecord
   mysql2
   proweb!
+  pry
   puma
   rack
   rack-cors

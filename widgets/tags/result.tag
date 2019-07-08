@@ -1,5 +1,11 @@
 <dfkv-result>
-  <div><strong>Title: </strong>{opts.data.title}</div>
+  <div>
+    <strong>Title:</strong>
+    <dfkv-highlight
+      contents={opts.data.title}
+      terms={terms()}
+    />
+  </div>
   
   <div
     each={people, role_id in opts.data.people_by_role.people}
@@ -67,17 +73,32 @@
 
   <div if={opts.data.citation}>
     <strong>Zitat</strong>
-    <blockquote>{opts.data.citation}</blockquote>
+    <blockquote>
+      <dfkv-highlight
+        contents={opts.data.citation}
+        terms={terms()}
+      />
+    </blockquote>
   </div>
 
   <div if={opts.data.transcription}>
     <strong>Transkription</strong>
-    <blockquote>{opts.data.transcription}</blockquote>
+    <blockquote>
+      <dfkv-highlight
+        contents={opts.data.transcription}
+        terms={terms()}
+      />
+    </blockquote>
   </div>
 
   <div if={opts.data.comment}>
     <strong>Kommentar</strong>
-    <blockquote>{opts.data.transcription}</blockquote>
+    <blockquote>
+      <dfkv-highlight
+        contents={opts.data.comment}
+        terms={terms()}
+      />
+    </blockquote>
   </div>
 
   <div if={opts.data.attribs_by_kind.attribs[42]}>
@@ -130,6 +151,10 @@
         args[type] = id;
         wApp.bus.trigger('dfkv:criteria', args);
       }
+    }
+
+    tag.terms = function() {
+      return wApp.routing.query()['terms'];
     }
   </script>
 </dfkv-result>
