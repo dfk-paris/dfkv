@@ -4,23 +4,37 @@
       show={!is_first()}
       onclick={page_to_first}
       href="#"
-    >«</i></a>
+    >
+      <dfkv-svg type="arrow-left" />
+      <dfkv-svg type="arrow-left" />
+      erste Seite
+    </a>
     <a
       show={!is_first()}
       onclick={page_down}
       href="#"
-    >‹</a>
+    >
+      <dfkv-svg type="arrow-left" />
+      vorherige Seite
+    </a>
     {opts.data.page}/{total_pages()}
     <a
       show={!is_last()}
       onclick={page_up}
       href="#"
-    >›</a>
+    >
+      nächste Seite
+      <dfkv-svg type="arrow-right" />
+    </a>
     <a
       show={!is_last()}
       onclick={page_to_last}
       href="#"
-    >»</a>
+    >
+      letzte Seite
+      <dfkv-svg type="arrow-right" />
+      <dfkv-svg type="arrow-right" />
+    </a>
   </div>
 
   <script type="text/coffee">

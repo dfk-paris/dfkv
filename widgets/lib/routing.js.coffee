@@ -2,7 +2,7 @@ wApp.routing = {
   query: (params) ->
     if params
       result = {}
-      $.extend(result, wApp.routing.query(), params)
+      jQuery.extend(result, wApp.routing.query(), params)
       qs = []
       for k, v of result
         if result[k] != null && result[k] != ''

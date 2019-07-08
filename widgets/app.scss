@@ -12,3 +12,17 @@ body {
 .filter {
   display: block;
 }
+
+dfkv-search {
+  display: flex;
+  flex-direction: row;
+
+  form {
+    // float: left;
+  }
+}
+
+dfkv-pagination {
+  display: block;
+  float: right;
+}

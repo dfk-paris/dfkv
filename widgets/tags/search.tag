@@ -1,69 +1,69 @@
 <dfkv-search>
-  <div class="header" if={data}>
-    <h3>Search</h3>
+  <form class="header" if={data}>
+    <strong>Search</strong>
     <input placeholder="search" onchange={search} value={initialTerms} ref="terms" />
-    <a href="#" onclick={newCriteria({terms: null})}>x</a>
+    <!-- a href="#" onclick={newCriteria({terms: null})}>x</a -->
 
-    <h3>Filters</h3>
-    <a 
-      if={person && role}
-      onclick={newCriteria({person: null, role: null})}
-      href="#"
-      class="filter"
-    >
-      {t(role)}:
-      {person.display_name}
-    </a>
-    <a
-      if={attrib}
-      onclick={newCriteria({attrib: null})}
-      href="#"
-      class="filter"
-    >{t(attrib)}</a>
-    <a
-      if={journal}
-      onclick={newCriteria({journal: null})}
-      href="#"
-      class="filter"
-    >{t(journal)}</a>
-    <a
-      if={volume}
-      onclick={newCriteria({volume: null})}
-      href="#"
-      class="filter"
-    >{t(volume)}</a>
-    <a
-      if={rubric}
-      onclick={newCriteria({rubric: null})}
-      href="#"
-      class="filter"
-    >{t(rubric)}</a>
-    <a
-      if={location}
-      onclick={newCriteria({location: null})}
-      href="#"
-      class="filter"
-    >{t(location)}</a>
-    <a
-      if={editor}
-      onclick={newCriteria({editor: null})}
-      href="#"
-      class="filter"
-    >{t(editor)}</a>
+    <div>
+      <strong>Aktive Filter</strong>
+      <a
+        if={person && role}
+        onclick={newCriteria({person: null, role: null})}
+        href="#"
+        class="filter"
+      >
+        {t(role)}:
+        {person.display_name}
+      </a>
+      <a
+        if={attrib}
+        onclick={newCriteria({attrib: null})}
+        href="#"
+        class="filter"
+      >{t(attrib)}</a>
+      <a
+        if={journal}
+        onclick={newCriteria({journal: null})}
+        href="#"
+        class="filter"
+      >{t(journal)}</a>
+      <a
+        if={volume}
+        onclick={newCriteria({volume: null})}
+        href="#"
+        class="filter"
+      >{t(volume)}</a>
+      <a
+        if={rubric}
+        onclick={newCriteria({rubric: null})}
+        href="#"
+        class="filter"
+      >{t(rubric)}</a>
+      <a
+        if={location}
+        onclick={newCriteria({location: null})}
+        href="#"
+        class="filter"
+      >{t(location)}</a>
+      <a
+        if={editor}
+        onclick={newCriteria({editor: null})}
+        href="#"
+        class="filter"
+      >{t(editor)}</a>
+    </div>
+  </form>
 
-    <h3>Sort</h3>
-    <a href="#" onclick={sort('title')}>Title</a>
-    <a href="#" onclick={sort('date')}>Date</a>
+  <div if={data}>
+    <div class="controls">
+      <dfkv-pagination data={data} />
+      Sortieren nach: 
+      <a href="#" onclick={sort('title')}>Titel</a> |
+      <a href="#" onclick={sort('date')}>Datum</a>
+    </div>
 
-    <h3>Pagination</h3>
-    <dfkv-pagination data={data} />
-  </div>
-
-  <hr /><hr />
-
-  <virtual if={data}>
     <dfkv-result each={result in data.records} data={result} />
-  </virtual>
+  </div>
 
   <script type="text/javascript">
     var tag = this;
@@ -78,7 +78,7 @@
     })
 
     tag.search = function(event) {
-      var terms = $(event.target).val();
+      var terms = jQuery(event.target).val();
       newCriteria({'terms': terms});
     }
 
@@ -125,8 +125,8 @@
     }
 
     var person = function(id) {
-      $.ajax({
-        url: 'http://127.0.0.1:3001/people/' + id,
+      jQuery.ajax({
+        url: tag.opts.url + '/people/' + id,
         success: function(data) {
           console.log(data);
           tag.person = data;
@@ -136,8 +136,8 @@
     }
 
     var attrib = function(id, target) {
-      $.ajax({
-        url: 'http://127.0.0.1:3001/attribs/' + id,
+      jQuery.ajax({
+        url: tag.opts.url + '/attribs/' + id,
         success: function(data) {
           console.log(data);
           tag[target] = data;
@@ -170,15 +170,15 @@
       // if (params['location']) {attrib(params['location'], 'location')}
       // if (params['editor']) {attrib(params['editor'], 'editor')}
 
-      $.ajax({
-        url: 'http://127.0.0.1:3001/search',
+      jQuery.ajax({
+        url: tag.opts.url + '/search',
         data: params,
         success: function(data) {
           console.log(data);
           tag.data = data;
           tag.update();
 
-          $(tag.refs.terms).val(params['terms']);
+          jQuery(tag.refs.terms).val(params['terms']);
         }
       })
     }
