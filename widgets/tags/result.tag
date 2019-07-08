@@ -18,7 +18,7 @@
   </div>
 
   <div if={opts.data.journal}>
-    <strong>Journal</strong>
+    <strong>Zeitschrift</strong>
     <span>
       <a href="#" onclick={only('journal', opts.data.journal.id)}>
         {t(opts.data.journal)}
@@ -27,7 +27,7 @@
   </div>
 
   <div if={opts.data.volume}>
-    <strong>Volume</strong>
+    <strong>Ausgabe</strong>
     <span>
       <a href="#" onclick={only('volume', opts.data.volume.id)}>
         {t(opts.data.volume)}
@@ -35,7 +35,7 @@
     </span>
   </div>
 
-  <strong>Date</strong>
+  <strong>Datum</strong>
   <span>{opts.data.human_date}</span>
 
   <div if={opts.data.rubric}>
@@ -48,7 +48,7 @@
   </div>
 
   <div if={opts.data.location}>
-    <strong>Location</strong>
+    <strong>Ort</strong>
     <span>
       <a href="#" onclick={only('location', opts.data.location.id)}>
         {t(opts.data.location)}
@@ -57,7 +57,7 @@
   </div>
 
   <div if={opts.data.editor}>
-    <strong>Editor</strong>
+    <strong>Verlag</strong>
     <span>
       <a href="#" onclick={only('editor', opts.data.editor.id)}>
         {t(opts.data.editor)}
@@ -66,17 +66,17 @@
   </div>
 
   <div if={opts.data.citation}>
-    <strong>Citation</strong>
+    <strong>Zitat</strong>
     <blockquote>{opts.data.citation}</blockquote>
   </div>
 
   <div if={opts.data.transcription}>
-    <strong>Transcription</strong>
+    <strong>Transkription</strong>
     <blockquote>{opts.data.transcription}</blockquote>
   </div>
 
   <div if={opts.data.comment}>
-    <strong>Transcription</strong>
+    <strong>Kommentar</strong>
     <blockquote>{opts.data.transcription}</blockquote>
   </div>
 

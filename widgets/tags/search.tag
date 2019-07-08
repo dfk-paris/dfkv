@@ -1,6 +1,6 @@
 <dfkv-search>
   <form class="header" if={data}>
-    <strong>Search</strong>
+    <strong>Suche</strong>
     <input placeholder="search" onchange={search} value={initialTerms} ref="terms" />
     <!-- a href="#" onclick={newCriteria({terms: null})}>x</a -->
 
