@@ -1,41 +1,31 @@
 <dfkv-pagination>
-  <div class="w-text-right" if={opts.data && total_pages() > 1}>
+  <virtual if={opts.data && total_pages() > 1}>
     <a
       show={!is_first()}
       onclick={page_to_first}
       href="#"
-    >
-      <dfkv-svg type="arrow-left" />
-      <dfkv-svg type="arrow-left" />
-      erste Seite
-    </a>
+      class="dfkv-first"
+    ><dfkv-svg type="arrow-left" /><dfkv-svg type="arrow-left" /> erste Seite</a>
     <a
       show={!is_first()}
       onclick={page_down}
       href="#"
-    >
-      <dfkv-svg type="arrow-left" />
-      vorherige Seite
-    </a>
+      class="dfkv-previous"
+    ><dfkv-svg type="arrow-left" /> vorherige Seite</a>
     {opts.data.page}/{total_pages()}
     <a
       show={!is_last()}
       onclick={page_up}
       href="#"
-    >
-      nächste Seite
-      <dfkv-svg type="arrow-right" />
-    </a>
+      class="dfkv-next"
+    >nächste Seite<dfkv-svg type="arrow-right" /></a>
     <a
       show={!is_last()}
       onclick={page_to_last}
       href="#"
-    >
-      letzte Seite
-      <dfkv-svg type="arrow-right" />
-      <dfkv-svg type="arrow-right" />
-    </a>
-  </div>
+      class="dfkv-last"
+    >letzte Seite <dfkv-svg type="arrow-right" /><dfkv-svg type="arrow-right" /></a>
+  </virtual>
 
   <script type="text/coffee">
     tag = this

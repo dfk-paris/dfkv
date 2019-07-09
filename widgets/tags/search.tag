@@ -1,6 +1,6 @@
 <dfkv-search>
-  <form class="header" if={data} onsubmit={submit}>
-    <strong>Suche</strong>
+  <form if={data} onsubmit={submit}>
+    <div class="dfkv-strong">Suchkriterien</div>
     <input placeholder="search" onchange={search} value={initialTerms} ref="terms" />
     <!-- a href="#" onclick={newCriteria({terms: null})}>x</a -->
 
@@ -59,13 +59,17 @@
     </label>
   </form>
 
-  <div if={data}>
+  <div class="dfkv-results" if={data}>
     <div class="controls">
+      <div class="dfkv-sorting">
+        Sortieren nach: 
+        <a href="#" onclick={sort('title')}>Titel</a> |
+        <a href="#" onclick={sort('date')}>Datum</a>
+      </div>
       <dfkv-pagination data={data} />
-      Sortieren nach: 
-      <a href="#" onclick={sort('title')}>Titel</a> |
-      <a href="#" onclick={sort('date')}>Datum</a>
     </div>
+
+    <hr />
 
     <dfkv-result
       each={result in data.records}
