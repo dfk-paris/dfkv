@@ -1,80 +1,61 @@
 <dfkv-result>
-  <div class="dfkv-inner">
-    <div class="dfkv-expand-collapse">
-      <a if={!isExpanded()} href="#" onclick={toggle}>… mehr</a>
-      <a if={isExpanded() && !opts.alwaysExpand} href="#" onclick={toggle}>… weniger</a>
+  <div class="dfkv-inner" onclick={toggle}>
+    <div class="dfkv-pull-right dfkv-muted dfkv-id">
+      id <a href="#" onclick={only('terms', opts.data.id)}>{opts.data.id}</a>
     </div>
 
-    <div class="dfkv-muted">Id {opts.data.id}</div>
-
-    <div>
-      <strong>Title</strong>
-      <dfkv-highlight
-        contents={opts.data.title}
-        terms={terms()}
-      />
+    <div class="dfkv-creator" if={opts.data.people_by_role.people[12063]}>
+      <span
+        each={person, i in opts.data.people_by_role.people[12063]}
+        data-id={person.id}
+      ><!--
+     --><virtual if={i > 0}>; </virtual><!--
+     --><a href="#" onclick={onlyPerson(12063, person.id)}>{person.display_name}</a><!--
+   --></span>
     </div>
 
-    <div>
-      <strong>Erschienen in</strong>
+
+    <dfkv-highlight
+      contents={opts.data.title}
+      terms={terms()}
+      class="dfkv-title"
+    />
+
+    <div class="dfkv-published-in">
       <a
         if={opts.data.journal}
         href="#"
         onclick={only('journal', opts.data.journal.id)}
+        class="dfkv-journal"
       >{tDe(opts.data.journal)}</a><!--
-      --><span
-        if={opts.data.volume}
-      >, 
+   --><virtual if={opts.data.volume}><!--
+     -->, 
         <a
           href="#"
           onclick={only('volume', opts.data.volume.id)}
-          class="dfkv-italic"
-        >{tDe(opts.data.volume)}</a>
-      </span><!--
-      --><span
-        if={opts.data.location}
-      ><!--
-        --><virtual if={opts.data.journal}>, </virtual><!--
-        --><a
+          class="dfkv-volume"
+        >{tDe(opts.data.volume)}</a><!--
+   --></virtual><!--
+   --><virtual if={opts.data.location}><!--
+     --><virtual if={opts.data.journal}>, </virtual><!--
+     --><a
           href="#"
           onclick={only('location', opts.data.location.id)}
-          class="dfkv-bold"
-        >{tDe(opts.data.location)}</a>
-      </span>
-    </div>
-
-    <div>
-      <strong>Datum</strong>
-      <span>{opts.data.human_date}</span>
+          class="dfkv-location"
+        >{tDe(opts.data.location)}</a><!--
+   --></virtual><!--
+   --><span if={opts.data.date} class="dfkv-date">, {opts.data.human_date}</span>
     </div>
 
     <div class="dfkv-longread {hidden: !isExpanded()}">
-      <div if={opts.data.rubric}>
-        <strong>Rubrik</strong>
-        <span>
-          <a href="#" onclick={only('rubric', opts.data.rubric.id)}>
-            {tDe(opts.data.rubric)}
-          </a>
-        </span>
-      </div>
-
-      <div if={opts.data.editor}>
-        <strong>Verlag</strong>
-        <span>
-          <a href="#" onclick={only('editor', opts.data.editor.id)}>
-            {tDe(opts.data.editor)}
-          </a>
-        </span>
-      </div>
-
-      <p if={opts.data.citation}>
+      <p if={opts.data.citation} class="dfkv-text">
         <dfkv-highlight
           contents={opts.data.citation}
           terms={terms()}
         />
       </p>
 
-      <p if={opts.data.transcription} class="dfkv-italic">
+      <p if={opts.data.transcription} class="dfkv-text dfkv-italic">
         <dfkv-highlight
           contents={opts.data.transcription}
           terms={terms()}
@@ -83,50 +64,81 @@
 
       <div if={opts.data.comment}>
         <strong>Kommentar</strong>
-        <blockquote>
+        <p class="dfkv-text">
           <dfkv-highlight
             contents={opts.data.comment}
             terms={terms()}
           />
-        </blockquote>
+        </p>
       </div>
 
-      <div
-        each={people, role_id in opts.data.people_by_role.people}
-        data-id={role_id}
-      >
-        <strong>{tDe(opts.data.people_by_role.roles[role_id])}</strong>
-        <span
-          each={person in people}
-          class="dfkv-badge"
-          data-id={person.id}
-        >
-          <a href="#" onclick={onlyPerson(role_id, person.id)}>
-            {person.display_name}
+      <div if={opts.data.editor} class="dfkv-editor">
+        <h2>Verlag</h2>
+        <span>
+          <a href="#" onclick={only('editor', opts.data.editor.id)}>
+            {tDe(opts.data.editor)}
           </a>
         </span>
       </div>
 
-      <div if={opts.data.attribs_by_kind.attribs[42]}>
-        <strong>{tDe(opts.data.attribs_by_kind.kinds[42])}</strong>
-        <span
-          each={a in opts.data.attribs_by_kind.attribs[42]}
-          class="dfkv-badge"
-          data-id={a.id}
-        >
-          <a href="#" onclick={only('attrib', a.id)}>{tDe(a)}</a>
+      <div if={opts.data.rubric} class="dfkv-rubric">
+        <h2>Rubrik</h2>
+        <span>
+          <a href="#" onclick={only('rubric', opts.data.rubric.id)}>
+            {tDe(opts.data.rubric)}
+          </a>
         </span>
       </div>
 
-      <div if={opts.data.attribs_by_kind.attribs[43]}>
-        <strong>Schlagwörter</strong>
+      <div class="dfkv-people">
+        <h2>Weitere beteiligte Personen</h2>
         <span
-          each={a in opts.data.attribs_by_kind.attribs[43]}
-          class="dfkv-badge"
+          each={person, i in opts.data.people_by_role.people[12069]}
+          data-id={person.id}
+        ><!--
+       --><virtual if={i > 0}>; </virtual><!--
+       --><a href="#" onclick={onlyPerson(12069, person.id)}>{person.display_name}</a>
+          (Übersetzer)<!--
+     --></span><!--
+       --><virtual if={hasAnyRoles(12069)}>; </virtual><!--
+     --><span
+          each={person, i in opts.data.people_by_role.people[12065]}
+          data-id={person.id}
+        ><!--
+       --><virtual if={i > 0}>; </virtual><!--
+       --><a href="#" onclick={onlyPerson(12065, person.id)}>{person.display_name}</a>
+          (abgebildet)<!--
+     --></span><!--
+       --><virtual if={hasAnyRoles(12065)}>; </virtual><!--
+     --><span
+          each={person, i in opts.data.people_by_role.people[12064]}
+          data-id={person.id}
+        ><!--
+       --><virtual if={i > 0}>; </virtual><!--
+       --><a href="#" onclick={onlyPerson(12064, person.id)}>{person.display_name}</a><!--
+     --></span>
+      </div>
+
+      <div if={opts.data.attribs_by_kind.attribs[42]} class="dfkv-attribs">
+        <h2>{tDe(opts.data.attribs_by_kind.kinds[42])}</h2>
+        <span
+          each={a, i in opts.data.attribs_by_kind.attribs[42]}
           data-id={a.id}
-        >
-          <a href="#" onclick={only('attrib', a.id)}>{tDe(a)}</a>
-        </span>
+        ><!--
+       --><virtual if={i > 0}>, </virtual><!--
+       --><a href="#" onclick={only('attrib', a.id)}>{tDe(a)}</a><!--
+     --></span>
+      </div>
+
+      <div if={opts.data.attribs_by_kind.attribs[43]} class="dfkv-attribs">
+        <h2>Schlagwörter</h2>
+        <span
+          each={a, i in opts.data.attribs_by_kind.attribs[43]}
+          data-id={a.id}
+        ><!--
+       --><virtual if={i > 0}>, </virtual><!--
+       --><a href="#" onclick={only('attrib', a.id)}>{tDe(a)}</a><!--
+     --></span>
       </div>
     </div>
   </div>
@@ -137,6 +149,7 @@
 
     tag.onlyPerson = function(role_id, person_id) {
       return function(event) {
+        event.stopPropagation();
         event.preventDefault();
         wApp.bus.trigger('dfkv:criteria', {role: role_id, person: person_id});
       }
@@ -144,6 +157,7 @@
 
     tag.only = function(type, id) {
       return function(event) {
+        event.stopPropagation();
         event.preventDefault();
         var args = {}
         args[type] = id;
@@ -162,6 +176,15 @@
     tag.toggle = function(event) {
       event.preventDefault();
       tag.expanded = !tag.expanded;
+    }
+
+    tag.hasAnyRoles = function() {
+      var roles = arguments;
+      for (var i = 0; i < roles.length; i++) {
+        var id = roles[i];
+        if (opts.data.people_by_role.people[id]) {return true;}
+      }
+      return false;
     }
   </script>
 </dfkv-result>

@@ -2,5 +2,6 @@
 
 $: << __dir__ + '/../lib'
 require 'dfkv'
+require 'pry'
 
 binding.pry

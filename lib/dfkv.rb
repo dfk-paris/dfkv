@@ -1,8 +1,14 @@
 require 'json'
 require 'yaml'
 
+
+bundles = [:default]
+bundles << :development if ENV['RACK_ENV'] != 'production'
+
+p bundles
+
 require 'bundler'
-Bundler.setup
+Bundler.setup(bundles)
 
 require 'active_record'
 

@@ -1,81 +1,94 @@
 <dfkv-search>
   <form if={data} onsubmit={submit}>
-    <div class="dfkv-strong">Suchkriterien</div>
-    <input placeholder="search" onchange={search} value={initialTerms} ref="terms" />
+    <h2>Suchkriterien</h2>
+    <input placeholder="Suche" onchange={search} value={initialTerms} ref="terms" />
     <!-- a href="#" onclick={newCriteria({terms: null})}>x</a -->
 
-    <div>
-      <strong>Aktive Filter</strong>
-      <a
-        if={person && role}
-        onclick={newCriteria({person: null, role: null})}
-        href="#"
-        class="dfkv-filter"
-      >
-        {tDe(role)}:
-        {person.display_name}
-      </a>
-      <a
-        if={attrib}
-        onclick={newCriteria({attrib: null})}
-        href="#"
-        class="dfkv-filter"
-      >{tDe(attrib)}</a>
-      <a
-        if={journal}
-        onclick={newCriteria({journal: null})}
-        href="#"
-        class="dfkv-filter"
-      >{tDe(journal)}</a>
-      <a
-        if={volume}
-        onclick={newCriteria({volume: null})}
-        href="#"
-        class="dfkv-filter"
-      >{tDe(volume)}</a>
-      <a
-        if={rubric}
-        onclick={newCriteria({rubric: null})}
-        href="#"
-        class="dfkv-filter"
-      >{tDe(rubric)}</a>
-      <a
-        if={location}
-        onclick={newCriteria({location: null})}
-        href="#"
-        class="dfkv-filter"
-      >{tDe(location)}</a>
-      <a
-        if={editor}
-        onclick={newCriteria({editor: null})}
-        href="#"
-        class="dfkv-filter"
-      >{tDe(editor)}</a>
-    </div>
+    <div if={person || attrib || journal || volume || rubric || location || editor}>
+      <h2>Aktive Filter</h2>
 
-    <label>
-      <input type="checkbox" onchange={toggle} />
-      Ergebnisse immer vollständig anzeigen
-    </label>
+      <ul>
+        <li if={person && role}>
+          <a
+            onclick={newCriteria({person: null, role: null})}
+            href="#"
+            class="dfkv-filter"
+          >
+            {tDe(role)}:
+            {person.display_name}
+          </a>
+        </li>
+        <li if={attrib}>
+          <a
+            onclick={newCriteria({attrib: null})}
+            href="#"
+            class="dfkv-filter"
+          >{tDe(attrib)}</a>
+        </li>
+        <li if={journal}>
+          <a
+            onclick={newCriteria({journal: null})}
+            href="#"
+            class="dfkv-filter"
+          >{tDe(journal)}</a>
+        </li>
+        <li if={volume}>
+          <a
+            onclick={newCriteria({volume: null})}
+            href="#"
+            class="dfkv-filter"
+          >{tDe(volume)}</a>
+        </li>
+        <li if={rubric}>
+          <a
+            onclick={newCriteria({rubric: null})}
+            href="#"
+            class="dfkv-filter"
+          >{tDe(rubric)}</a>
+        </li>
+        <li if={location}>
+          <a
+            onclick={newCriteria({location: null})}
+            href="#"
+            class="dfkv-filter"
+          >{tDe(location)}</a>
+        </li>
+        <li if={editor}>
+          <a
+            onclick={newCriteria({editor: null})}
+            href="#"
+            class="dfkv-filter"
+          >{tDe(editor)}</a>
+        </li>
+      </ul>
+    </div>
   </form>
 
   <div class="dfkv-results" if={data}>
-    <div class="controls">
-      <div class="dfkv-sorting">
-        Sortieren nach: 
-        <a href="#" onclick={sort('title')}>Titel</a> |
-        <a href="#" onclick={sort('date')}>Datum</a>
+    <h2>Suchergebnisse</h2>
+    <virtual if={data.total == 0}>keine Ergebnisse</virtual>
+    <virtual if={data.total > 0}>
+      <div class="controls">
+        <label class="dfkv-collapsing">
+          alle ausklappen
+          <input type="checkbox" onchange={toggle} />
+        </label>
+        <div class="dfkv-sorting">
+          Sortieren nach: 
+          <a href="#" onclick={sort('title')}>Titel</a> |
+          <a href="#" onclick={sort('date')}>Datum</a>
+        </div>
+        <dfkv-pagination data={data} />
       </div>
-      <dfkv-pagination data={data} />
-    </div>
 
-    <hr />
+      <hr />
 
-    <dfkv-result
-      each={result in data.records}
-      data={result}
-      always-expand={expand}
-    />
+      <dfkv-result
+        each={result in data.records}
+        data={result}
+        always-expand={expand}
+      />
+    </virtual>
   </div>
 
   <script type="text/javascript">
