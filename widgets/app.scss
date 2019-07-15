@@ -46,6 +46,10 @@ body.development {
       h2 {
         margin-top: 2rem;
       }
+
+      h2:first-child {
+        margin-top: 10px;
+      }
     }
 
     h2 {
