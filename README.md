@@ -1,6 +1,6 @@
 # Deutsch-Französische Kunstvermittlung 1871–1940 und 1945-1960 (database)
 
-This is the database project for Project 
+This is the database project for 
 [Deutsch-Französische Kunstvermittlung 1871–1940 und 1945-1960](https://dfk-paris.org/de/page/deutsch-franz%C3%B6sische-kunstvermittlung-1871%E2%80%931940-und-1945-1960-2389.html)
 at the [DFK Paris](https://dfk-paris.org).
 
