@@ -1,0 +1,65 @@
+popup {
+  display: inline-block;
+
+  width: 0;
+  height: 0;
+  overflow: hidden;
+
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  max-width: 400px;
+  max-height: 80vh;
+
+  border-radius: 5px;
+
+  background-color: white;
+  box-shadow: -3px 0px 20px 5px rgba(0.4, 0.4, 0.4, 0.3);
+
+  animation-fill-mode: forwards;
+  
+  &.preload {
+    animation: none !important;
+  }
+
+  &.open {
+    animation: 0.5s appear;
+    width: 50vw;
+    height: auto;
+    overflow-y: auto;
+  }
+
+  &.close {
+    animation: 0.5s disappear;
+  }
+}
+
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes disappear {
+  0% {
+    opacity: 1;
+
+    width: 50vw;
+    height: auto;
+    overflow-y: auto;
+  }
+
+  100% {
+    opacity: 0;
+
+    width: 50vw;
+    height: auto;
+    overflow-y: auto;
+  }
+}

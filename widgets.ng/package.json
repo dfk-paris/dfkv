@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html --public-url '/private/Cu4luin7' --no-source-maps",
+    "deploy": "rsync -av --delete dist/ app@prime.wendig.io:/var/storage/host/static/current/private/Cu4luin7/"
+  },
+  "devDependencies": {
+    "@riotjs/compiler": "^6.0.3",
+    "@riotjs/parcel-plugin-riot": "^6.0.0",
+    "d3": "^7.0.1",
+    "parcel-bundler": "^1.12.5",
+    "regenerator-runtime": "^0.13.9",
+    "riot": "^6.0.3",
+    "sass": "^1.38.1"
+  }
+}

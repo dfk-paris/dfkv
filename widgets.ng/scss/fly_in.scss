@@ -1,0 +1,61 @@
+:root {
+  --fly-in-width: 30vw;
+}
+
+$shadow: -3px 0px 20px 5px rgba(0.4, 0.4, 0.4, 0.3);
+
+fly-in {
+  display: inline-block;
+  width: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  overflow-x: clip;
+  overflow-y: clip;
+  height: 100vh;
+
+  background-color: white;
+
+  animation-duration: 0.5s;
+
+  .content-wrapper {
+    width: var(--fly-in-width);
+  }
+
+  &.preload {
+    animation: none !important;
+  }
+
+  &.open {
+    width: var(--fly-in-width);
+    box-shadow: $shadow;
+
+    animation-name: slidein;
+  }
+
+  &.close {
+    animation-name: slideout;
+  }
+}
+
+@keyframes slidein {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: var(--fly-in-width);
+  }
+}
+
+@keyframes slideout {
+  0% {
+    width: var(--fly-in-width);
+    box-shadow: $shadow;
+  }
+
+  100% {
+    width: 0;
+    box-shadow: $shadow;
+  }
+}

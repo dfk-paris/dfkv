@@ -1,0 +1,29 @@
+<popup class={this.classes()}>
+  <slot />
+
+  <script>
+    export default class {
+      classes() {
+        return [
+          this.state.animate ? '' : 'preload',
+          this.props.open ? 'open' : 'close'
+        ].join(' ')
+      }
+
+      onBeforeMount(props) {
+        document.body.append(this.root)
+
+        this.state = {
+          animate: false,
+          initial: props.open
+        }
+      }
+
+      onBeforeUpdate(props, state) {
+        if (!state.animate && props.open != state.initial) {
+          this.update({animate: true})
+        }
+      }
+    }
+  </script>
+</popup>

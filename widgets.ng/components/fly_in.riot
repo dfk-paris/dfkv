@@ -1,0 +1,37 @@
+<fly-in class={this.classes()}>
+  <div class="content-wrapper">
+    <slot/>
+  </div>
+
+  <script>
+    export default class {
+      classes() {
+        return [
+          this.state.animate ? '' : 'preload',
+          this.props.open ? 'open' : 'close'
+        ].join(' ')
+      }
+
+      onBeforeMount(props) {
+        document.body.append(this.root)
+
+        this.state = {
+          animate: false,
+          initial: props.open
+        }
+      }
+
+      onMounted(props, state) {
+        if (this.props.width) {
+          this.root.style.setProperty('--fly-in-width', this.props.width)
+        }
+      }
+
+      onBeforeUpdate(props, state) {
+        if (!state.animate && props.open != state.initial) {
+          this.update({animate: true})
+        }
+      }
+    }
+  </script>
+</fly-in>
