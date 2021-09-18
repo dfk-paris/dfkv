@@ -1,0 +1,21 @@
+div.dfk-glossary {
+  .row {
+    margin-bottom: 1em;
+    display: flex;
+
+    .key {
+      width: 30%;
+
+      img {
+        position: relative;
+        top: 0.2em;
+        max-width: 1.2em;
+      }
+    }
+
+    .description {
+      width: 70%;
+      text-align: left;
+    }
+  }
+}

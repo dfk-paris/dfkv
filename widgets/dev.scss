@@ -1,0 +1,32 @@
+@import 'index.scss';
+
+html, body {
+  margin: 0;
+}
+
+body {
+  text-align: center;
+  padding-bottom: 100px;
+  font-family: arial;
+}
+
+#root {
+  overflow: auto;
+}
+
+h1 {
+  margin-top: 50px;
+}
+
+h2 {
+  margin-top: 60px;
+  margin-bottom: 30px;
+  color: #2D2D2D;
+}
+
+fly-in, popup {
+  h1, h2 {
+    margin-top: 20px;
+    border: none;
+  }
+}

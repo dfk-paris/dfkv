@@ -1,0 +1,150 @@
+<demo>
+  <div class="container">
+    <h1>Widget Demo Page</h1>
+
+    <p>
+      A page showing several widgets developed as re-usable components of the
+      DFK online presence.
+    </p>
+
+    <div class="item">
+      <h2>FlyIn</h2>
+
+      <fly-in open={this.state.paris}>
+        <div class="fly-in-open">
+          <div style="padding: 30px">
+            <h1>Paris</h1>
+
+            <p>
+              Paris is the capital and most populous city of France, with an estimated population of 2,175,601 residents as of 2018, in an area of more than 105 square kilometres. Since the 17th century, Paris has been one of Europe's major centres of finance, diplomacy, commerce, fashion, gastronomy, science, and arts.
+            </p>
+
+            <img
+              src="https://www.parisescapes.com/images/eiffel_tower_twilight.jpg"
+              style="width: 100%"
+            />
+          </div>
+        </div>
+
+        <div class="fly-in-closed">
+          <div style="padding: 30px">
+            Paris
+
+            <img
+              src="https://www.parisescapes.com/images/eiffel_tower_twilight.jpg"
+              style="width: 100%"
+            />
+          </div>
+        </div>
+      </fly-in>
+
+      <button onclick={this.parisClick}>Paris</button>
+    </div>
+
+    <div class="item">
+      <h2>RangeControl</h2>
+
+      <div style="width: 400px; height: 150px; margin: 50px auto 30px;">
+        <range-control
+          from={1455}
+          to={1677}
+          min={1400}
+          max={1900}
+          bins={this.state.bins}
+        />
+      </div>
+      <button onclick={event => this.newBins('bins', 40)}>Generate new data</button>
+
+      <div class="divider"></div>
+
+      <div style="width: 600px; height: 150px; margin: 50px auto 30px;">
+        <range-control
+          from={1626}
+          to={1762}
+          min={1400}
+          max={1900}
+          bins={this.state.bins2}
+          binWidth={4}
+        />
+      </div>
+      <button onclick={event => this.newBins('bins2', 80)}>Generate new data</button>
+    </div>
+
+    <div class="item">
+      <h2>Popup</h2>
+
+      <popup open={this.state.popup}>
+        <div style="padding: 30px">
+          <h2>Artwork Details</h2>
+          <p>
+            There are two main seasons, the rainy season (November to April) corresponding to summer, and the dry season (May/June to October/November), corresponding to winter. The dry season is subdivided into the cool dry season (May/June to August), and the hot dry season (September to October/November). The modifying influence of altitude gives the country pleasant subtropical weather rather than tropical conditions during the cool season of May to August.[76] However, average monthly temperatures remain above 20 °C (68 °F) over most of the country for eight or more months of the year.
+          </p>
+
+          <div style="text-align: right; margin-top: 30px;">
+            <button onclick={this.popup}>Close</button>
+          </div>
+        </div>
+      </popup>
+
+      <button onclick={event => this.popup()}>Launch</button>
+    </div>
+  </div>
+
+  <script>
+    import FlyIn from './fly_in.riot'
+    import Popup from './popup.riot'
+    import RangeControl from './range_control.riot'
+
+    export default class {
+      static components = {
+        FlyIn, 
+        RangeControl,
+        Popup
+      }
+
+      onBeforeMount(props, state) {
+        this.state = {
+          // zambia: false,
+          paris: false,
+          bins: this.randomBins(40),
+          bins2: this.randomBins(80),
+          popup: false
+        }
+
+        // this.zambiaClick = this.zambiaClick.bind(this)
+        this.parisClick = this.parisClick.bind(this)
+        this.popup = this.popup.bind(this)
+
+        this.root.innerHTML = ''
+      }
+
+      // zambiaClick() {
+      //   this.update({zambia: !this.state.zambia})
+      // }
+
+      onMounted() {
+        window.setTimeout(() => {
+          for (const c of this.tags['range-control']) {
+            c.update()
+          }
+        }, 0)
+      }
+
+      parisClick() {
+        this.update({paris: !this.state.paris})
+      }
+
+      randomBins(count) {
+        return Array.from(Array(count).keys()).map(e => Math.round(Math.random() * 100))
+      }
+
+      newBins(attr, count) {
+        this.update({[attr]: this.randomBins(count)})
+      }
+
+      popup(event) {
+        this.update({popup: !this.state.popup})
+      }
+    }
+  </script>
+</demo>

@@ -1,0 +1,52 @@
+<fly-in-demo>
+  <button onclick={(event) => this.toggle(event)}>Toggle</button>
+
+  <fly-in open={state.open}>
+    <div class="fly-in-open">
+      <div style="padding: 30px">
+        <h1>Paris</h1>
+
+        <p>
+          Paris is the capital and most populous city of France, with an estimated population of 2,175,601 residents as of 2018, in an area of more than 105 square kilometres. Since the 17th century, Paris has been one of Europe's major centres of finance, diplomacy, commerce, fashion, gastronomy, science, and arts.
+        </p>
+
+        <img
+          src="https://www.parisescapes.com/images/eiffel_tower_twilight.jpg"
+          style="width: 100%"
+        />
+      </div>
+    </div>
+
+    <div class="fly-in-closed">
+      <div style="padding: 30px">
+        Paris
+
+        <img
+          src="https://www.parisescapes.com/images/eiffel_tower_twilight.jpg"
+          style="width: 100%"
+        />
+      </div>
+    </div>
+  </fly-in>
+
+  <script>
+    import FlyIn from '../fly_in.riot'
+
+    export default class {
+      static components = {
+        FlyIn
+      }
+
+      onBeforeMount(props, state) {
+        this.root.innerHTML = ''
+        state.open = false
+      }
+
+      toggle(event) {
+        this.update({
+          open: !this.state.open
+        })
+      }
+    }
+  </script>
+</fly-in-demo>

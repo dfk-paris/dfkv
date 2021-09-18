@@ -1,0 +1,19 @@
+<icon>
+  <template if={true}>
+    <img src={this.url()} />
+  </template>
+
+  <script>
+    import {baseUrl} from '../lib/util'
+
+    export default class {
+      onBeforeMount() {
+        console.log(this.props)
+      }
+
+      url() {
+        return `${baseUrl}/icons/${this.props.type}.png`
+      }
+    }
+  </script>
+</icon>

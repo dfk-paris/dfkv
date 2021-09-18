@@ -1,30 +1,32 @@
 <range-control>
-  <svg viewBox="0 0 {this.svgWidth()} {this.svgHeight()}">
-    <g class="bins" fill="#aaaaaa">
-      <rect
-        each={(bin, index) in this.props.bins}
-        x="calc({this.binIndexToPercent(index)}% - {(this.props.binWidth || 1) / 2}px)"
-        height="{this.binToHeight(bin)}%"
-        y="{90 - this.binToHeight(bin) - 10}%"
-        width={this.props.binWidth || 1}
-        fill={this.binColor(index)}
-      />
-    </g>
-    <g class="background" fill="#aaaaaa">
-      <!-- <rect width="80%" height="1px" x="10%" y="calc(90% - 0px)" /> -->
-      <rect width="100%" height="1" x="0%" y="90%" />
-      <!-- <rect width="1" height="10%" x="10%" y="calc(90% - 5%)" /> -->
-      <!-- <rect width="1" height="10%" x="90%" y="calc(90% - 5%)" /> -->
-    </g>
-    <g class="controls" fill="#5EC1ABaa">
-      <circle class="from" cx="{this.valueToPercent(this.state.from)}%" cy="90%" r="0.5em" />
-      <circle class="to" cx="{this.valueToPercent(this.state.to)}%" cy="90%" r="0.5em" />
-    </g>
+  <div class="graph">
+    <svg viewBox="0 0 {this.svgWidth()} {this.svgHeight()}">
+      <g class="bins" fill="#aaaaaa">
+        <rect
+          each={(bin, index) in this.props.bins}
+          x="calc({this.binIndexToPercent(index)}% - {(this.props.binWidth || 1) / 2}px)"
+          height="{this.binToHeight(bin)}%"
+          y="{90 - this.binToHeight(bin) - 10}%"
+          width={this.props.binWidth || 1}
+          fill={this.binColor(index)}
+        />
+      </g>
+      <g class="background" fill="#aaaaaa">
+        <!-- <rect width="80%" height="1px" x="10%" y="calc(90% - 0px)" /> -->
+        <rect width="100%" height="1" x="0%" y="90%" />
+        <!-- <rect width="1" height="10%" x="10%" y="calc(90% - 5%)" /> -->
+        <!-- <rect width="1" height="10%" x="90%" y="calc(90% - 5%)" /> -->
+      </g>
+      <g class="controls" fill="#5EC1ABaa">
+        <circle class="from" cx="{this.valueToPercent(this.state.from)}%" cy="90%" r="0.5em" />
+        <circle class="to" cx="{this.valueToPercent(this.state.to)}%" cy="90%" r="0.5em" />
+      </g>
 
-    <!-- <g x="10%">
-      <rect width="80%" height="10" x="10%" y="50%" />
-    </g> -->
-  </svg>
+      <!-- <g x="10%">
+        <rect width="80%" height="10" x="10%" y="50%" />
+      </g> -->
+    </svg>
+  </div>
 
   <div class="literals">
     <div>{this.props.min}</div>
@@ -33,7 +35,7 @@
   </div>
 
   <script>
-    import *as d3Selection from 'd3-selection'
+    import * as d3Selection from 'd3-selection'
     import * as d3Scale from 'd3-scale'
     import * as d3Drag from 'd3-drag'
 
@@ -86,21 +88,23 @@
       }
 
       svgWidth() {
-        return this.root.querySelector('svg').getBoundingClientRect().width
+        console.log('w', this.root.querySelector('.graph').getBoundingClientRect().width)
+        return this.root.querySelector('.graph').getBoundingClientRect().width
       }
 
       svgHeight() {
-        return this.root.querySelector('svg').getBoundingClientRect().height
+        console.log('h', this.root.querySelector('.graph').getBoundingClientRect().height)
+        return this.root.querySelector('.graph').getBoundingClientRect().height
       }
 
-      clamp(value) {
-        let r = Math.max(value, this.props.min)
-        return Math.min(r, this.props.max)
-      }
+      // clamp(value) {
+      //   let r = Math.max(value, this.props.min)
+      //   return Math.min(r, this.props.max)
+      // }
 
-      mapRange(value, from = [0.0, 1.0], to = [0.0, 1.0]) {
-        return (value - from[0]) / from[1] * (to[1] - to[0]) + to[0]
-      }
+      // mapRange(value, from = [0.0, 1.0], to = [0.0, 1.0]) {
+      //   return (value - from[0]) / from[1] * (to[1] - to[0]) + to[0]
+      // }
 
       onMounted(props, state) {
         const component = this
@@ -128,7 +132,7 @@
 
         d3.select(this.root).
           selectAll(".controls circle").
-          call(d3.drag().on('drag', drag))        
+          call(d3.drag().on('drag', drag))
       }
     }
   </script>

@@ -4,11 +4,17 @@
   </div>
 
   <script>
+    import Icon from './icon.riot'
+
     export default class {
+      static components = {
+        Icon
+      }
+
       classes() {
         return [
           this.state.animate ? '' : 'preload',
-          this.props.open ? 'open' : 'close'
+          this.props.open ? 'open' : 'closed'
         ].join(' ')
       }
 

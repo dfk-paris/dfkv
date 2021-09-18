@@ -1,0 +1,84 @@
+@import 'index.scss';
+
+// base
+
+$logo-green: #009BB5;
+$header-green: #009bb5;
+$serif: 'lyon';
+$sans-serif: 'cera-pro';
+
+
+[is=dfk-demo], popup {
+  .container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .item {
+    margin-bottom: 30px;
+    overflow: auto;
+  }
+
+  .divider {
+    overflow: auto;
+    width: 20%;
+    border-top: 1px dashed gray;
+    margin: 50px auto;
+    height: 1px;
+  }
+
+  h1 {
+    font-family: $serif;
+    font-size: 44px;
+    color: $header-green;
+    font-weight: normal;
+    margin: {
+      top: 100px;
+      bottom: 50px;
+    };
+  }
+
+  h2 {
+    font-family: $serif;
+    font-size: 30px;
+    color: $header-green;
+    font-weight: normal;
+    margin: {
+      top: 50px;
+      bottom: 30px;
+    };
+  }
+
+  button {
+    background-color: $header-green;
+    border: 0;
+    padding: 5px 15px;
+    color: white;
+  }
+}
+
+// components
+
+fly-in {
+  z-index: 10000;
+
+  img {
+    display: block;
+    margin-top: 10px;
+  }
+
+  .fly-in-open {
+    img {
+      margin-top: 20px;
+    }
+  }
+}
+
+popup {
+  z-index: 10000;
+
+  h2 {
+    margin-top: 30px;
+  }
+}

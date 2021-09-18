@@ -1,12 +1,13 @@
 :root {
   --fly-in-width: 30vw;
+  --fly-in-width-collapsed: 10vw;
 }
 
 $shadow: -3px 0px 20px 5px rgba(0.4, 0.4, 0.4, 0.3);
 
 fly-in {
   display: inline-block;
-  width: 0;
+  width: var(--fly-in-width-collapsed);
   position: fixed;
   top: 0;
   right: 0;
@@ -17,6 +18,7 @@ fly-in {
   background-color: white;
 
   animation-duration: 0.5s;
+  box-shadow: $shadow;
 
   .content-wrapper {
     width: var(--fly-in-width);
@@ -31,16 +33,36 @@ fly-in {
     box-shadow: $shadow;
 
     animation-name: slidein;
+
+    .fly-in-open {
+      display: initial;
+    }
+
+    .fly-in-closed {
+      display: none;
+    }
   }
 
-  &.close {
+  &.closed {
     animation-name: slideout;
+
+    .fly-in-open {
+      display: none;
+    }
+
+    .fly-in-closed {
+      display: initial;
+    }
+
+    .content-wrapper {
+      width: var(--fly-in-width-collapsed);
+    }
   }
 }
 
 @keyframes slidein {
   0% {
-    width: 0;
+    width: var(--fly-in-width-collapsed);
   }
 
   100% {
@@ -51,11 +73,9 @@ fly-in {
 @keyframes slideout {
   0% {
     width: var(--fly-in-width);
-    box-shadow: $shadow;
   }
 
   100% {
-    width: 0;
-    box-shadow: $shadow;
+    width: var(--fly-in-width-collapsed);
   }
 }

@@ -31,11 +31,6 @@ function all {
 #     "widgets/build.sh watch_images"
 # }
 
-function server {
-  cd public
-  static -p 3000 -a 127.0.0.1
-}
-
 function vendor {
   # log "concatenating vendor css"
   # cat widgets/vendor/css/*.css > public/vendor.css
