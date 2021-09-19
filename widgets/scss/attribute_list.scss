@@ -1,0 +1,15 @@
+.attribute-list {
+  text-align: left;
+  font-size: 18px;
+  line-height: 24px;
+
+  .attribute {
+    font-weight: bold;
+    margin-bottom: 1.5em;
+  }
+
+  .value {
+    font-family: $serif;
+    margin-bottom: 3em;
+  }
+}

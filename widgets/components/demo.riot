@@ -38,7 +38,7 @@
         </div>
       </fly-in>
 
-      <button onclick={this.parisClick}>Paris</button>
+      <button class="default" onclick={this.parisClick}>Paris</button>
     </div>
 
     <div class="item">
@@ -53,7 +53,7 @@
           bins={this.state.bins}
         />
       </div>
-      <button onclick={event => this.newBins('bins', 40)}>Generate new data</button>
+      <button class="default" onclick={event => this.newBins('bins', 40)}>Generate new data</button>
 
       <div class="divider"></div>
 
@@ -67,7 +67,7 @@
           binWidth={4}
         />
       </div>
-      <button onclick={event => this.newBins('bins2', 80)}>Generate new data</button>
+      <button class="default" onclick={event => this.newBins('bins2', 80)}>Generate new data</button>
     </div>
 
     <div class="item">
@@ -81,12 +81,12 @@
           </p>
 
           <div style="text-align: right; margin-top: 30px;">
-            <button onclick={this.popup}>Close</button>
+            <button class="default" onclick={this.popup}>Close</button>
           </div>
         </div>
       </popup>
 
-      <button onclick={event => this.popup()}>Launch</button>
+      <button class="default" onclick={event => this.popup()}>Launch</button>
     </div>
 
     <div class="item">
@@ -185,6 +185,43 @@
         <dfk-blockquote>
           »Man erlebte die Ausstellung mit Genuß und ist dankbar für diesen, wenn auch nicht vollkommen geklärten Einblick in das einen überlieferten, hohen Durchschnitt zeigende französische Kunstschaffen der Gegenwart.«
         </dfk-blockquote>
+      </div>
+    </div>
+
+    <div class="item">
+      <h2>.attribute-list</h2>
+
+      <div style="width: 400px; margin: 0 auto;">
+        <div class="attribute-list">
+          <div class="attribute">Beschreibung/Kommentar</div>
+          <div class="value">
+            Der Organisator der 'ersten offiziellen Ausstellung französischer Kunst seit 40 Jahren', Robert Rey, habe als Schlüssel zu dieser Schau die Gruppe Nabis erklärt. Es falle auf, daß nur Anerkanntes gezeigt werde, wohl um den Eindruck überlegener Gelassenheit erwecken zu können.
+          </div>
+          <div class="attribute">Personen</div>
+          <div class="value">
+            Rey, Robert   ; Vuillard, Edouard   ; Bonnard, Pierre    ; Lotiron, Robert; François-Poncet, André; Gernez, Paul; Göring, Hermann ; Goebbels, Joseph   ; Brianchon, Maurice ; Asselin, Maurice ; Chapelain-Midi, Roger    ; Roussel, Ker-Xavier
+          </div>
+          <div class="attribute">Textart</div>
+          <div class="value">Ausstellungsbesprechung</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <h2>button</h2>
+
+      <div style="width: 500px; margin: 0 auto;">
+        <button class="default">default</button>
+        <button class="yellow">yellow</button>
+        <button class="green">green</button>
+        <button class="light">light</button>
+
+        <br /><br />
+
+        <button class="default large">default</button>
+        <button class="yellow large">yellow</button>
+        <button class="green large">green</button>
+        <button class="light large">light</button>
       </div>
     </div>
   </div>
