@@ -1,12 +1,13 @@
-@import 'index.scss';
-
-// base
-
 $logo-green: #009BB5;
 $header-green: #009bb5;
+$hover-green: #D9E6D9;
+$active-gray: #8D8D8D;
 $serif: 'lyon';
 $sans-serif: 'cera-pro';
 
+@import 'index.scss';
+
+// base
 
 [is=dfk-demo], popup {
   .container {
@@ -81,4 +82,66 @@ popup {
   h2 {
     margin-top: 30px;
   }
+}
+
+.grid-box-html {
+  tabs {
+    a {
+      font-family: $sans-serif;
+      text-align: left;
+      font-size: 16px;
+      border-color: $active-gray;
+      padding: 6px;
+      text-decoration: none !important;
+    }
+  }
+
+  pagination {
+    display: block;
+    line-height: 24px;
+
+    a {
+      font-family: cera-pro;
+      text-decoration: none;
+
+      .text {
+        padding: 0 10px;
+      }
+    }
+
+    icon {
+      position: relative;
+      height: 16px;
+      width: 16px;
+      top: 3px;
+      margin: 2px;
+
+      .cls-1 {
+        fill: #8d8d8d;
+      }
+    }
+  }
+
+  .expose {
+    & > * {
+      margin: 0;
+    }
+  }
+
+}
+
+.search-result {
+  font-family: $serif;
+}
+
+.sans-serif {
+  font-family: cera-pro
+}
+
+.font-weight-bold {
+  font-weight: bold;
+}
+
+.mb-1 {
+  margin-bottom: 1.4em;
 }

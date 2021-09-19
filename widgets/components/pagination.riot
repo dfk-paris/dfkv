@@ -1,0 +1,72 @@
+<pagination>
+  <template if={props.page}>
+    <a
+      if={!isFirst()}
+      onclick={event => pageTo(event, 1)}
+      href="#"
+      class="dfkv-first"
+    >
+      <icon type="arrow-left" />
+      <icon type="arrow-left" />
+      <span class="text">erste Seite</span>
+    </a>
+    <a
+      if={!isFirst()}
+      onclick={event => pageTo(event, this.props.page - 1)}
+      href="#"
+      class="dfkv-previous"
+    >
+      <icon type="arrow-left" />
+      <span class="text">vorherige Seite</span>
+    </a>
+    <strong>{this.props.page}/{totalPages()}</strong>
+    <a
+      if={!isLast()}
+      onclick={event => pageTo(event, this.props.page + 1)}
+      href="#"
+      class="dfkv-next"
+    >
+      <span class="text">nächste Seite</span>
+      <icon type="arrow-right" />
+    </a>
+    <a
+      if={!isLast()}
+      onclick={event => pageTo(event, totalPages())}
+      href="#"
+      class="dfkv-last"
+    >
+      <span class="text">letzte Seite</span>
+      <icon type="arrow-right" />
+      <icon type="arrow-right" />
+    </a>
+  </template>
+
+  <script>
+    import Icon from './icon.riot'
+
+    export default class {
+      static components = {
+        Icon
+      }
+
+      pageTo(event, newPage) {
+        event.preventDefault()
+        if (this.props.pageTo) {
+          this.props.pageTo(newPage)
+        }
+      }
+
+      isFirst() {
+        return this.props.page == 1
+      }
+
+      isLast() {
+        return this.props.page == this.totalPages()
+      }
+
+      totalPages() {
+        return Math.ceil(this.props.total / this.props.perPage)
+      }
+    }
+  </script>
+</pagination>

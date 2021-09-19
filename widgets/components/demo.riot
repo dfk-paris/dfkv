@@ -3,8 +3,8 @@
     <h1>Widget Demo Page</h1>
 
     <p>
-      A page showing several widgets developed as re-usable components of the
-      DFK online presence.
+      A page showing several widgets developed as re-usable components for
+      various DFK online tools
     </p>
 
     <div class="item">
@@ -88,18 +88,125 @@
 
       <button onclick={event => this.popup()}>Launch</button>
     </div>
+
+    <div class="item">
+      <h2>Tab</h2>
+
+      <div style="width: 600px; margin: 0 auto;">
+        <tabs>
+          <tab
+            id="continents"
+            active-tab={this.state.tab}
+            activate={id => this.changeTab(id)}
+          >Continents (3)</tab>
+          <tab
+            id="countries"
+            active-tab={this.state.tab}
+            activate={id => this.changeTab(id)}
+          >Countries (19)</tab>
+          <tab
+            id="cities"
+            active-tab={this.state.tab}
+            activate={id => this.changeTab(id)}
+          >Cities (182)</tab>
+        </tabs>
+      </div>
+    </div>
+
+    <div class="item">
+      <h2>.search-result</h2>
+
+      <div style="width: 800px; margin: 0 auto;">
+        <div class="search-result">
+          <div class="active-box">
+            <a class="stretched-link" href="#"></a>
+
+            <div class="content-box">
+              <div class="meta">
+                <div class="mb-1">Jean-Marc Poinsot</div>
+                <div class="sans-serif font-weight-bold">Kowalski</div>
+                <div class="ref mb-1">
+                  <em>Chroniques de l’art vivant</em>,
+                  n° 20, mai 1971, p. 12
+                </div>
+                <div class="text">
+                  In diesem Artikel, der anlässlich der Piotr Kowalski Ausstellung im ARC erschien, hebt Jean-Marc Poinsot "die moderne Raumkonzeption", welche seine Arbeit kennzeichnet, hervor. Dieser Raum zeichnet sich einerseits durch das Fehlen einer bevorzugten Perspektive aus, andererseits durch die Partizipation des Betrachters und schließlich durch eine Hinterfragung der sozialen Beziehungen.
+                </div>
+              </div>
+              <div class="sidebar">
+                <div class="icon mb-1"><icon type="arrow-right" /></div>
+                <div class="image">
+                  <img
+                    src="https://ownreality.dfkg.org/files/e4044e9aa708504f9b473d14a84dcf7f8422bf9a/140.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <h2>Pagination</h2>
+
+      <pagination
+        page={state.page}
+        total={688}
+        per-page={20}
+        page-to={page => this.pageTo(page)}
+      />
+    </div>
+
+    <div class="item">
+      <h2>.expose</h2>
+
+      <div style="width: 400px; margin: 0 auto;">
+        <p>
+          In eget enim sem. Quisque ornare commodo tellus id tristique. Phasellus id sapien sed lorem commodo cursus. Donec id malesuada nibh, sit amet sollicitudin mi.
+        </p>
+
+        <div class="expose">
+          <p>
+            Pellentesque urna odio, facilisis et laoreet a, rhoncus id ex. Sed vitae urna eu metus ornare pharetra. Quisque sodales nunc at scelerisque cursus. Etiam tincidunt nunc purus, quis ultrices ante gravida quis. Duis urna velit, lobortis vitae feugiat quis, pretium at arcu. Nulla ac nunc quis lacus pharetra luctus. Sed ligula mi, aliquam nec arcu et, finibus egestas nisl. Quisque aliquet ac nunc non suscipit. Quisque pulvinar commodo ante, id maximus enim.
+          </p>
+        </div>
+
+        <p>
+          Donec sed ex vel nisl cursus vehicula. Nulla eu placerat leo, et hendrerit eros. Donec eleifend aliquam ornare. In sed tempor elit, viverra egestas odio. Nunc iaculis turpis tellus, nec pretium libero consectetur eget.
+        </p>
+      </div>
+    </div>
+
+    <div class="item">
+      <h2>DfkBlockquote</h2>
+
+      <div style="width: 400px; margin: 0 auto;">
+        <dfk-blockquote>
+          »Man erlebte die Ausstellung mit Genuß und ist dankbar für diesen, wenn auch nicht vollkommen geklärten Einblick in das einen überlieferten, hohen Durchschnitt zeigende französische Kunstschaffen der Gegenwart.«
+        </dfk-blockquote>
+      </div>
+    </div>
   </div>
 
   <script>
+    import DfkBlockquote from './blockquote.riot'
     import FlyIn from './fly_in.riot'
+    import Icon from './icon.riot'
+    import Pagination from './pagination.riot'
     import Popup from './popup.riot'
     import RangeControl from './range_control.riot'
+    import Tab from './tab.riot'
 
     export default class {
       static components = {
+        DfkBlockquote,
         FlyIn, 
+        Icon,
         RangeControl,
-        Popup
+        Pagination,
+        Popup,
+        Tab
       }
 
       onBeforeMount(props, state) {
@@ -108,7 +215,9 @@
           paris: false,
           bins: this.randomBins(40),
           bins2: this.randomBins(80),
-          popup: false
+          popup: false,
+          tab: 'cities',
+          page: 8
         }
 
         // this.zambiaClick = this.zambiaClick.bind(this)
@@ -116,6 +225,10 @@
         this.popup = this.popup.bind(this)
 
         this.root.innerHTML = ''
+
+        // remove pink background from dfk unpublished page
+        const article = document.querySelector('article')
+        article.classList.remove('node--unpublished')
       }
 
       // zambiaClick() {
@@ -144,6 +257,14 @@
 
       popup(event) {
         this.update({popup: !this.state.popup})
+      }
+
+      changeTab(id) {
+        this.update({tab: id})
+      }
+
+      pageTo(newPage) {
+        this.update({page: newPage})
       }
     }
   </script>

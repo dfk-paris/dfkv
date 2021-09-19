@@ -1,0 +1,18 @@
+<dfk-blockquote>
+  <div class="icon">
+    <icon type="quotes" />
+  </div>
+  <div class="content">
+    <slot />
+  </div>
+
+  <script>
+    import Icon from './icon.riot'
+
+    export default class {
+      static components = {
+        Icon
+      }
+    }
+  </script>
+</dfk-blockquote>
