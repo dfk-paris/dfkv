@@ -1,0 +1,163 @@
+<range-control>
+  <div class="graph">
+    <svg viewBox="0 0 {svgWidth()} {svgHeight()}">
+      <g class="bins" fill="#aaaaaa">
+        <rect
+          each={(bin, index) in props.bins}
+          x="calc({binIndexToPercent(index)}% - {(props.binWidth || 1) / 2}px)"
+          height="{binToHeight(bin)}%"
+          y="{90 - binToHeight(bin) - 10}%"
+          width={props.binWidth || 1}
+          fill={binColor(index)}
+        />
+      </g>
+      <g class="background" fill="#aaaaaa">
+        <!-- <rect width="80%" height="1px" x="10%" y="calc(90% - 0px)" /> -->
+        <rect width="100%" height="1" x="0%" y="90%" />
+        <!-- <rect width="1" height="10%" x="10%" y="calc(90% - 5%)" /> -->
+        <!-- <rect width="1" height="10%" x="90%" y="calc(90% - 5%)" /> -->
+      </g>
+      <g class="controls" fill="#5EC1ABaa">
+        <circle class="from" cx="{valueToPercent(from())}%" cy="90%" r="0.5em" />
+        <circle class="to" cx="{valueToPercent(to())}%" cy="90%" r="0.5em" />
+      </g>
+
+      <!-- <g x="10%">
+        <rect width="80%" height="10" x="10%" y="50%" />
+      </g> -->
+    </svg>
+  </div>
+
+  <div class="literals">
+    <div>{props.min}</div>
+    <div>{from()} – {to()}</div>
+    <div>{props.max}</div>
+  </div>
+
+  <script>
+    import * as d3Selection from 'd3-selection'
+    import * as d3Scale from 'd3-scale'
+    import * as d3Drag from 'd3-drag'
+
+    const d3 = Object.assign({}, d3Selection, d3Scale, d3Drag)
+
+    export default class {
+      clamp(value) {
+        const t = Math.max(this.props.min, value)
+        return Math.min(t, this.props.max)
+      }
+
+      from() {
+        const v = (this.state.dragging ? this.state.from : this.props.from)
+        if (v == undefined) {return this.props.from}
+
+        return this.clamp(v)
+      }
+
+      to() {
+        const v = (this.state.dragging ? this.state.to : this.props.to)
+        if (v == undefined) {return this.props.to}
+
+        return this.clamp(v)
+      }
+
+      onBeforeMount() {
+        this.state = {
+          dragging: false,
+          from: this.props.from || this.props.min,
+          to: this.props.to || this.props.max
+        }
+      }
+
+      onMounted() {
+        const cmp = this
+
+        const m = d3.scaleLinear().
+          domain([0, this.svgWidth()]).
+          range([cmp.props.min, cmp.props.max]).
+          clamp(true)
+
+        const drag = function(event) {
+          cmp.state.dragging = true
+
+          const value = Math.round(m(event.x))
+          const side = (this.classList.contains('from') ? 'from' : 'to')
+          cmp.update({[side]: value})
+
+          if (side == 'from' && value > cmp.to()) {
+            cmp.update({to: value})
+          }
+
+          if (side == 'to' && value < cmp.from()) {
+            cmp.update({from: value})
+          }
+        }
+
+        const end = (event) => {
+          cmp.props.onInputsChanged({from: cmp.state.from, to: cmp.state.to})
+          cmp.update({stopDragging: false})
+        }
+
+        d3.select(this.root).
+          selectAll(".controls circle").
+          call(d3.drag().on('drag', drag).on('end', end))
+      }
+
+      // dragging mode is not stopped immediately to prevent a brief jump-back
+      // of the slider to the previous position because the new url value hasn't
+      // been propagated to this component yet
+      onBeforeUpdate(props, state) {
+        if (state.stopDragging) {
+          state.stopDragging = false
+          state.dragging = false
+        }
+      }
+
+      binColor(index) {
+        const active = (
+          this.binIndexToPercent(index) >= this.valueToPercent(this.from()) &&
+          this.binIndexToPercent(index) <= this.valueToPercent(this.to())
+        )
+
+        return active ? '#232323' : ''
+      }
+
+      valueToPercent(value) {
+        const m = d3.scaleLinear().
+          domain([this.props.min, this.props.max]).
+          range([0, 100])
+
+        return m(value)
+      }
+
+      binToHeight(value) {
+        const m = d3.scaleLinear().
+          domain([0, this.maxBin()]).
+          range([0, 80])
+
+        return m(value)
+      }
+
+      binIndexToPercent(index) {
+        const m = d3.scaleLinear().
+          domain([0, this.props.bins.length - 1]).
+          range([0, 100])
+
+        return m(index)
+      }
+
+      maxBin() {
+        const values = this.props.bins
+        return Math.max(...values)
+      }
+
+      svgWidth() {
+        return this.root.querySelector('.graph').getBoundingClientRect().width
+      }
+
+      svgHeight() {
+        return this.root.querySelector('.graph').getBoundingClientRect().height
+      }
+    }
+  </script>
+</range-control>

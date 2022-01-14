@@ -1,0 +1,38 @@
+{
+  "fulltext_search": {
+    "id": "fulltext_search",
+    "de": "Volltextsuche",
+    "en": null,
+    "fr": null
+  },
+  "search_criteria": {
+    "id": "search_criteria",
+    "de": "Suchkriterien",
+    "en": null,
+    "fr": null
+  },
+  "next_page": {
+    "id": "next_page",
+    "de": "nächste Seite",
+    "en": null,
+    "fr": null
+  },
+  "prev_page": {
+    "id": "prev_page",
+    "de": "vorherige Seite",
+    "en": null,
+    "fr": null
+  },
+  "first_page": {
+    "id": "first_page",
+    "de": "erste Seite",
+    "en": null,
+    "fr": null
+  },
+  "last_page": {
+    "id": "last_page",
+    "de": "letzte Seite",
+    "en": null,
+    "fr": null
+  }
+}

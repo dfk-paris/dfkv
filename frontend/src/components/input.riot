@@ -1,0 +1,34 @@
+<dfk-input>
+  <label if={props.label} for={props.name}>{props.label}</label>
+  <input
+    type={props.type || 'text'}
+    autocomplete="off"
+    id={props.name}
+    name={props.name}
+    value={props.value}
+    placeholder={props.placeholder}
+    oninput={event => onChange(event)}
+  />
+
+  <script>
+    export default class {
+      onBeforeMount() {
+        console.log(this.props)
+      }
+
+      onChange(event) {
+        if (this.props.updateHandler) {
+          this.props.updateHandler(event, this.getValue())
+        }
+      }
+
+      getName() {
+        return this.props.name
+      }
+
+      getValue() {
+        return this.root.querySelector('input').value
+      }
+    }
+  </script>
+</dfk-input>

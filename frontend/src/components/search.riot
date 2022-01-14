@@ -1,0 +1,86 @@
+<dfkv-search>
+  <dfkv-search-form
+    on-inputs-changed={this.onInputsChanged}
+    criteria={params()}
+    results={state.results}
+  />
+
+  <dfkv-search-results
+    if={state.results}
+    on-inputs-changed={this.onInputsChanged}
+    criteria={params()}
+    results={state.results}
+  />
+
+  <script>
+    import {Url} from '@wendig/lib'
+
+    import Search from '../lib/search'
+
+    import SearchForm from './search_form.riot'
+    import SearchResults from './search_results.riot'
+
+    export default class {
+      static components = {
+        'dfkv-search-form': SearchForm,
+        'dfkv-search-results': SearchResults
+      }
+
+      constructor() {
+        this.onHashChanged = this.onHashChanged.bind(this)
+        this.onResults = this.onResults.bind(this)
+      }
+
+      onBeforeMount() {
+        window.addEventListener('hashchange', this.onHashChanged)
+        this.bus.addEventListener('search-results', this.onResults)
+
+        this.onHashChanged(null, false)
+      }
+
+      onUnmounted() {
+        window.removeEventListener('hashchange', this.onHashChanged)
+        this.bus.removeEventListener('search-results', this.onResults)
+      }
+
+      onHashChanged(event, doUpdate = true) {
+        this.state = {...this.state, ...this.params()}
+        this.onSearch()
+
+        if (doUpdate) {
+          this.update()
+        }
+      }
+
+      onInputsChanged(values) {
+        console.log(values)
+        const url = Url.current()
+        url.updateHashParams(values)
+        url.apply()
+      }
+
+      onSearch() {
+        Search.search(this.params())
+      }
+
+      onResults(event) {
+        this.update({results: event.data})
+      }
+
+      params() {
+        const defaults = {
+          decode: true,
+          parseInt: ['page', 'per_page']
+        }
+
+        const url = Url.current()
+        const result = {
+          page: 1,
+          perPage: 10,
+          ...url.hashParams(defaults)
+        }
+        return result
+      }
+    }
+  </script>
+</dfkv-search>

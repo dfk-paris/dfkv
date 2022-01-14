@@ -1,0 +1,66 @@
+<dfkv-search-form>
+  <h3>{t('search_criteria')}</h3>
+
+  <dfk-input
+    placeholder={t('fulltext_search')}
+    name="terms"
+    update-handler={this.delayedUpdateUrl}
+    value={props.criteria.terms}
+  />
+
+  <dfk-range-control
+    if={props.results}
+    from={props.criteria.from}
+    to={props.criteria.to}
+    min={1842}
+    max={1978}
+    bins={props.results.aggregations().year.buckets.map(e => e.doc_count)}
+    on-inputs-changed={props.onInputsChanged}
+  />
+
+  <script>
+    import {i18n, Url} from '@wendig/lib'
+    import search from '../lib/search'
+
+    import Input from './input.riot'
+    import RangeControl from './range_control.riot'
+
+    export default class {
+      static components = {
+        'dfk-input': Input,
+        'dfk-range-control': RangeControl
+      }
+
+      constructor() {
+        this.delayedUpdateUrl = this.delayedUpdateUrl.bind(this)
+        this.updateUrl = this.updateUrl.bind(this)
+
+        this.t = i18n.translate
+      }
+
+      updateUrl() {
+        const newParams = {...this.inputValues(), page: 1}
+        this.props.onInputsChanged(newParams)
+      }
+
+      inputValues() {
+        const result = {}
+        for (const input of this.tags['dfk-input']) {
+          result[input.getName()] = input.getValue()
+        }
+        return result
+      }
+
+      delayedUpdateUrl(event) {
+        console.log(new Error().stack)
+
+        if (this.timeout) {
+          window.clearTimeout(this.timeout)
+          this.timeout = null
+        }
+
+        this.timeout = window.setTimeout(this.updateUrl, 300)
+      }
+    }
+  </script>
+</dfkv-search-form>

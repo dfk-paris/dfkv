@@ -1,0 +1,23 @@
+dfk-pagination {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+
+  a {
+    display: flex;
+    flex-direction: row;
+    margin: 0 15px;
+
+    span:first-child {
+      margin-right: 10px;
+    }
+
+    span:last-child {
+      margin-left: 10px;
+    }
+  }
+
+  a.hidden {
+    visibility: hidden;
+  }
+}

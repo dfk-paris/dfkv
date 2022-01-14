@@ -1,0 +1,44 @@
+button {
+  border: 0;
+  padding: 5px 15px;
+  color: white;
+  cursor: pointer;
+
+  &.large {
+    padding: 15px 30px;
+    font-weight: bold;
+  }
+
+  &.default {
+    background-color: $header-green;
+  }
+
+  &.default:hover {
+    background-color: darken($header-green, 10);
+  }
+
+  &.yellow {
+    background-color: #E3CD35;
+  }
+
+  &.yellow:hover {
+    background-color: darken(#E3CD35, 10);
+  }
+
+  &.green {
+    background-color: #B3BA32;
+  }
+
+  &.green:hover {
+    background-color: darken(#B3BA32, 10);
+  }
+
+  &.light {
+    background-color: #C4DFE7;
+    color: #3e3e3e;
+  }
+
+  &.light:hover {
+    background-color: darken(#C4DFE7, 10);
+  }
+}

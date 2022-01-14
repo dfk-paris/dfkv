@@ -1,0 +1,185 @@
+$logo-green: #009BB5;
+$header-green: #009bb5;
+$hover-green: #D9E6D9;
+$active-gray: #8D8D8D;
+$serif: 'lyon';
+$sans-serif: 'cera-pro';
+$text-color: #1e1e1e;
+
+@import 'scss/demo/fonts.scss';
+@import 'components.scss';
+
+
+// base
+
+[is=dfk-widgets], popup {
+  .container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .item {
+    margin-bottom: 30px;
+    overflow: auto;
+  }
+
+  .divider {
+    overflow: auto;
+    width: 20%;
+    border-top: 1px dashed gray;
+    margin: 50px auto;
+    height: 1px;
+  }
+
+  h1 {
+    font-family: $serif;
+    font-size: 44px;
+    color: $header-green;
+    font-weight: normal;
+    margin: {
+      top: 100px;
+      bottom: 50px;
+    };
+  }
+
+  h2 {
+    font-family: $serif;
+    font-size: 30px;
+    color: $header-green;
+    font-weight: normal;
+    margin: {
+      top: 50px;
+      bottom: 30px;
+    };
+  }
+
+  a {
+    color: $text-color;
+  }
+}
+
+// components
+
+fly-in {
+  z-index: 10000;
+
+  img {
+    display: block;
+    margin-top: 10px;
+  }
+
+  .fly-in-open {
+    img {
+      margin-top: 20px;
+    }
+  }
+}
+
+popup {
+  z-index: 10000;
+
+  h2 {
+    margin-top: 30px;
+  }
+}
+
+tabs {
+  a {
+    font-family: $sans-serif;
+    text-align: left;
+    font-size: 16px;
+    border-color: $active-gray;
+    padding: 6px;
+    text-decoration: none !important;
+  }
+}
+
+pagination {
+  display: block;
+  line-height: 24px;
+  user-select: none;
+
+  a {
+    font-family: cera-pro;
+    text-decoration: none;
+
+    .text {
+      padding: 0 10px;
+    }
+  }
+
+  icon {
+    position: relative;
+    height: 16px;
+    width: 16px;
+    top: 3px;
+    margin: 2px;
+
+    .cls-1 {
+      fill: #8d8d8d;
+    }
+  }
+}
+
+.expose {
+  & > * {
+    margin: 0;
+  }
+}
+
+.search-result {
+  font-family: $serif;
+}
+
+.sans-serif {
+  font-family: cera-pro;
+}
+
+.font-weight-bold {
+  font-weight: bold;
+}
+
+.mb-1 {
+  margin-bottom: 1.4em;
+}
+
+.icons > div {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  .icon-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    margin-bottom: 20px;
+    width: 90px;
+
+
+    white-space: nowrap;
+  }
+
+  icon {
+    display: block;
+    max-width: 30px;
+    max-height: 30px;
+
+    margin-bottom: 10px;
+  }
+}
+
+popup {
+  .header {
+    display: flex;
+    justify-content: space-between;
+
+    icon {
+      max-width: 30px;
+      max-height: 30px;
+
+      cursor: pointer;
+    }
+  }
+}

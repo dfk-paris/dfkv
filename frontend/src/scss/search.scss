@@ -1,0 +1,24 @@
+[is='dfkv'] {
+  display: flex;
+  justify-content: flex-start;
+
+  dfkv-search-form {
+    width: 300px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin-right: 10px;
+  }
+
+  dfkv-search-results {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+    margin-left: 10px;
+
+    .search-results {
+      width: 100%;
+    }
+  }
+}
+

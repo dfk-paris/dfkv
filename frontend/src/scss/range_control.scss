@@ -1,0 +1,37 @@
+dfk-range-control {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  // height: 100%;
+
+  .graph {
+    flex-grow: 1;
+    overflow: clip;
+    overflow-x: visible;
+
+    width: calc(100% - 20px);
+    margin: 0 10px;
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+
+      rect {
+        transition:
+          height 0.5s ease-out,
+          y 0.5s ease-out;
+      }
+
+      circle {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .literals {
+    display: flex;
+    justify-content: space-between;
+  }
+}

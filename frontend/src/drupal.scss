@@ -1,0 +1,39 @@
+@import 'scss/demo/fonts.scss';
+
+// h1 {
+//   font-family: $serif;
+//   font-size: 44px;
+//   color: $header-green;
+//   font-weight: normal;
+//   margin: {
+//     top: 100px;
+//     bottom: 50px;
+//   };
+// }
+
+html {
+  margin: 0;
+  font-size: 18px;
+  color: $text-color;
+}
+
+body {
+  margin: 0;
+  font-family: $serif;
+}
+
+// h2 {
+//   font-family: $serif;
+//   font-size: 44px;
+//   color: $header-green;
+//   font-weight: normal;
+//   margin: {
+//     top: 40px;
+//     bottom: 60px;
+//   };
+// }
+
+a {
+  color: $text-color;
+  text-decoration: none;
+}

@@ -1,0 +1,356 @@
+<widgets>
+  <div class="container">
+    <h1>Widget Demo Page</h1>
+
+    <p>
+      A page showing several widgets developed as re-usable components for
+      various DFK online tools
+    </p>
+
+    <div class="item">
+      <h2>FlyIn</h2>
+
+      <fly-in open={this.state.paris}>
+        <div class="fly-in-open">
+          <div style="padding: 30px">
+            <h1>Paris</h1>
+
+            <p>
+              Paris is the capital and most populous city of France, with an estimated population of 2,175,601 residents as of 2018, in an area of more than 105 square kilometres. Since the 17th century, Paris has been one of Europe's major centres of finance, diplomacy, commerce, fashion, gastronomy, science, and arts.
+            </p>
+
+            <img
+              src="https://www.parisescapes.com/images/eiffel_tower_twilight.jpg"
+              style="width: 100%"
+            />
+          </div>
+        </div>
+
+        <div class="fly-in-closed">
+          <div style="padding: 30px">
+            Paris
+
+            <img
+              src="https://www.parisescapes.com/images/eiffel_tower_twilight.jpg"
+              style="width: 100%"
+            />
+          </div>
+        </div>
+      </fly-in>
+
+      <button class="default" onclick={this.parisClick}>Paris</button>
+    </div>
+
+    <div class="item">
+      <h2>RangeControl</h2>
+
+      <div style="width: 400px; height: 150px; margin: 50px auto 30px;">
+        <range-control
+          from={1455}
+          to={1677}
+          min={1400}
+          max={1900}
+          bins={this.state.bins}
+        />
+      </div>
+      <button class="default" onclick={event => this.newBins('bins', 40)}>Generate new data</button>
+
+      <div class="divider"></div>
+
+      <div style="width: 600px; height: 150px; margin: 50px auto 30px;">
+        <range-control
+          from={1626}
+          to={1762}
+          min={1400}
+          max={1900}
+          bins={this.state.bins2}
+          binWidth={4}
+        />
+      </div>
+      <button class="default" onclick={event => this.newBins('bins2', 80)}>Generate new data</button>
+    </div>
+
+    <div class="item">
+      <h2>Popup</h2>
+
+      <popup open={this.state.popup}>
+        <div style="padding: 40px">
+          <div class="header">
+            <h2> Artwork Details</h2>
+            <Icon type="cross" onclick={this.popup} />
+          </div>
+          <p>
+            There are two main seasons, the rainy season (November to April) corresponding to summer, and the dry season (May/June to October/November), corresponding to winter. The dry season is subdivided into the cool dry season (May/June to August), and the hot dry season (September to October/November). The modifying influence of altitude gives the country pleasant subtropical weather rather than tropical conditions during the cool season of May to August.[76] However, average monthly temperatures remain above 20 °C (68 °F) over most of the country for eight or more months of the year.
+          </p>
+        </div>
+      </popup>
+
+      <button class="default" onclick={event => this.popup()}>Launch</button>
+    </div>
+
+    <div class="item">
+      <h2>Tab</h2>
+
+      <div style="width: 600px; margin: 0 auto;">
+        <tabs>
+          <tab
+            id="continents"
+            active-tab={this.state.tab}
+            activate={id => this.changeTab(id)}
+          >Continents (3)</tab>
+          <tab
+            id="countries"
+            active-tab={this.state.tab}
+            activate={id => this.changeTab(id)}
+          >Countries (19)</tab>
+          <tab
+            id="cities"
+            active-tab={this.state.tab}
+            activate={id => this.changeTab(id)}
+          >Cities (182)</tab>
+        </tabs>
+      </div>
+    </div>
+
+    <div class="item">
+      <h2>.search-result</h2>
+
+      <div style="width: 800px; margin: 0 auto;">
+        <div class="search-result">
+          <div class="active-box">
+            <a class="stretched-link" href="#"></a>
+
+            <div class="content-box">
+              <div class="meta">
+                <div class="mb-1">Jean-Marc Poinsot</div>
+                <div class="sans-serif font-weight-bold">Kowalski</div>
+                <div class="ref mb-1">
+                  <em>Chroniques de l’art vivant</em>,
+                  n° 20, mai 1971, p. 12
+                </div>
+                <div class="text">
+                  In diesem Artikel, der anlässlich der Piotr Kowalski Ausstellung im ARC erschien, hebt Jean-Marc Poinsot "die moderne Raumkonzeption", welche seine Arbeit kennzeichnet, hervor. Dieser Raum zeichnet sich einerseits durch das Fehlen einer bevorzugten Perspektive aus, andererseits durch die Partizipation des Betrachters und schließlich durch eine Hinterfragung der sozialen Beziehungen.
+                </div>
+              </div>
+              <div class="sidebar">
+                <div class="icon mb-1"><icon type="arrow-right" /></div>
+                <div class="image">
+                  <img
+                    src="https://ownreality.dfkg.org/files/e4044e9aa708504f9b473d14a84dcf7f8422bf9a/140.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <h2>Pagination</h2>
+
+      <pagination
+        page={state.page}
+        total={688}
+        per-page={20}
+        page-to={page => this.pageTo(page)}
+      />
+    </div>
+
+    <div class="item">
+      <h2>.expose</h2>
+
+      <div style="width: 400px; margin: 0 auto;">
+        <p>
+          In eget enim sem. Quisque ornare commodo tellus id tristique. Phasellus id sapien sed lorem commodo cursus. Donec id malesuada nibh, sit amet sollicitudin mi.
+        </p>
+
+        <div class="expose">
+          <p>
+            Pellentesque urna odio, facilisis et laoreet a, rhoncus id ex. Sed vitae urna eu metus ornare pharetra. Quisque sodales nunc at scelerisque cursus. Etiam tincidunt nunc purus, quis ultrices ante gravida quis. Duis urna velit, lobortis vitae feugiat quis, pretium at arcu. Nulla ac nunc quis lacus pharetra luctus. Sed ligula mi, aliquam nec arcu et, finibus egestas nisl. Quisque aliquet ac nunc non suscipit. Quisque pulvinar commodo ante, id maximus enim.
+          </p>
+        </div>
+
+        <p>
+          Donec sed ex vel nisl cursus vehicula. Nulla eu placerat leo, et hendrerit eros. Donec eleifend aliquam ornare. In sed tempor elit, viverra egestas odio. Nunc iaculis turpis tellus, nec pretium libero consectetur eget.
+        </p>
+      </div>
+    </div>
+
+    <div class="item">
+      <h2>DfkBlockquote</h2>
+
+      <div style="width: 400px; margin: 0 auto;">
+        <dfk-blockquote>
+          »Man erlebte die Ausstellung mit Genuß und ist dankbar für diesen, wenn auch nicht vollkommen geklärten Einblick in das einen überlieferten, hohen Durchschnitt zeigende französische Kunstschaffen der Gegenwart.«
+        </dfk-blockquote>
+      </div>
+    </div>
+
+    <div class="item">
+      <h2>.attribute-list</h2>
+
+      <div style="width: 400px; margin: 0 auto;">
+        <div class="attribute-list">
+          <div class="attribute">Beschreibung/Kommentar</div>
+          <div class="value">
+            Der Organisator der 'ersten offiziellen Ausstellung französischer Kunst seit 40 Jahren', Robert Rey, habe als Schlüssel zu dieser Schau die Gruppe Nabis erklärt. Es falle auf, daß nur Anerkanntes gezeigt werde, wohl um den Eindruck überlegener Gelassenheit erwecken zu können.
+          </div>
+          <div class="attribute">Personen</div>
+          <div class="value">
+            Rey, Robert   ; Vuillard, Edouard   ; Bonnard, Pierre    ; Lotiron, Robert; François-Poncet, André; Gernez, Paul; Göring, Hermann ; Goebbels, Joseph   ; Brianchon, Maurice ; Asselin, Maurice ; Chapelain-Midi, Roger    ; Roussel, Ker-Xavier
+          </div>
+          <div class="attribute">Textart</div>
+          <div class="value">Ausstellungsbesprechung</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <h2>button</h2>
+
+      <div style="width: 500px; margin: 0 auto;">
+        <button class="default">default</button>
+        <button class="yellow">yellow</button>
+        <button class="green">green</button>
+        <button class="light">light</button>
+
+        <br /><br />
+
+        <button class="default large">default</button>
+        <button class="yellow large">yellow</button>
+        <button class="green large">green</button>
+        <button class="light large">light</button>
+      </div>
+    </div>
+
+    <div class="item icons">
+      <h2>Icon</h2>
+
+      <div style="width: 500px; margin: 0 auto;">
+        <div class="icon-tile">
+          <Icon type="book" />
+          <div>book</div>
+        </div>
+        <div class="icon-tile">
+          <Icon type="quotes" />
+          <div>quotes</div>
+        </div>
+
+        <div class="icon-tile">
+          <Icon type="arrow-left" />
+          <div>arrow-left</div>
+        </div>
+        <div class="icon-tile">
+          <Icon type="arrow-right" />
+          <div>arrow-right</div>
+        </div>
+        <div class="icon-tile">
+          <Icon type="arrow-up" />
+          <div>arrow-up</div>
+        </div>
+
+        <div class="icon-tile">
+          <Icon type="chevron-left" />
+          <div>chevron-left</div>
+        </div>
+        <div class="icon-tile">
+          <Icon type="chevron-right" />
+          <div>chevron-right</div>
+        </div>
+
+        <div class="icon-tile">
+          <Icon type="cross" />
+          <div>cross</div>
+        </div>
+        <div class="icon-tile">
+          <Icon type="print" />
+          <div>print</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    import DfkBlockquote from '../blockquote.riot'
+    import FlyIn from '../fly_in.riot'
+    import Icon from '../icon.riot'
+    import Pagination from '../pagination.riot'
+    import Popup from '../popup.riot'
+    import RangeControl from '../range_control.riot'
+    import Tab from '../tab.riot'
+
+    export default class {
+      static components = {
+        DfkBlockquote,
+        FlyIn, 
+        Icon,
+        RangeControl,
+        Pagination,
+        Popup,
+        Tab
+      }
+
+      onBeforeMount(props, state) {
+        this.state = {
+          // zambia: false,
+          paris: false,
+          bins: this.randomBins(40),
+          bins2: this.randomBins(80),
+          popup: false,
+          tab: 'cities',
+          page: 8
+        }
+
+        // this.zambiaClick = this.zambiaClick.bind(this)
+        this.parisClick = this.parisClick.bind(this)
+        this.popup = this.popup.bind(this)
+
+        this.root.innerHTML = ''
+
+        // remove pink background from dfk unpublished page
+        const article = document.querySelector('article')
+        if (article) {
+          article.classList.remove('node--unpublished')
+        }
+      }
+
+      // zambiaClick() {
+      //   this.update({zambia: !this.state.zambia})
+      // }
+
+      onMounted() {
+        window.setTimeout(() => {
+          for (const c of this.tags['range-control']) {
+            c.update()
+          }
+        }, 0)
+      }
+
+      parisClick() {
+        this.update({paris: !this.state.paris})
+      }
+
+      randomBins(count) {
+        return Array.from(Array(count).keys()).map(e => Math.round(Math.random() * 100))
+      }
+
+      newBins(attr, count) {
+        this.update({[attr]: this.randomBins(count)})
+      }
+
+      popup(event) {
+        this.update({popup: !this.state.popup})
+      }
+
+      changeTab(id) {
+        this.update({tab: id})
+      }
+
+      pageTo(newPage) {
+        this.update({page: newPage})
+      }
+    }
+  </script>
+</widgets>
