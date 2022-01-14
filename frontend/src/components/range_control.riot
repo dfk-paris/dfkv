@@ -56,7 +56,7 @@
 
       to() {
         const v = (this.state.dragging ? this.state.to : this.props.to)
-        if (v == undefined) {return this.props.to}
+        if (v == undefined) {return this.props.max}
 
         return this.clamp(v)
       }
