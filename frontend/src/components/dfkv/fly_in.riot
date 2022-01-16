@@ -1,0 +1,83 @@
+<dfkv-fly-in>
+  <dfk-fly-in open={state.open} element={root}>
+    <div class="fly-in-open h-100">
+      <div class="h-100 d-flex align-items-center">
+        <a class="ml-4" onclick={event => toggle(event)}>&gt;&gt;</a>
+        <div class="h-100 ml-6 overflow-y-scroll">
+          <h1 class="mt-6">{cap(t('help'))}</h1>
+
+          <table class="mt-6">
+            <tr>
+              <td><dfk-icon type="quotes"/></td>
+              <td>{cap(t('help_quote'))}</td>
+            </tr>
+            <tr>
+              <td><dfk-icon type="book"/></td>
+              <td>{t('help_viewer')}</td>
+            </tr>
+            <tr>
+              <td><h1>{cap(t('title'))}</h1></td>
+              <td>{t('help_title')}</td>
+            </tr>
+            <tr>
+              <td>{cap(t('transcription'))}</td>
+              <td>{(t('help_transcription'))}</td>
+            </tr>
+            <tr>
+              <td>{t('people')}</td>
+              <td>{t('help_people')}</td>
+            </tr>
+            <tr>
+              <td>{cap(t('text_type'))}</td>
+              <td>{t('help_text_type')}</td>
+            </tr>
+            <tr>
+              <td>{cap(t('tags'))}</td>
+              <td>{t('help_tags')}</td>
+            </tr>
+            <tr>
+              <td>{cap(t('search_feature'))}</td>
+              <td>{t('help_search_feature')}</td>
+            </tr>
+          </table>
+
+          <div class="mt-5 mb-5 d-flex flex-column align-items-center">
+            <button class="w-75 mb-3 d-block default large">
+              {cap(t('datamodel_and_data_curation'))}
+            </button>
+            <button class="w-75 mb-3 d-block yellow large">
+              {cap(t('publications'))}
+            </button>
+            <button class="w-75 mb-3 d-block green large">
+              {cap(t('reuse_question'))}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fly-in-closed">
+      <div class="h-100 d-flex align-items-center p-2">
+        <a onclick={event => toggle(event)}>&lt;&lt;</a>
+      </div>
+    </div>
+  </dfk-fly-in>
+
+  <script>
+    import FlyIn from '../fly_in.riot'
+    import Icon from '../icon.riot'
+    
+    export default class {
+      static components = {
+        'dfk-fly-in': FlyIn,
+        'dfk-icon': Icon,
+      }
+
+      toggle(event) {
+        event.preventDefault()
+
+        this.update({open: !this.state.open})
+      }
+    }
+  </script>
+</dfkv-fly-in>

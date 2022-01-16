@@ -41,18 +41,18 @@ module Dfkv::Tasks
     people = read_excel(ENV['DATA_FILE_MASTER'], "Personnes")
     roles = read_excel(ENV['DATA_FILE_MASTER'], "Rôles de personnes")
     attribs = read_excel(ENV['DATA_FILE_MASTER'], "Attributs")
+    projects = read_excel(ENV['DATA_FILE_MASTER'], 'Projets')
     translations = read_excel(ENV['DATA_TRANSLATIONS'], "translations")
 
-    File.open 'frontend/public/translations.json', 'w+' do |f|
-      f.write JSON.pretty_generate(translations)
-    end
+    self.dump_json(translations, 'frontend/public/translations.json')
+    self.dump_json(projects, 'frontend/public/projects.json')
 
     elastic = Dfkv::Elastic.new
     elastic.reset!
 
     # records
     pb = Dfkv.progress_bar('indexing records', records.size)
-    records.each do |id, record|
+    records.each do |record_id, record|
       record['tags'] = to_id_list(record['tags'])
       record['involved'] = to_id_list(record['involved'])
       record['creators'] = to_id_list(record['creators'])
@@ -60,7 +60,12 @@ module Dfkv::Tasks
       record['text_types'] = to_id_list(record['text_types'])
       record['date'] = to_date(record['date'])
 
-      record['volumes'] = volumes.values.select{|e| e['record_id'] == id}
+      if id = record['project_id']
+        binding.pry unless projects[id]
+        record['project'] = projects[id]
+      end
+
+      record['volumes'] = volumes.values.select{|e| e['record_id'] == record_id}
       record['volumes'].each do |volume|
         id = volume['journal_id']
         # binding.pry unless journals[id]
@@ -141,11 +146,17 @@ module Dfkv::Tasks
     (3..sheet.last_row).each do |i|
       values = sheet.row(i)
       record = headers.zip(values).to_h
-      # binding.pry if sheet_name == 'Volume_ID'
+      # binding.pry if sheet_name == 'Data_complet'
       results[record[primary_key]] = record
     end
     
     book.close
     results
+  end
+
+  def self.dump_json(data, file)
+    File.open file, 'w+' do |f|
+      f.write JSON.pretty_generate(data)
+    end
   end
 end

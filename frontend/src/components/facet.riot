@@ -1,0 +1,44 @@
+<dfk-facet>
+  <div class="d-flex justify-content-between mb-2">
+    <div>{props.name}</div>
+    <div class="text-end">
+      <a href="#">{t('show_all')}</a>
+    </div>
+  </div>
+
+  <div class="d-flex flex-column align-items-start">
+    <a
+      each={bucket in props.aggregation.buckets}
+      class="d-block rounded bg-gray mb-2 p-2"
+      onclick={event => addFilter(event, bucket.key)}
+    >
+      <div class="d-flex">
+        <div>+</div>
+        <div class="ml-1">{bucket.key} ({bucket.doc_count})</div>
+      </div>
+    </a>
+  </div>
+
+  <script>
+    import {i18n} from '@wendig/lib'
+
+    export default class {
+      constructor() {
+        this.t = i18n.translate
+      }
+
+      addFilter(event, newFilter) {
+        event.preventDefault()
+
+        if (this.props.addFilter) {
+          this.props.addFilter(newFilter)
+        }
+      }
+
+      // lookup(key) {
+      //   const f = this.props.lookup
+      //   return f ? f(key) : key
+      // }
+    }
+  </script>
+</dfk-facet>

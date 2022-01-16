@@ -1,0 +1,49 @@
+<dfkv-watchlist-trigger>
+  <a class="float-right rounded p-2 mr-6 bg-gray">
+    + {t('watchlist')} ({count()})
+  </a>
+
+  <script>
+    export default class {
+      constructor() {
+        this.addItem = this.addItem.bind(this)
+        this.clear = this.clear.bind(this)
+      }
+
+      onBeforeMount() {
+        this.bus.addEventListener('add-watchlist-item', this.addItem)
+        this.bus.addEventListener('clear-watchlist', this.clear)
+
+        window.b = this.bus
+      }
+
+      onUnmounted() {
+        window.removeEventListener('clear-watchlist', this.clear)
+        window.removeEventListener('add-watchlist-item', this.addItem)
+      }
+
+      count() {
+        console.log(this.unpack())
+        return this.unpack().length
+      }
+
+      clear() {
+        this.pack([])
+      }
+
+      addItem(event) {
+        const tmp = this.unpack()
+        tmp.push(event.data)
+        this.pack(tmp)
+      }
+
+      unpack() {
+        return JSON.parse(window.localStorage.watchlist || '[]')
+      }
+
+      pack(data) {
+        window.localStorage.watchlist = JSON.stringify(data)
+      }
+    }
+  </script>
+</dfkv-watchlist-trigger>

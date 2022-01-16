@@ -2,12 +2,14 @@ $logo-green: #009BB5;
 $header-green: #009bb5;
 $hover-green: #D9E6D9;
 $active-gray: #8D8D8D;
+$tag-gray: #D8D8D8;
 $serif: 'lyon';
 $sans-serif: 'cera-pro';
 $text-color: #1e1e1e;
 
-@import 'drupal.scss';
-@import 'components.scss';
+@import 'scss/bootstrap_light';
+@import 'drupal';
+@import 'components';
 
 dfk-input {
   display: block;
@@ -19,6 +21,43 @@ dfk-input {
     border: 1px solid #8c8d8f;
   }
 }
+
+.text-underline {
+  text-decoration: underline;
+}
+
+dfk-range-control {
+  margin-top: 10px;
+
+  // .graph {
+  //   height: 70px;
+  // }
+}
+
+dfkv-fly-in, [is='dfkv-fly-in'] {
+  font-size: 0.8em;
+
+  table {
+    td {
+      vertical-align: top;
+      padding-bottom: map-get($spacers, 3);
+    }
+
+    td:first-child {
+      padding-right: map-get($spacers, 3);
+      font-weight: bold;
+
+      h1 {
+        margin-top: 0;
+      }
+    }
+
+    td:last-child {
+      padding-right: 3em;
+    }
+  }
+}
+
 
 // html, body {
 //   margin: 0;

@@ -8,12 +8,17 @@
       activate(event) {
         event.preventDefault()
         if (this.props.activate) {
-          this.props.activate(this.props.id)
+          const newValue = (this.isActive() ? null : this.props.id)
+          this.props.activate(newValue)
         }
       }
 
+      isActive() {
+        return this.props.activeTab == this.props.id
+      }
+
       classes() {
-        return this.props.activeTab == this.props.id ? 'active' : ''
+        return this.isActive() ? 'active' : ''
       }
     }
   </script>

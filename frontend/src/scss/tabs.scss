@@ -1,9 +1,9 @@
-tabs {
+dfk-tabs {
   display: flex;
   justify-content: stretch;
   width: 100%;
 
-  tab {
+  dfk-tab {
     display: block;
     flex-grow: 1;
     border: 1px solid gray;
@@ -16,11 +16,11 @@ tabs {
     }
   }
 
-  tab:last-child {
+  dfk-tab:last-child {
     border-right-width: 1px;
   }
 
-  tab.active, tab:hover {
+  dfk-tab.active, dfk-tab:hover {
     background-color: gray;
 
     a {

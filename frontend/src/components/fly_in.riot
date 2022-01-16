@@ -4,13 +4,7 @@
   </div>
 
   <script>
-    import Icon from './icon.riot'
-
     export default class {
-      static components = {
-        Icon
-      }
-
       classes() {
         return [
           this.state.animate ? '' : 'preload',
@@ -19,7 +13,8 @@
       }
 
       onBeforeMount(props) {
-        document.body.append(this.root)
+        const element = this.props.element || this.root
+        document.body.append(element)
 
         this.state = {
           animate: false,

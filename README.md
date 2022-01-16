@@ -16,15 +16,13 @@ get started, run
 
 This starts a development server with a simple page at http://localhost:3000
 
-To start the backend rack app, install a recent ruby version and install the
-dependencies:
+To start the backend rack app, first build the vagrant virtual machine. This
+requires that you have [vagrant](https://vagrantup.com) and
+[virtualbox](https://virtualbox.org) installed. Then run:
 
 ~~~bash
-bundle install
+vagrant up
+bin/dev.sh
 ~~~
 
-then, to start the backend app, run
-
-~~~bash
-bundle exec bin/api
-~~~
+Then the development instance is available at http://127.0.0.1:3000

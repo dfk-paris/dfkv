@@ -34,5 +34,185 @@
     "de": "letzte Seite",
     "en": null,
     "fr": null
+  },
+  "search_results": {
+    "id": "search_results",
+    "de": "Suchergebnisse",
+    "en": null,
+    "fr": null
+  },
+  "sort_by": {
+    "id": "sort_by",
+    "de": "sortieren nach",
+    "en": null,
+    "fr": null
+  },
+  "title": {
+    "id": "title",
+    "de": "Titel",
+    "en": null,
+    "fr": null
+  },
+  "date": {
+    "id": "date",
+    "de": "Datum",
+    "en": null,
+    "fr": null
+  },
+  "authors": {
+    "id": "authors",
+    "de": "Autoren",
+    "en": null,
+    "fr": null
+  },
+  "show_all": {
+    "id": "show_all",
+    "de": "alle anzeigen",
+    "en": null,
+    "fr": null
+  },
+  "filters": {
+    "id": "filters",
+    "de": "Filter",
+    "en": null,
+    "fr": null
+  },
+  "your_selection": {
+    "id": "your_selection",
+    "de": "Ihre Auswahl",
+    "en": null,
+    "fr": null
+  },
+  "journals": {
+    "id": "journals",
+    "de": "Zeitschriften",
+    "en": null,
+    "fr": null
+  },
+  "id": {
+    "id": "id",
+    "de": "Id",
+    "en": null,
+    "fr": null
+  },
+  "involved_people": {
+    "id": "involved_people",
+    "de": "beteiligte Personen",
+    "en": null,
+    "fr": null
+  },
+  "watchlist": {
+    "id": "watchlist",
+    "de": "Merkliste",
+    "en": null,
+    "fr": null
+  },
+  "legend": {
+    "id": "legend",
+    "de": "Legende",
+    "en": null,
+    "fr": null
+  },
+  "help": {
+    "id": "help",
+    "de": "Hilfe",
+    "en": "help",
+    "fr": null
+  },
+  "transcription": {
+    "id": "transcription",
+    "de": "Transkription",
+    "en": null,
+    "fr": null
+  },
+  "search_feature": {
+    "id": "search_feature",
+    "de": "Suchfunktion",
+    "en": null,
+    "fr": null
+  },
+  "tags": {
+    "id": "tags",
+    "de": "Themen",
+    "en": null,
+    "fr": null
+  },
+  "text_type": {
+    "id": "text_type",
+    "de": "Textart",
+    "en": null,
+    "fr": null
+  },
+  "people": {
+    "id": "people",
+    "de": "Personen",
+    "en": null,
+    "fr": null
+  },
+  "help_quote": {
+    "id": "help_quote",
+    "de": "Zitat aus der angegebenen Quelle. Zitate spiegeln das Interesse der Bearbeiter/in wieder, sind aber wortwörtliche Übernahmen.",
+    "en": null,
+    "fr": null
+  },
+  "help_viewer": {
+    "id": "help_viewer",
+    "de": "Ansicht des zitierten Beitrags bzw. der zitierten Beiträge  in einem Viewer. Die Digitalisate werden von BnF (Gallica) und der Universitätsbibliothek Heidelberg angeboten und 2021 eingebunden.",
+    "en": null,
+    "fr": null
+  },
+  "help_title": {
+    "id": "help_title",
+    "de": "Der Titel entspricht dem Werktitel/ der Quelle oder ist vom Projekt vergeben worden, um Abschnitte in Artikeln und Kolumnen zu kennzeichnen.",
+    "en": null,
+    "fr": null
+  },
+  "help_transcription": {
+    "id": "help_transcription",
+    "de": "Die Transkription ist eine Beschreibung der aus Sicht des Forschungsprojekts relevanten Inhalte des Beitrags. Die Transktiptionen sind somit Inhaltswiedergaben und/oder Interpretationen der Bearbeiter/innen.",
+    "en": null,
+    "fr": null
+  },
+  "help_people": {
+    "id": "help_people",
+    "de": "Alle in der Quelle genannten Personen, meist in der Schreibweise des Quelltextes. Die Personen wurden durch die Bearbeiter/innen erfasst. 2021 wurden sie soweit möglich mit Normdaten referenziert (mehr...).",
+    "en": null,
+    "fr": null
+  },
+  "help_text_type": {
+    "id": "help_text_type",
+    "de": "Klassifizierung des Texttyps durch die Bearbeiter/in. Insgesamt wurden ## Textarten herausgestellt, davon ## französischsprachig, ## deutschsprachig.",
+    "en": null,
+    "fr": null
+  },
+  "help_tags": {
+    "id": "help_tags",
+    "de": "Stichpunkte, mit denen die jeweilige Bearbeiter/in markiert hat, welche für das Forschungsprojekt interessanten Themenbereiche im Beitrag behandelt werden. Die Angabe von Themen ergänzen oder ersetzen auch die Beschreibung.",
+    "en": null,
+    "fr": null
+  },
+  "help_search_feature": {
+    "id": "help_search_feature",
+    "de": "Projektbalken ermöglicht neben der Suche in allen Datenbanken auch die separate Auswahl einer einzelnen und macht die ursprünglichen Zugehörigkeiten sichtbar.\n\nDie Volltextsuche fragt alle Informationen ab und beeinflusst die Filtervorschläge.\n\nDer Zeitbalken grnezt nach Erscheinungsdatum ein; Achtung: für die Jahre 1941-1944 wurden keine Daten erhoben.\n\nPersonen, Autoren, Zeitschriften, Bucheinträge...",
+    "en": null,
+    "fr": null
+  },
+  "datamodel_and_data_curation": {
+    "id": "datamodel_and_data_curation",
+    "de": "Datenmodell & Anreicherung",
+    "en": null,
+    "fr": null
+  },
+  "publications": {
+    "id": "publications",
+    "de": "Publikationen",
+    "en": null,
+    "fr": null
+  },
+  "reuse_question": {
+    "id": "reuse_question",
+    "de": "Reuse?",
+    "en": null,
+    "fr": null
   }
 }

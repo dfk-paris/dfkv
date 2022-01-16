@@ -15,10 +15,10 @@
   <script>
     import {Url} from '@wendig/lib'
 
-    import Search from '../lib/search'
+    import Search from '../../lib/search'
 
-    import SearchForm from './search_form.riot'
-    import SearchResults from './search_results.riot'
+    import SearchForm from '../search_form.riot'
+    import SearchResults from '../search_results.riot'
 
     export default class {
       static components = {
@@ -52,7 +52,11 @@
         }
       }
 
-      onInputsChanged(values) {
+      onInputsChanged(values, resetPage = true) {
+        if (resetPage) {
+          values['page'] = null
+        }
+
         console.log(values)
         const url = Url.current()
         url.updateHashParams(values)

@@ -15,6 +15,14 @@ class Dfkv::Elastic
     create_index 'records', {
       'settings' => {
         
+      },
+      'mappings' => {
+        'properties' => {
+          'date' => {
+            'type' => 'date',
+            'format' => 'strict_date_optional_time_nanos'
+          }
+        }
       }
     }
   end
@@ -30,42 +38,75 @@ class Dfkv::Elastic
     require_ok!
     result = JSON.parse(@response.body)
 
-    query = build_query(params, with_dates: false)
-    request 'post', "/#{config[:prefix]}-records/_search", nil, query
-    require_ok!
-    no_dates_result = JSON.parse(@response.body)
+    # binding.pry
 
-    result['aggregations']['year'] = no_dates_result['aggregations']['year']
+    ['year', 'project_id'].each do |a|
+      query = build_query(params, without: a)
+      request 'post', "/#{config[:prefix]}-records/_search", nil, query
+      require_ok!
+      all_results = JSON.parse(@response.body)
+      result['aggregations'][a] = all_results['aggregations'][a]
+    end
 
     result
   end
 
-  def build_query(params, with_dates: true)
+  def build_query(params, without: nil)
     filters = []
-    date_filters = []
+    locale = params['locale'] || 'de'
 
-    if with_dates
+    if v = to_array(params['creator'])
+      filters << {
+        'terms' => {'creators.display_name.keyword' => v}
+      }
+    end
+
+    if v = to_array(params['involved'])
+      filters << {
+        'terms' => {'involved.display_name.keyword' => v}
+      }
+    end
+
+    if v = to_array(params['journal'])
+      filters << {
+        'terms' => {"volumes.journal.#{locale}.keyword" => v}
+      }
+    end
+
+    if without != 'year'
       if v = params['from']
         filters << {
-          'range' => {'date' => {'gte' => "#{v}-01-01"}}
+          'range' => {'date' => {'gte' => "#{v}-01-01T00:00:00Z"}}
         }
       end
 
       if v = params['to']
         filters << {
-          'range' => {'date' => {'lte' => "#{v}-12-31"}}
+          'range' => {'date' => {'lte' => "#{v}-12-31T23:59:59Z"}}
         }
       end
     end
 
+    if without != 'project_id'
+      if id = params['project_id']
+        filters << {
+          'term' => {'project_id' => {'value' => id}}
+        }
+      end
+    end
+
+    full_text = if params['terms'] && params['terms'] != ''
+      [
+        {'simple_query_string' => {'query' => params['terms']}}
+      ]
+    end
+    
     query = {
       'from' => (params['page'] - 1) * params['per_page'],
       'size' => params['per_page'],
       'query' => {
         'bool' => {
-          'must' => [
-            {'simple_query_string' => {'query' => params['terms']}}
-          ],
+          'must' => full_text,
           'filter' => filters
         },
       },
@@ -76,9 +117,31 @@ class Dfkv::Elastic
             "interval" => 'year',
             "format" => "yyyy"
           }
+        },
+        "project_id" => {
+          "terms" => {"field" => "project_id"}
+        },
+        "creator" => {
+          "terms" => {"field" => "creators.display_name.keyword"}
+        },
+        "involved" => {
+          "terms" => {"field" => "involved.display_name.keyword"}
+        },
+        "journal" => {
+          "terms" => {"field" => "volumes.journal.#{locale}.keyword"}
         }
       }
     }
+
+    if s = params['sort']
+      field = {
+        'title' => 'title.keyword'
+      }[s] || s
+
+      query['sort'] = {field => {'order' => 'asc'}}
+    end
+
+    query
   end
 
   def create_index(name, options = {})
@@ -188,6 +251,13 @@ class Dfkv::Elastic
           'accept' => 'application/json'
         }
       )
+    end
+
+    def to_array(value)
+      case value
+      when String then value.split('|')
+      else value
+      end
     end
 
   # def tokenize(query_string)

@@ -31,6 +31,10 @@ class Dfkv::Server
       'terms' => terms,
       'from' => request.params['from'],
       'to' => request.params['to'],
+      'project_id' => request.params['project'],
+      'creator' => request.params['creator'],
+      'involved' => request.params['involved'],
+      'journal' => request.params['journal'],
       'sort' => sort,
       'direction' => direction,
     )
@@ -90,7 +94,7 @@ class Dfkv::Server
   # end
 
   def terms
-    request.params['terms'] || '*'
+    request.params['terms']
   end
 
   def page

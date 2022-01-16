@@ -1,0 +1,129 @@
+// background & borders
+
+.rounded {
+  border-radius: 7px;
+}
+
+.bg-gray {
+  background-color: $tag-gray;
+}
+
+// display & flex
+
+.d-block {
+  display: block;
+}
+
+.d-inline-block {
+  display: inline-block;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.align-items-start {
+  align-items: start;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.float-right {
+  float: right;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
+}
+
+.position-relative {
+  position: relative;
+}
+
+
+// typography
+
+.fw-bold {
+  font-weight: bold;
+}
+
+.fst-italic {
+  font-style: italic;
+}
+
+.text-end {
+  text-align: right;
+}
+
+.text-muted {
+  color: $tag-gray;
+}
+
+
+// sizing
+
+.h-100 {
+  height: 100%;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-75 {
+  width: 75%;
+}
+
+
+// spacing
+
+$spacers: (
+  1: 0.2rem,
+  2: 0.5rem,
+  3: 1rem,
+  4: 1.5rem,
+  5: 2rem,
+  6: 3rem,
+  7: 5rem
+);
+
+$sides: (
+  l: 'left',
+  r: 'right',
+  t: 'top',
+  b: 'bottom'
+);
+
+@each $size, $amount in $spacers {
+  .m-#{$size} {
+    margin: $amount;
+  }
+
+  .p-#{$size} {
+    padding: $amount;
+  }
+
+  @each $s, $side in $sides {
+    .m#{$s}-#{$size} {
+      margin-#{$side}: $amount;
+    }
+
+    .p#{$s}-#{$size} {
+      padding-#{$side}: $amount;
+    }
+  }
+}

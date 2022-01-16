@@ -25,7 +25,7 @@
     "webpack-dev-server": "^4.7.2"
   },
   "scripts": {
-    "elastic": "docker run --rm -ti -p 9200:9200 -e 'discovery.type=single-node' elasticsearch:7.16.2",
+    "elastic": "bin/elastic",
     "index": "bundle exec bin/index",
     "api": "bundle exec bin/api",
     "dev": "webpack-cli serve -c frontend/webpack.config.js",

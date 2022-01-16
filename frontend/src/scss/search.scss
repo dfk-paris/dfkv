@@ -1,6 +1,7 @@
 [is='dfkv'] {
   display: flex;
   justify-content: flex-start;
+  margin-right: 4.5vw;
 
   dfkv-search-form {
     width: 300px;
@@ -12,12 +13,22 @@
   dfkv-search-results {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     flex-grow: 1;
     margin-left: 10px;
 
     .search-results {
       width: 100%;
+    }
+
+    .search-result {
+      dfk-icon {
+        width: 20px;
+      }
+    }
+
+    dfk-pagination {
+      height: 21px;
     }
   }
 }
