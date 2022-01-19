@@ -1,0 +1,26 @@
+<dfkv-routed-modal>
+  <dfk-routed-modal routes={routes()} />
+
+  <script>
+    import RoutedModal from '../routed_modal.riot'
+    import Record from './record.riot'
+
+    export default class {
+      static components = {
+        'dfk-routed-modal': RoutedModal
+      }
+
+      onMounted() {
+        const element = this.root.querySelector('dfk-routed-modal')
+        document.querySelector('body').append(element)
+      }
+
+      routes() {
+        return [
+          {url: /^$/, component: null},
+          {url: /^\/records\/(?<id>\d+)$/, component: Record}
+        ]
+      }
+    }
+  </script>
+</dfkv-routed-modal>

@@ -38,7 +38,7 @@
       class="search-result"
     >
       <div class="active-box">
-        <a class="stretched-link" href="#"></a>
+        <a class="stretched-link" href={itemPath(item.id())}></a>
 
         <div class="content-box">
           <div class="meta">
@@ -127,6 +127,12 @@
         }
 
         return 0
+      }
+
+      itemPath(itemId) {
+        const url = Url.current()
+        url.setHashPath(`/records/${itemId}`)
+        return url.formatHash()
       }
     }
   </script>

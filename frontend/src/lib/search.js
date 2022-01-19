@@ -40,6 +40,13 @@ class Search {
       bus.emit('search-results', items)
     })
   }
+
+  static findRecord(id) {
+    const url = `http://localhost:3001/records/${id}`
+    return fetch(url).
+      then(r => r.json()).
+      then(data => new Item(data))
+  }
 }
 
 export default Search

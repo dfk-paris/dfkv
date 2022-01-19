@@ -17,13 +17,15 @@
 
     import Search from '../../lib/search'
 
+    import RoutedModal from '../routed_modal.riot'
     import SearchForm from '../search_form.riot'
     import SearchResults from '../search_results.riot'
 
     export default class {
       static components = {
         'dfkv-search-form': SearchForm,
-        'dfkv-search-results': SearchResults
+        'dfkv-search-results': SearchResults,
+        'dfk-routed-modal': RoutedModal
       }
 
       constructor() {
@@ -57,7 +59,6 @@
           values['page'] = null
         }
 
-        console.log(values)
         const url = Url.current()
         url.updateHashParams(values)
         url.apply()

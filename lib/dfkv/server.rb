@@ -19,6 +19,7 @@ class Dfkv::Server
 
     case request.path_info
       when /^\/search$/ then search
+      when /^\/records\/(\d+)$/ then record($1.to_i)
       else
         render JSON.dump(message: 'not found'), status: 404
     end
@@ -40,6 +41,12 @@ class Dfkv::Server
     )
 
     render JSON.dump(results)
+  end
+
+  def record(id)
+    result = elastic.find(id)
+
+    render JSON.dump(result)
   end
 
   def elastic

@@ -32,6 +32,13 @@ class Dfkv::Elastic
     require_ok!
   end
 
+  def find(id)
+    request 'get', "/#{config[:prefix]}-records/_doc/#{id}"
+    require_ok!
+
+    return JSON.parse(@response.body)
+  end
+
   def search(params = {})
     query = build_query(params)
     request 'post', "/#{config[:prefix]}-records/_search", nil, query

@@ -1,0 +1,26 @@
+<dfkv-record>
+  <template if={state.item}>
+    <div class="p-7">
+      <h1>{state.item.title()}</h1>
+      
+      <div>
+        {state.item.transcription()}
+      </div>
+    </div>
+
+  </template>
+  
+  <script>
+    import {Url} from '@wendig/lib'
+
+    import Search from '../../lib/search'
+
+    export default class {
+      onBeforeMount() {
+        const url = Url.current()
+        const id = parseInt(url.hashPath().split('/')[2])
+        Search.findRecord(id).then(data => this.update({'item': data}))
+      }
+    }
+  </script>
+</dfkv-record>

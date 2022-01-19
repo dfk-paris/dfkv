@@ -1,0 +1,81 @@
+<dfk-routed-modal active={active()}>
+  <div class="text-end">
+    <a href={closePath()}><dfk-icon type="cross" /></a>
+  </div>
+  <div class="target" />
+
+  <script>
+    import * as riot from 'riot'
+
+    import {Url} from '@wendig/lib'
+
+    import Icon from './icon.riot'
+
+    export default class {
+      static components = {
+        'dfk-icon': Icon
+      }
+
+      constructor() {
+        this.onHashChanged = this.onHashChanged.bind(this)
+      }
+
+      onMounted() {
+        this.element = this.root.querySelector('.target')
+
+        window.addEventListener('hashchange', this.onHashChanged)
+
+        this.onHashChanged()
+      }
+
+      onUnmounted() {
+        window.removeEventListener('hashchange', this.onHashChanged)
+      }
+
+      mountCmp(component) {
+        this.unmountCmp()
+
+        const mounter = riot.component(component)
+        this.state.component = mounter(this.element)
+        this.update()
+      }
+
+      unmountCmp() {
+        if (this.state.component) {
+          this.state.component.unmount(true)
+          delete this.state['component']
+          this.update()
+        }
+      }
+
+      closePath() {
+        const url = Url.current()
+        url.setHashPath('')
+        return url.formatHash()
+      }
+
+      active() {
+        return !!this.state.component
+      }
+
+      onHashChanged() {
+        const url = Url.current()
+        const path = url.hashPath()
+
+        if (this.state.path != path) {
+          this.state.path = path
+          
+          for (const e of this.props.routes) {
+            if (path.match(e['url'])) {
+              if (e['component']) {
+                this.mountCmp(e['component'])
+              } else {
+                this.unmountCmp()
+              }
+            }
+          }
+        }
+      }
+    }
+  </script>
+</dfk-routed-modal>

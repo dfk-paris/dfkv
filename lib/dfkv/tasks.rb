@@ -120,7 +120,7 @@ module Dfkv::Tasks
       # binding.pry
 
       elastic.bulk([
-        {'index' => {'_index' => "#{elastic.config[:prefix]}-records"}},
+        {'index' => {'_id' => record['id'], '_index' => "#{elastic.config[:prefix]}-records"}},
         record
       ], batch_size: 500)
 
