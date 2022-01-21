@@ -47,6 +47,7 @@
 
       onHashChanged(event, doUpdate = true) {
         this.state = {...this.state, ...this.params()}
+
         this.onSearch()
 
         if (doUpdate) {
@@ -61,6 +62,11 @@
 
         const url = Url.current()
         url.updateHashParams(values)
+
+        if (url.formatHash() == '') {
+          url.setHashPath('/')
+        }
+
         url.apply()
       }
 

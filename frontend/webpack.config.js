@@ -21,6 +21,7 @@ module.exports = (env, argv) => {
       },
       compress: true,
       port: 4000,
+      hot: false
     },
     module: {
       rules: [
@@ -36,7 +37,7 @@ module.exports = (env, argv) => {
             },{
               loader: '@riotjs/webpack-loader',
               options: {
-                hot: true, // set it to true if you are using hmr
+                // hot: true, // set it to true if you are using hmr
                 // add here all the other @riotjs/compiler options riot.js.org/compiler
                 // template: 'pug' for example
             }

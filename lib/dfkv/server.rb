@@ -36,6 +36,7 @@ class Dfkv::Server
       'creator' => request.params['creator'],
       'involved' => request.params['involved'],
       'journal' => request.params['journal'],
+      'type' => request.params['type'],
       'sort' => sort,
       'direction' => direction,
     )

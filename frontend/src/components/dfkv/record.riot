@@ -1,4 +1,8 @@
 <dfkv-record>
+  <div class="text-end">
+    <a href={closePath()}><dfk-icon type="cross" /></a>
+  </div>
+
   <template if={state.item}>
     <div class="p-7">
       <h1>{state.item.title()}</h1>
@@ -7,19 +11,29 @@
         {state.item.transcription()}
       </div>
     </div>
-
   </template>
   
   <script>
     import {Url} from '@wendig/lib'
 
+    import Icon from '../icon.riot'
     import Search from '../../lib/search'
 
     export default class {
+      static components = {
+        'dfk-icon': Icon
+      }
+
       onBeforeMount() {
         const url = Url.current()
         const id = parseInt(url.hashPath().split('/')[2])
         Search.findRecord(id).then(data => this.update({'item': data}))
+      }
+
+      closePath() {
+        const url = Url.current()
+        url.setHashPath('')
+        return url.formatHash() || '#'
       }
     }
   </script>

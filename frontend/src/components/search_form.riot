@@ -22,11 +22,20 @@
 
   <dfk-active-filters
     criteria={props.criteria}
-    params={['creator', 'journal', 'involved']}
+    params={['creator', 'journal', 'involved', 'type']}
     remove-filter={(param, value) => removeFilter(param, value)}
   />
 
   <h3>{t('filters')}</h3>
+
+  <dfk-facet
+    if={props.results}
+    name={t('people')}
+    criteria={props.criteria}
+    aggregation={props.results.aggregations().involved}
+    add-filter={newFilter => addFilter('involved', newFilter)}
+    class="d-block mb-4"
+  />
 
   <dfk-facet
     if={props.results}
@@ -38,19 +47,19 @@
 
   <dfk-facet
     if={props.results}
-    name={t('involved_people')}
+    name={t('journals')}
     criteria={props.criteria}
-    aggregation={props.results.aggregations().involved}
-    add-filter={newFilter => addFilter('involved', newFilter)}
+    aggregation={props.results.aggregations().journal}
+    add-filter={newFilter => addFilter('journal', newFilter)}
     class="d-block mb-4"
   />
 
   <dfk-facet
     if={props.results}
-    name={t('journals')}
+    name={t('text_type')}
     criteria={props.criteria}
-    aggregation={props.results.aggregations().journal}
-    add-filter={newFilter => addFilter('journal', newFilter)}
+    aggregation={props.results.aggregations().type}
+    add-filter={newFilter => addFilter('type', newFilter)}
     class="d-block mb-4"
   />
 
@@ -126,10 +135,8 @@
 
       removeFilter(param, value) {
         let current = this.props.criteria[param]
-        current = current ? current.split('|') : []
+        current = (current ? current.split('|') : [])
         const index = current.indexOf(value)
-
-        console.log(current, value, index)
 
         if (index != -1) {
           current.splice(index, 1)

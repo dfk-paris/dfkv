@@ -62,21 +62,27 @@ class Dfkv::Elastic
     filters = []
     locale = params['locale'] || 'de'
 
-    if v = to_array(params['creator'])
+    to_array(params['creator']).each do |v|
       filters << {
-        'terms' => {'creators.display_name.keyword' => v}
+        'term' => {'creators.display_name.keyword' => v}
       }
     end
 
-    if v = to_array(params['involved'])
+    to_array(params['involved']).each do |v|
       filters << {
-        'terms' => {'involved.display_name.keyword' => v}
+        'term' => {'involved.display_name.keyword' => v}
       }
     end
 
-    if v = to_array(params['journal'])
+    to_array(params['journal']).each do |v|
       filters << {
-        'terms' => {"volumes.journal.#{locale}.keyword" => v}
+        'term' => {"volumes.journal.#{locale}.keyword" => v}
+      }
+    end
+
+    to_array(params['type']).each do |v|
+      filters << {
+        'term' => {"text_types.#{locale}.keyword" => v}
       }
     end
 
@@ -136,6 +142,9 @@ class Dfkv::Elastic
         },
         "journal" => {
           "terms" => {"field" => "volumes.journal.#{locale}.keyword"}
+        },
+        "type" => {
+          "terms" => {"field" => "text_types.#{locale}.keyword"}
         }
       }
     }
@@ -263,7 +272,9 @@ class Dfkv::Elastic
     def to_array(value)
       case value
       when String then value.split('|')
-      else value
+      when nil then []
+      else
+        raise "can't generate array from #{value.inspect}"
       end
     end
 

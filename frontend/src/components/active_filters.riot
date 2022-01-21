@@ -1,27 +1,19 @@
 <dfk-active-filters>
   <div class="d-flex flex-column align-items-start">
-    <template each={param in props.params}>
-      <a
-        each={value in values(param)}
-        class="d-block rounded bg-gray mb-2 p-2"
-        onclick={event => removeFilter(event, param, value)}
-      >
-        <div class="d-flex">
-          <div>-</div>
-          <div class="ml-1">{value}</div>
-        </div>
-      </a>
-    </template>
+    <a
+      each={filter in actives()}
+      class="d-block rounded bg-gray mb-2 p-2"
+      onclick={event => removeFilter(event, filter.param, filter.value)}
+    >
+      <div class="d-flex">
+        <div>-</div>
+        <div class="ml-1">{filter.value}</div>
+      </div>
+    </a>
   </div>
 
   <script>
-    import {i18n} from '@wendig/lib'
-
     export default class {
-      constructor() {
-        this.t = i18n.translate
-      }
-
       removeFilter(event, param, value) {
         event.preventDefault()
 
@@ -30,15 +22,20 @@
         }
       }
 
+      actives() {
+        let result = []
+        for (const p of this.props.params) {
+          for (const v of this.values(p)) {
+            result.push({param: p, value: v})
+          }
+        }
+        return result
+      }
+
       values(param) {
         const str = this.props.criteria[param]
         return str ? str.split('|') : []
       }
-
-      // lookup(key) {
-      //   const f = this.props.lookup
-      //   return f ? f(key) : key
-      // }
     }
   </script>
 </dfk-active-filters>

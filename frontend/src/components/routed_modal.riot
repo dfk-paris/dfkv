@@ -1,7 +1,4 @@
 <dfk-routed-modal active={active()}>
-  <div class="text-end">
-    <a href={closePath()}><dfk-icon type="cross" /></a>
-  </div>
   <div class="target" />
 
   <script>
@@ -9,13 +6,7 @@
 
     import {Url} from '@wendig/lib'
 
-    import Icon from './icon.riot'
-
     export default class {
-      static components = {
-        'dfk-icon': Icon
-      }
-
       constructor() {
         this.onHashChanged = this.onHashChanged.bind(this)
       }
@@ -46,12 +37,6 @@
           delete this.state['component']
           this.update()
         }
-      }
-
-      closePath() {
-        const url = Url.current()
-        url.setHashPath('')
-        return url.formatHash()
       }
 
       active() {

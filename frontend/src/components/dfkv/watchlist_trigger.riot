@@ -13,8 +13,6 @@
       onBeforeMount() {
         this.bus.addEventListener('add-watchlist-item', this.addItem)
         this.bus.addEventListener('clear-watchlist', this.clear)
-
-        window.b = this.bus
       }
 
       onUnmounted() {
@@ -23,7 +21,6 @@
       }
 
       count() {
-        console.log(this.unpack())
         return this.unpack().length
       }
 
