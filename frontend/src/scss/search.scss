@@ -36,7 +36,7 @@
 [is='dfkv-record'] {
   .close, .previous, .next {
     position: absolute;
-    top: 108px;
+    // top: 133px;
   }
 
   .close {
@@ -45,11 +45,14 @@
   }
 
   .previous {
-    left: 20px;
+    // left: 20px;
+    margin-top: -6px;
+    margin-left: -40px;
   }
 
   .next {
-    right: 20px;
+    margin-top: -6px;
+    right: -40px;
   }
 }
 

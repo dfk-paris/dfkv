@@ -42,8 +42,16 @@
   align-items: center;
 }
 
+.float-left {
+  float: left;
+}
+
 .float-right {
   float: right;
+}
+
+.clear-both {
+  clear: both;
 }
 
 .overflow-y-scroll {

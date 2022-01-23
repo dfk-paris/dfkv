@@ -214,5 +214,23 @@
     "de": "Reuse?",
     "en": null,
     "fr": null
+  },
+  "description_comment": {
+    "id": "description_comment",
+    "de": "Beschreibung / Kommentar",
+    "en": null,
+    "fr": null
+  },
+  "project_affiliation": {
+    "id": "project_affiliation",
+    "de": "Projektzugehörigkeit",
+    "en": null,
+    "fr": null
+  },
+  "citation_format": {
+    "id": "citation_format",
+    "de": "empfohlene Zitation",
+    "en": null,
+    "fr": null
   }
 }
