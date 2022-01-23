@@ -1,7 +1,20 @@
 <dfkv-record>
-  <div class="text-end">
-    <a href={closePath()}><dfk-icon type="cross" /></a>
-  </div>
+  <a class="close" href={closePath()}><dfk-icon type="cross" /></a>
+
+  <a
+    if={!props.first(id())}
+    class="previous" onclick={event => previous(event)}
+  >
+    <dfk-icon type="chevron-left" />
+  </a>
+
+  <a
+    if={!props.last(id())}
+    class="next"
+    onclick={event => next(event)}
+  >
+    <dfk-icon type="chevron-right" />
+  </a>
 
   <template if={state.item}>
     <div class="p-7">
@@ -24,11 +37,41 @@
         'dfk-icon': Icon
       }
 
-      onBeforeMount() {
-        const url = Url.current()
-        const id = parseInt(url.hashPath().split('/')[2])
-        Search.findRecord(id).then(data => this.update({'item': data}))
+      constructor() {
+        this.fetch = this.fetch.bind(this)
       }
+
+      onBeforeMount() {
+        window.addEventListener('hashchange', this.fetch)
+
+        this.fetch()
+      }
+
+      onUnmounted() {
+        window.removeEventListener('hashchange', this.fetch)
+      }
+
+      fetch() {
+        Search.findRecord(this.id()).then(data => this.update({'item': data}))
+      }
+
+      previous(event) {
+        event.preventDefault()
+
+        this.bus.emit('to-previous-record', {currentId: this.id()})
+      }
+
+      next() {
+        event.preventDefault()
+        this.bus.emit('to-next-record', {currentId: this.id()})
+      }
+
+      id() {
+        const url = Url.current()
+        return parseInt(url.hashPath().split('/')[2])
+      }
+
+
 
       closePath() {
         const url = Url.current()

@@ -12,12 +12,16 @@
     results={state.results}
   />
 
+  <dfkv-fly-in />
+  <dfkv-routed-modal first={isFirst} last={isLast} />
+
   <script>
     import {Url} from '@wendig/lib'
 
     import Search from '../../lib/search'
 
-    import RoutedModal from '../routed_modal.riot'
+    import FlyIn from './fly_in.riot'
+    import RoutedModal from './routed_modal.riot'
     import SearchForm from '../search_form.riot'
     import SearchResults from '../search_results.riot'
 
@@ -25,17 +29,25 @@
       static components = {
         'dfkv-search-form': SearchForm,
         'dfkv-search-results': SearchResults,
-        'dfk-routed-modal': RoutedModal
+        'dfkv-routed-modal': RoutedModal,
+        'dfkv-fly-in': FlyIn
       }
 
       constructor() {
         this.onHashChanged = this.onHashChanged.bind(this)
         this.onResults = this.onResults.bind(this)
+        this.toPreviousRecord = this.toPreviousRecord.bind(this)
+        this.toNextRecord = this.toNextRecord.bind(this)
+        this.isFirst = this.isFirst.bind(this)
+        this.isLast = this.isLast.bind(this)
       }
 
       onBeforeMount() {
         window.addEventListener('hashchange', this.onHashChanged)
         this.bus.addEventListener('search-results', this.onResults)
+        this.bus.addEventListener('to-previous-record', this.toPreviousRecord)
+        this.bus.addEventListener('to-next-record', this.toNextRecord)
+        this.bus.addEventListener('open-item', this.open)
 
         this.onHashChanged(null, false)
       }
@@ -75,7 +87,17 @@
       }
 
       onResults(event) {
-        this.update({results: event.data})
+        this.state.results = event.data
+
+        // open result for single-view pagination
+        if (this.state.open != null) {
+          const item = this.state.results.items()[this.state.open]
+          this.bus.emit('open-item', item)
+          this.state.open = null
+          this.state.transitioning = false
+        }
+
+        this.update()
       }
 
       params() {
@@ -91,6 +113,107 @@
           ...url.hashParams(defaults)
         }
         return result
+      }
+
+      isFirst(id) {
+        if (!this.results()) {return false}
+
+        const result = (
+          this.indexFor(id) == 0 &&
+          this.params()['page'] == 1
+        )
+
+        return result
+      }
+
+      isLast(id) {
+        if (!this.results()) {return false}
+
+        const p = this.params()
+        const items = this.state.results.items()
+        const pages = Math.ceil(this.state.results.total() / p['perPage'])
+
+        const result = (
+          this.indexFor(id) == items.length - 1 &&
+          this.params()['page'] == pages
+        )
+
+        return result
+      }
+
+      results() {
+        if (this.state && this.state.results) {
+          return this.state.results
+        }
+      }
+
+      indexFor(id) {
+        const items = this.state.results.items()
+        for (const [i, item] of items.entries()) {
+          if (item.id() == id) {
+            return i
+          }
+        }
+      }
+
+      toPreviousRecord(event) {
+        // prevent race-conditions
+        if (this.state.transitioning == true) {
+          return
+        }
+        this.state.transitioning = true
+
+        const index = this.indexFor(event.data.currentId)
+        const p = this.params()
+
+        if (index == 0) {
+          if (p['page'] > 1) {
+            // paginate to previous page of results and open last result when
+            // loaded
+            this.state.open = p['perPage'] - 1
+            this.bus.emit('to-previous-page')
+          } else {
+            this.state.transitioning = false
+          }
+        } else {
+          const item = this.state.results.items()[index - 1]
+          this.bus.emit('open-item', item)
+          this.state.transitioning = false
+        }
+      }
+
+      toNextRecord(event) {
+        // prevent race-conditions
+        if (this.state.transitioning == true) {
+          return
+        }
+        this.state.transitioning = true
+
+        const index = this.indexFor(event.data.currentId)
+        const p = this.params()
+
+        if (index == this.state.results.items().length - 1) {
+          const pages = Math.ceil(this.state.results.total() / p['perPage'])
+          if (p['page'] < pages) {
+            // paginate to next page of results and open first result when
+            // loaded
+            this.state.open = 0
+            this.bus.emit('to-next-page')
+          } else {
+            this.state.transitioning = false
+          }
+        } else {
+          const item = this.state.results.items()[index + 1]
+          this.bus.emit('open-item', item)
+          this.state.transitioning = false
+        }
+      }
+
+      open(event) {
+        const item = event.data
+        const url = Url.current()
+        url.setHashPath(`/record/${item.id()}`)
+        url.apply()
       }
     }
   </script>

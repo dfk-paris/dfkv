@@ -129,7 +129,7 @@
         return 0
       }
 
-      itemPath(itemId) {
+      itemPath(itemId, position = null) {
         const url = Url.current()
         url.setHashPath(`/records/${itemId}`)
         return url.formatHash()

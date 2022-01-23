@@ -27,7 +27,7 @@
         this.unmountCmp()
 
         const mounter = riot.component(component)
-        this.state.component = mounter(this.element)
+        this.state.component = mounter(this.element, this.props.props)
         this.update()
       }
 

@@ -1,7 +1,7 @@
 <pagination>
   <template if={enabled()}>
     <a
-      onclick={event => pageTo(event, 1)}
+      onclick={event => pageTo(1, event)}
       href="#"
       class="dfkv-first {show(!isFirst())}"
     >
@@ -10,7 +10,7 @@
       <span class="text">erste Seite</span>
     </a>
     <a
-      onclick={event => pageTo(event, this.props.page - 1)}
+      onclick={event => pageTo(this.props.page - 1, event)}
       href="#"
       class="dfkv-previous {show(!isFirst())}"
     >
@@ -19,7 +19,7 @@
     </a>
     <strong>{this.props.page}/{totalPages()}</strong>
     <a
-      onclick={event => pageTo(event, this.props.page + 1)}
+      onclick={event => pageTo(this.props.page + 1, event)}
       href="#"
       class="dfkv-next {show(!isLast())}"
     >
@@ -27,7 +27,7 @@
       <icon type="arrow-right" />
     </a>
     <a
-      onclick={event => pageTo(event, totalPages())}
+      onclick={event => pageTo(totalPages(), event)}
       href="#"
       class="dfkv-last {show(!isLast())}"
     >
@@ -45,13 +45,43 @@
         Icon
       }
 
+      constructor() {
+        this.previous = this.previous.bind(this)
+        this.next = this.next.bind(this)
+      }
+
+      onBeforeMount() {
+        this.bus.addEventListener('to-previous-page', this.previous)
+        this.bus.addEventListener('to-next-page', this.next)
+      }
+
+      onUnmounted() {
+        this.bus.removeEventListener('to-next-page', this.next)
+        this.bus.removeEventListener('to-previous-page', this.previous)
+      }
+
+      previous() {
+        if (this.props.page > 1) {
+          this.pageTo(this.props.page - 1)
+        }
+      }
+
+      next() {
+        if (this.props.page < this.totalPages()) {
+          this.pageTo(this.props.page + 1)
+        }
+      }
+
       enabled() {
         const total = this.props.total || 0
         return total > this.props.perPage
       }
 
-      pageTo(event, newPage) {
-        event.preventDefault()
+      pageTo(newPage, event) {
+        if (event) {
+          event.preventDefault()
+        }
+        
         if (this.props.pageTo) {
           this.props.pageTo(newPage)
         }

@@ -26,20 +26,7 @@ class Dfkv::Server
   end
 
   def search
-    results = elastic.search(
-      'page' => page,
-      'per_page' => per_page,
-      'terms' => terms,
-      'from' => request.params['from'],
-      'to' => request.params['to'],
-      'project_id' => request.params['project'],
-      'creator' => request.params['creator'],
-      'involved' => request.params['involved'],
-      'journal' => request.params['journal'],
-      'type' => request.params['type'],
-      'sort' => sort,
-      'direction' => direction,
-    )
+    results = elastic.search(search_params)
 
     render JSON.dump(results)
   end
@@ -50,84 +37,104 @@ class Dfkv::Server
     render JSON.dump(result)
   end
 
-  def elastic
-    @elastic = Dfkv::Elastic.new
-  end
 
-  # def person(id)
-  #   @person = Dfkv::Person.find(id)
-  #   render @person.to_json
-  # end
+  protected
 
-  # def attrib(id)
-  #   @attrib = Dfkv::Attrib.find(id)
-  #   render @attrib.to_json
-  # end
+    def search_params
+      return {
+        'page' => page,
+        'per_page' => per_page,
+        'terms' => terms,
+        'from' => request.params['from'],
+        'to' => request.params['to'],
+        'project_id' => request.params['project'],
+        'creator' => request.params['creator'],
+        'involved' => request.params['involved'],
+        'journal' => request.params['journal'],
+        'type' => request.params['type'],
+        'sort' => sort,
+        'direction' => direction
+      }
+    end
 
-  # def search
-  #   return render({dummy: true}.to_json)
-    
-    
-  #   @records = Dfkv::Record.
-  #     # includes(
-  #     #   # :journal, :volume, :project, :rubric, :location, :editor,
-  #     #   contributions: :person,
-  #     #   attribs: :kind,
-  #     # ).
-  #     by_person(request.params['role'], request.params['person']).
-  #     by_attrib(request.params['attrib']).
-  #     by_journal(request.params['journal']).
-  #     by_volume(request.params['volume']).
-  #     by_rubric(request.params['rubric']).
-  #     by_location(request.params['location']).
-  #     by_editor(request.params['editor']).
-  #     search(request.params['terms']).
-  #     order(sort => direction)
+    def elastic
+      @elastic = Dfkv::Elastic.new
+    end
 
-  #   puts @records.to_sql
+    # def person(id)
+    #   @person = Dfkv::Person.find(id)
+    #   render @person.to_json
+    # end
 
-  #   now = Time.now
-  #   result = {
-  #     'total' => @records.count,
-  #     'records' => @records.pageit(page, per_page).as_json(
-  #       include: [:journal, :volume, :project, :rubric, :location, :editor],
-  #       methods: [:people_by_role, :attribs_by_kind, :human_date]
-  #     ),
-  #     'per_page' => per_page,
-  #     'page' => page
-  #   }
-  #   p Time.now - now
+    # def attrib(id)
+    #   @attrib = Dfkv::Attrib.find(id)
+    #   render @attrib.to_json
+    # end
 
-  #   render result.to_json
-  # end
+    # def search
+    #   return render({dummy: true}.to_json)
+      
+      
+    #   @records = Dfkv::Record.
+    #     # includes(
+    #     #   # :journal, :volume, :project, :rubric, :location, :editor,
+    #     #   contributions: :person,
+    #     #   attribs: :kind,
+    #     # ).
+    #     by_person(request.params['role'], request.params['person']).
+    #     by_attrib(request.params['attrib']).
+    #     by_journal(request.params['journal']).
+    #     by_volume(request.params['volume']).
+    #     by_rubric(request.params['rubric']).
+    #     by_location(request.params['location']).
+    #     by_editor(request.params['editor']).
+    #     search(request.params['terms']).
+    #     order(sort => direction)
 
-  def terms
-    request.params['terms']
-  end
+    #   puts @records.to_sql
 
-  def page
-    (request.params['page'] || 1).to_i
-  end
+    #   now = Time.now
+    #   result = {
+    #     'total' => @records.count,
+    #     'records' => @records.pageit(page, per_page).as_json(
+    #       include: [:journal, :volume, :project, :rubric, :location, :editor],
+    #       methods: [:people_by_role, :attribs_by_kind, :human_date]
+    #     ),
+    #     'per_page' => per_page,
+    #     'page' => page
+    #   }
+    #   p Time.now - now
 
-  def per_page
-    (request.params['per_page'] || 10).to_i
-  end
+    #   render result.to_json
+    # end
 
-  def sort
-    request.params['sort'] || 'title'
-  end
+    def terms
+      request.params['terms']
+    end
 
-  def direction
-    request.params['direction'] || 'asc'
-  end
+    def page
+      (request.params['page'] || 1).to_i
+    end
 
-  def render(body = nil, options = {})
-    options = {
-      status: 200,
-      content_type: 'application/json'
-    }.merge(options)
+    def per_page
+      (request.params['per_page'] || 10).to_i
+    end
 
-    body = (body == nil ? [] : [body])
-    [options[:status], {'content-type' => options[:content_type]}, body]
-  end
+    def sort
+      request.params['sort'] || 'title'
+    end
+
+    def direction
+      request.params['direction'] || 'asc'
+    end
+
+    def render(body = nil, options = {})
+      options = {
+        status: 200,
+        content_type: 'application/json'
+      }.merge(options)
+
+      body = (body == nil ? [] : [body])
+      [options[:status], {'content-type' => options[:content_type]}, body]
+    end
 end

@@ -33,3 +33,26 @@
   }
 }
 
+[is='dfkv-record'] {
+  .close, .previous, .next {
+    position: absolute;
+    top: 108px;
+  }
+
+  .close {
+    top: 20px;
+    right: 20px;
+  }
+
+  .previous {
+    left: 20px;
+  }
+
+  .next {
+    right: 20px;
+  }
+}
+
+[is='dfkv-watchlist-trigger'] {
+  margin-right: 4.5vw;
+}
