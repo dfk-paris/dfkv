@@ -56,6 +56,14 @@
   }
 }
 
+[is='dfkv-watchlist'] {
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+}
+
 [is='dfkv-watchlist-trigger'] {
   margin-right: 4.5vw;
 }

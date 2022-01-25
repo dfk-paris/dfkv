@@ -1,13 +1,24 @@
 <dfkv-watchlist-trigger>
-  <a class="float-right rounded p-2 bg-gray">
+  <a
+    class="float-right rounded p-2 bg-gray"
+    href={watchlistPath()}
+  >
     + {t('watchlist')} ({count()})
   </a>
 
   <script>
+    import {Url} from '@wendig/lib'
+
     export default class {
       constructor() {
         this.addItem = this.addItem.bind(this)
         this.clear = this.clear.bind(this)
+      }
+
+      watchlistPath() {
+        const url = Url.current()
+        url.setHashPath('/watchlist')
+        return url.formatHash()
       }
 
       onBeforeMount() {

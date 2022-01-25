@@ -2,11 +2,6 @@
 
 if ! which npm > /dev/null ; then
   echo "npm not available, can't continue"
-
-  local "npm install"
-  local "npm run build"
-
-  
 fi
 
 function deploy {
@@ -14,17 +9,18 @@ function deploy {
   deploy_code
   cleanup
 
-  # database
-  mysqldump -u root -proot dfkv | gzip -c | ssh root@192.168.30.212 "gunzip -c | mysql -u root dfkv"
+  # frontend
+  npm run build
 
   # app
-  remote "ln -sfn $SHARED_PATH/app.yml $CURRENT_PATH/app.yml"
-  remote "echo 2.4.2 > $CURRENT_PATH/.ruby-version"
-  within_do $CURRENT_PATH "bundle --clean --quiet --without test development --path $SHARED_PATH/bundle"
+  remote "ln -sfn $SHARED_PATH/env $CURRENT_PATH/.env.local"
+  remote "echo $RUBY_VERSION > $CURRENT_PATH/.ruby-version"
+  within_do $CURRENT_PATH "bundle --clean --quiet --without test development --path $SHARED_PATH/bundle.$RUBY_VERSION"
   remote "mkdir $CURRENT_PATH/public"
   remote "mkdir $CURRENT_PATH/tmp"
-  upload "public/app*" "$CURRENT_PATH/public/"
+  upload "frontend/public/*" "$CURRENT_PATH/public/"
   remote "touch $CURRENT_PATH/tmp/restart.txt"
+  within_do $CURRENT_PATH "bundle exec bin/index"
 
   finalize
 }

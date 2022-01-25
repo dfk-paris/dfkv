@@ -1,7 +1,13 @@
+const dotenv = require('dotenv')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 
 module.exports = (env, argv) => {
   const mode = argv.mode || 'development'
+  if (mode == 'production') {
+    dotenv.config({path: '.env.production'})
+  }
+  dotenv.config({path: '.env'})
 
   return {
     mode: mode,
@@ -63,6 +69,19 @@ module.exports = (env, argv) => {
           }
         }
       ]
-    }
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: 'frontend/src/index.ejs',
+        filename: 'index.html',
+        meta: {
+          'charset': 'utf-8',
+          'viewport': 'width=device-width, initial-scale=1',
+          'env-api-url': process.env.API_URL,
+        },
+        'hash': true,
+        'chunks': ['app']
+      })
+    ]
   }
 }

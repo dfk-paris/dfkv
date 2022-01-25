@@ -15,12 +15,13 @@ i18n.fetch('/translations.json').then(() => {
   RiotPlugins.setup(riot)
   riot.install(RiotPlugins.i18n)
   riot.install(RiotPlugins.parent)
+  riot.install(RiotPlugins.setTitle)
   riot.install(BusRiotPlugin)
 
   riot.register('dfkv', Search)
   riot.register('dfkv-fly-in', FlyIn)
-  riot.register('dfkv-watchlist-trigger', WatchlistTrigger)
   riot.register('dfkv-routed-modal', RoutedModal)
+  riot.register('dfkv-watchlist-trigger', WatchlistTrigger)
 
   riot.mount('[is]')
 
