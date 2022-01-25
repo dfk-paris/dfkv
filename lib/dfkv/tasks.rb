@@ -1,6 +1,10 @@
 require 'csv'
 require 'roo'
-require 'pry'
+
+begin
+  require 'pry'
+rescue LoadError => e
+end
 
 module Dfkv::Tasks
   def self.to_id_list(value)
