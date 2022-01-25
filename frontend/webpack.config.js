@@ -75,7 +75,6 @@ module.exports = (env, argv) => {
         template: 'frontend/src/index.ejs',
         filename: 'index.html',
         meta: {
-          'charset': 'utf-8',
           'viewport': 'width=device-width, initial-scale=1',
           'env-api-url': process.env.API_URL,
         },

@@ -9,7 +9,9 @@ import RoutedModal from './components/dfkv/routed_modal.riot'
 import Search from './components/dfkv/search.riot'
 import WatchlistTrigger from './components/dfkv/watchlist_trigger.riot'
 
-i18n.fetch('/translations.json').then(() => {
+import env from './lib/env'
+
+i18n.fetch(`${env['env-api-url']}/translations.json`).then(() => {
   i18n.setLocale('de')
 
   RiotPlugins.setup(riot)
