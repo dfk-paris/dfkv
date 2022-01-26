@@ -1,11 +1,12 @@
 const dotenv = require('dotenv')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 
 module.exports = (env, argv) => {
   const mode = argv.mode || 'development'
   if (mode == 'production') {
-    dotenv.config({path: '.env.production'})
+    dotenv.config({path: '.env.local'})
   }
   dotenv.config({path: '.env'})
 
@@ -13,8 +14,7 @@ module.exports = (env, argv) => {
     mode: mode,
     entry: {
       app: __dirname + '/src/app.js',
-      demo: __dirname + '/src/demo.js',
-      widgets: __dirname + '/src/widgets.js',
+      standalone: __dirname + '/src/standalone.js'
     },
     output: {
       path: __dirname + '/public',
@@ -27,7 +27,14 @@ module.exports = (env, argv) => {
       },
       compress: true,
       port: 4000,
-      hot: false
+      hot: false,
+      https: true,
+      headers: {
+        'ACCESS-CONTROL-ALLOW-ORIGIN': 'https://dfk-paris.org'
+      },
+      client: {
+        webSocketURL: `${process.env.STATIC_URL}/ws`,
+      },
     },
     module: {
       rules: [
@@ -71,15 +78,18 @@ module.exports = (env, argv) => {
       ]
     },
     plugins: [
+      new webpack.DefinePlugin({
+        apiUrl: JSON.stringify(process.env.API_URL),
+        staticUrl: JSON.stringify(process.env.STATIC_URL)
+      }),
       new HtmlWebpackPlugin({
         template: 'frontend/src/index.ejs',
         filename: 'index.html',
         meta: {
           'viewport': 'width=device-width, initial-scale=1',
-          'env-api-url': process.env.API_URL,
         },
         'hash': true,
-        'chunks': ['app']
+        'chunks': ['standalone']
       })
     ]
   }

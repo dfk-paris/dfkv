@@ -1,4 +1,8 @@
 /node_modules/
 /data/.~*
+/frontend/public/*.html
+/frontend/public/*.css
+/frontend/public/*.js
+/frontend/public/*.txt
 
 /.env.production

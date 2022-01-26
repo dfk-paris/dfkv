@@ -3,15 +3,10 @@ import Items from './items'
 import Item from './item'
 
 import {bus} from './bus'
-import env from './env'
 
 class Search {
-  static apiUrl() {
-    return env['env-api-url']
-  }
-
   static search(criteria) {
-    const url = Url.parse(`${Search.apiUrl()}/search`)
+    const url = Url.parse(`${apiUrl}/search`)
     url.updateParams(criteria)
 
     fetch(url.url()).then(r => r.json()).then(data => {
@@ -21,8 +16,7 @@ class Search {
   }
 
   static findRecord(id) {
-    console.log(url, 'x')
-    const url = `${Search.apiUrl()}/records/${id}`
+    const url = `${apiUrl}/records/${id}`
     return fetch(url).
       then(r => r.json()).
       then(data => new Item(data))

@@ -1,6 +1,4 @@
-document.querySelector('article').classList.remove('node--unpublished')
-
-import './app.scss'
+import './standalone.scss'
 
 import * as riot from 'riot'
 import {bus, BusRiotPlugin} from './lib/bus'

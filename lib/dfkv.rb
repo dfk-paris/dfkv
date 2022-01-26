@@ -13,7 +13,8 @@ require 'bundler'
 Bundler.setup(bundles)
 Bundler.require(*bundles)
 
-require 'dotenv/load'
+require 'dotenv'
+Dotenv.load('.env.local', '.env')
 
 module Dfkv
   autoload :Elastic, 'dfkv/elastic'
