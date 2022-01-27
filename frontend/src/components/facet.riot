@@ -8,7 +8,7 @@
 
   <div class="d-flex flex-column align-items-start">
     <a
-      each={bucket in props.aggregation.buckets}
+      each={bucket in props.aggregation.buckets.slice(0, 5)}
       class="d-block rounded bg-gray mb-2 p-2"
       onclick={event => addFilter(event, bucket.key)}
     >

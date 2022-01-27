@@ -73,12 +73,20 @@
   font-style: italic;
 }
 
+.fs-6 {
+  font-size: 0.7em;
+}
+
 .text-end {
   text-align: right;
 }
 
 .text-muted {
   color: $tag-gray;
+}
+
+.text-decoration-underline {
+  text-decoration: underline;
 }
 
 

@@ -15,15 +15,35 @@
     flex-direction: column;
     justify-content: start;
     flex-grow: 1;
-    margin-left: 10px;
+    margin-left: 80px;
 
     .search-results {
       width: 100%;
     }
 
     .search-result {
+      position: relative;
+
       dfk-icon {
         width: 20px;
+      }
+
+      a.bookmark {
+        position: absolute;
+        top: 40px;
+        left: -40px;
+
+        path {
+          stroke: $tag-gray;
+          fill: $tag-gray;
+        }
+      }
+
+      a.bookmark.active {
+        path {
+          stroke: $text-color;
+          fill: $text-color;
+        }
       }
     }
 
@@ -66,4 +86,27 @@
 
 [is='dfkv-watchlist-trigger'] {
   margin-right: 4.5vw;
+}
+
+dfk-input {
+  display: block;
+
+  input {
+    display: block;
+    width: 100%;
+    height: 18px;
+    border: 1px solid #8c8d8f;
+  }
+}
+
+dfk-input[type='checkbox'] {
+  display: flex;
+  justify-content: start;
+
+  input {
+    // justify-self: flex-end;
+    margin-top: -2px;
+    width: auto;
+    margin: 0;
+  }
 }

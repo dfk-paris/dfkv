@@ -19,6 +19,7 @@
     import {Url} from '@wendig/lib'
 
     import Search from '../../lib/search'
+    import watchlist from '../../lib/watchlist'
 
     import FlyIn from './fly_in.riot'
     import RoutedModal from './routed_modal.riot'
@@ -48,6 +49,7 @@
         this.bus.addEventListener('to-previous-record', this.toPreviousRecord)
         this.bus.addEventListener('to-next-record', this.toNextRecord)
         this.bus.addEventListener('open-item', this.open)
+        this.bus.addEventListener('watchlist-changed', this.onHashChanged)
 
         this.onHashChanged(null, false)
       }
@@ -83,7 +85,13 @@
       }
 
       onSearch() {
-        Search.search(this.params())
+        const p = this.params()
+        if (p['watchlist'] && watchlist.count() > 0) {
+          p['id'] = watchlist.unpack().join(',')
+          delete p['watchlist']
+        }
+
+        Search.search(p)
       }
 
       onResults(event) {

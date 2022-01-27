@@ -45,6 +45,7 @@ class Dfkv::Server
         'page' => page,
         'per_page' => per_page,
         'terms' => terms,
+        'id' => to_ids(request.params['id']),
         'from' => request.params['from'],
         'to' => request.params['to'],
         'project_id' => request.params['project'],
@@ -107,6 +108,10 @@ class Dfkv::Server
 
     #   render result.to_json
     # end
+
+    def to_ids(string)
+      (string || '').split(/\s*,\s*/).map{|e| e.to_i}
+    end
 
     def terms
       request.params['terms']

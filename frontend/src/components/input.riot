@@ -5,17 +5,14 @@
     autocomplete="off"
     id={props.name}
     name={props.name}
-    value={props.value}
+    value={propsValue()}
     placeholder={props.placeholder}
     oninput={event => onChange(event)}
+    checked={propsChecked()}
   />
 
   <script>
     export default class {
-      onBeforeMount() {
-        console.log(this.props)
-      }
-
       onChange(event) {
         if (this.props.updateHandler) {
           this.props.updateHandler(event, this.getValue())
@@ -26,7 +23,28 @@
         return this.props.name
       }
 
+      propsValue() {
+        if (this.props.type == 'checkbox') {
+          return 'cb-value'
+        }
+
+        return this.props.value
+      }
+
+      propsChecked() {
+        if (this.props.type == 'checkbox') {
+          return this.props.value
+        }
+
+        return false
+      }
+
       getValue() {
+        if (this.props.type == 'checkbox') {
+          const checked = this.root.querySelector('input').checked
+          return checked || null
+        }
+
         return this.root.querySelector('input').value
       }
     }

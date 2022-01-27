@@ -232,5 +232,23 @@
     "de": "empfohlene Zitation",
     "en": null,
     "fr": null
+  },
+  "watchlist_only": {
+    "id": "watchlist_only",
+    "de": "nur Einträge in der Merkliste anzeigen",
+    "en": null,
+    "fr": null
+  },
+  "records": {
+    "id": "records",
+    "de": "Einträge",
+    "en": null,
+    "fr": null
+  },
+  "record": {
+    "id": "record",
+    "de": "Eintrag",
+    "en": null,
+    "fr": null
   }
 }

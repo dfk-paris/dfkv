@@ -62,6 +62,12 @@ class Dfkv::Elastic
     filters = []
     locale = params['locale'] || 'de'
 
+    unless params['id'].empty?
+      filters << {
+        'terms' => {'id' => params['id']}
+      }
+    end
+
     to_array(params['creator']).each do |v|
       filters << {
         'term' => {'creators.display_name.keyword' => v}
@@ -135,16 +141,28 @@ class Dfkv::Elastic
           "terms" => {"field" => "project_id"}
         },
         "creator" => {
-          "terms" => {"field" => "creators.display_name.keyword"}
+          "terms" => {
+            "field" => "creators.display_name.keyword",
+            "size" => 10000
+          }
         },
         "involved" => {
-          "terms" => {"field" => "involved.display_name.keyword"}
+          "terms" => {
+            "field" => "involved.display_name.keyword",
+            "size" => 10000
+          }
         },
         "journal" => {
-          "terms" => {"field" => "volumes.journal.#{locale}.keyword"}
+          "terms" => {
+            "field" => "volumes.journal.#{locale}.keyword",
+            "size" => 500
+          }
         },
         "type" => {
-          "terms" => {"field" => "text_types.#{locale}.keyword"}
+          "terms" => {
+            "field" => "text_types.#{locale}.keyword",
+            "size" => 500
+          }
         }
       }
     }

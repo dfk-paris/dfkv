@@ -3,18 +3,14 @@
     class="float-right rounded p-2 bg-gray"
     href={watchlistPath()}
   >
-    + {t('watchlist')} ({count()})
+    + {t('watchlist')} ({0})
   </a>
 
   <script>
     import {Url} from '@wendig/lib'
+    import watchlist from '../../lib/watchlist'
 
     export default class {
-      constructor() {
-        this.addItem = this.addItem.bind(this)
-        this.clear = this.clear.bind(this)
-      }
-
       watchlistPath() {
         const url = Url.current()
         url.setHashPath('/watchlist')
@@ -22,35 +18,13 @@
       }
 
       onBeforeMount() {
-        this.bus.addEventListener('add-watchlist-item', this.addItem)
+        this.bus.addEventListener('toggle-watchlist-item', this.toggleItem)
         this.bus.addEventListener('clear-watchlist', this.clear)
       }
 
       onUnmounted() {
         window.removeEventListener('clear-watchlist', this.clear)
-        window.removeEventListener('add-watchlist-item', this.addItem)
-      }
-
-      count() {
-        return this.unpack().length
-      }
-
-      clear() {
-        this.pack([])
-      }
-
-      addItem(event) {
-        const tmp = this.unpack()
-        tmp.push(event.data)
-        this.pack(tmp)
-      }
-
-      unpack() {
-        return JSON.parse(window.localStorage.watchlist || '[]')
-      }
-
-      pack(data) {
-        window.localStorage.watchlist = JSON.stringify(data)
+        window.removeEventListener('toggle-watchlist-item', this.toggleItem)
       }
     }
   </script>
