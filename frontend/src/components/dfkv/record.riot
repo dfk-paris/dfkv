@@ -126,8 +126,9 @@
         this.bus.emit('to-previous-record', {currentId: this.id()})
       }
 
-      next() {
+      next(event) {
         event.preventDefault()
+
         this.bus.emit('to-next-record', {currentId: this.id()})
       }
 

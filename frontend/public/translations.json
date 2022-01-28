@@ -274,5 +274,11 @@
     "de": "aus dem Quelltext erfasste",
     "en": null,
     "fr": null
+  },
+  "empty_watchlist": {
+    "id": "empty_watchlist",
+    "de": "Merkliste leeren",
+    "en": null,
+    "fr": null
   }
 }
