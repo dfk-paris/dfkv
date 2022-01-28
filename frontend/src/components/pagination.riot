@@ -51,13 +51,8 @@
       }
 
       onBeforeMount() {
-        this.bus.addEventListener('to-previous-page', this.previous)
-        this.bus.addEventListener('to-next-page', this.next)
-      }
-
-      onUnmounted() {
-        this.bus.removeEventListener('to-next-page', this.next)
-        this.bus.removeEventListener('to-previous-page', this.previous)
+        this.on('to-previous-page', this.previous)
+        this.on('to-next-page', this.next)
       }
 
       previous() {

@@ -109,7 +109,7 @@
       }
 
       onMounted() {
-        this.bus.addEventListener('watchlist-changed', event => this.update())
+        this.on('watchlist-changed', event => this.update())
       }
 
       updateUrl() {
