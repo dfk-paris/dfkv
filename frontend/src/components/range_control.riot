@@ -41,6 +41,10 @@
 
     const d3 = Object.assign({}, d3Selection, d3Scale, d3Drag)
 
+    const toInt = (v) => {
+      return typeof v == 'string' ? parseInt(v) : v
+    }
+
     export default class {
       clamp(value) {
         const t = Math.max(this.props.min, value)
@@ -48,8 +52,8 @@
       }
 
       from() {
-        const v = (this.state.dragging ? this.state.from : this.props.from)
-        if (v == undefined) {return this.props.from}
+        const v = (this.state.dragging ? this.state.from : toInt(this.props.from))
+        if (v == undefined) {return toInt(this.props.from)}
 
         return this.clamp(v)
       }
@@ -64,7 +68,7 @@
       onBeforeMount() {
         this.state = {
           dragging: false,
-          from: this.props.from || this.props.min,
+          from: toInt(this.props.from) || this.props.min,
           to: this.props.to || this.props.max
         }
       }
@@ -72,12 +76,20 @@
       onMounted() {
         const cmp = this
 
-        const m = d3.scaleLinear().
-          domain([0, this.svgWidth()]).
-          range([cmp.props.min, cmp.props.max]).
-          clamp(true)
+        // const start = function(event) {
+        //   cmp.update({
+        //     from: cmp.clamp(cmp.state.from),
+        //     to: cmp.clamp(cmp.state.to)
+        //   })
+        //   console.log(cmp.state, cmp.props)
+        // }
 
         const drag = function(event) {
+          const m = d3.scaleLinear().
+            domain([0, cmp.svgWidth()]).
+            range([cmp.props.min, cmp.props.max]).
+            clamp(true)
+
           cmp.state.dragging = true
 
           const value = Math.round(m(event.x))
@@ -107,11 +119,20 @@
       // of the slider to the previous position because the new url value hasn't
       // been propagated to this component yet
       onBeforeUpdate(props, state) {
+        // this.state.from = this.clamp(this.state.from)
+        // this.state.to = this.clamp(this.state.to)
+        // this.props.onInputsChanged({from: this.state.from, to: this.state.to})
+        // console.log(this.state, this.props, 'b')
+
         if (state.stopDragging) {
           state.stopDragging = false
           state.dragging = false
         }
       }
+
+      // onUpdated() {
+      //   console.log(this.state, this.props, 'a')
+      // }
 
       binColor(index) {
         const active = (

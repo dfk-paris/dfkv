@@ -13,7 +13,7 @@
     <a
       onclick={event => clearWatchlist()}
       class="d-block mt-1 mb-4 fs-6 text-decoration-underline"
-    >empty Watchlst</a>
+    >{t('empty_watchlist')}</a>
 
   </template>
 
@@ -26,8 +26,8 @@
 
   <dfk-range-control
     if={props.results}
-    from={props.criteria.from}
-    to={props.criteria.to}
+    from={props.criteria.from || firstYear()}
+    to={props.criteria.to || lastYear()}
     min={firstYear()}
     max={lastYear()}
     bins={props.results.aggregations().year.buckets.map(e => e.doc_count)}

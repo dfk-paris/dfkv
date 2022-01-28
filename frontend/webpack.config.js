@@ -6,7 +6,7 @@ const path = require('path')
 module.exports = (env, argv) => {
   const mode = argv.mode || 'development'
   if (mode == 'production') {
-    dotenv.config({path: '.env.local'})
+    dotenv.config({path: '.env.production'})
   }
   dotenv.config({path: '.env'})
 

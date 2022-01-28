@@ -108,7 +108,7 @@
       onBeforeMount() {
         this.bus.addEventListener('watchlist-changed', event => this.update())
 
-        fetch('/projects.json').then(r => r.json()).then(data => {
+        fetch(`${staticUrl}/projects.json`).then(r => r.json()).then(data => {
           this.update({projects: data})
         })
       }
