@@ -250,5 +250,29 @@
     "de": "Eintrag",
     "en": null,
     "fr": null
+  },
+  "journal_facet_text": {
+    "id": "journal_facet_text",
+    "de": "Insgesamt wurden gut 350 Zeitschriftenreihen systematisch auf Beiträge hin durchgesehen. Für einige dieser Zeitschriften sind zwischenzeitliche Namensänderungen bekannt (meist in Form von Zusätzen). In Übereinstimmung mit ihrer Erfassung durch die Bibliotheken (hier insbesondere die Bibliotheque National de la France und die Deutsche National Bibliothek) werden die verschiedenen Varianten unter einem Titel geführt. Hinter dem Titel wird in Klammern die Zahl der Dateneinträge gennant, die auf die Zeitschrift referenzieren.",
+    "en": null,
+    "fr": null
+  },
+  "people_facet_text": {
+    "id": "people_facet_text",
+    "de": "Insgesamt wurden gut 9000 Personennamen erfasst, darunter gibt es Nennungen einer Person unter verschiedenen Namen oder auch in verschiedenen Schreibweisen.  2021 sind diese Varianten, soweit sie eindeutig waren, zusammengeführt worden, ohne die Schreibweise in den Datensätzen zu verändern.  Unter \"BeispielÄ\" lassen sich damit die selben Datensätze aufrufen wie unter \"BeispielAE\".  ",
+    "en": null,
+    "fr": null
+  },
+  "journal_facet_tag_line": {
+    "id": "journal_facet_tag_line",
+    "de": "in die Untersuchung einbezogene Zeitschriften",
+    "en": null,
+    "fr": null
+  },
+  "people_facet_tag_line": {
+    "id": "people_facet_tag_line",
+    "de": "aus dem Quelltext erfasste",
+    "en": null,
+    "fr": null
   }
 }

@@ -22,6 +22,10 @@
   display: flex;
 }
 
+.d-none {
+  display: none;
+}
+
 .flex-column {
   flex-direction: column;
 }
@@ -141,5 +145,14 @@ $sides: (
     .p#{$s}-#{$size} {
       padding-#{$side}: $amount;
     }
+  }
+}
+
+
+// grid
+
+.row {
+  .col-3 {
+    width: 25%;
   }
 }

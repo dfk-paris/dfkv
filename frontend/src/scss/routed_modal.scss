@@ -9,9 +9,10 @@ dfk-routed-modal {
 
   overflow-y: scroll;
   background-color: #ffffff;
-  z-index: 200;
+  z-index: 600;
+  
+  &[active] {
+    display: block;
+  }
 }
 
-dfk-routed-modal[active] {
-  display: block;
-}

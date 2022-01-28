@@ -5,8 +5,8 @@
       href="#"
       class="dfkv-first {show(!isFirst())}"
     >
-      <icon type="arrow-left" />
-      <icon type="arrow-left" />
+      <dfk-icon type="arrow-left" />
+      <dfk-icon type="arrow-left" />
       <span class="text">erste Seite</span>
     </a>
     <a
@@ -14,7 +14,7 @@
       href="#"
       class="dfkv-previous {show(!isFirst())}"
     >
-      <icon type="arrow-left" />
+      <dfk-icon type="arrow-left" />
       <span class="text">vorherige Seite</span>
     </a>
     <strong>{this.props.page}/{totalPages()}</strong>
@@ -24,7 +24,7 @@
       class="dfkv-next {show(!isLast())}"
     >
       <span class="text">nächste Seite</span>
-      <icon type="arrow-right" />
+      <dfk-icon type="arrow-right" />
     </a>
     <a
       onclick={event => pageTo(totalPages(), event)}
@@ -32,8 +32,8 @@
       class="dfkv-last {show(!isLast())}"
     >
       <span class="text">letzte Seite</span>
-      <icon type="arrow-right" />
-      <icon type="arrow-right" />
+      <dfk-icon type="arrow-right" />
+      <dfk-icon type="arrow-right" />
     </a>
   </template>
 
@@ -42,7 +42,7 @@
 
     export default class {
       static components = {
-        Icon
+        'dfk-icon': Icon
       }
 
       constructor() {

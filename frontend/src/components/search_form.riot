@@ -46,7 +46,9 @@
 
   <dfk-facet
     if={props.results}
+    tag_line={t('people_facet_tag_line')}
     name={t('people')}
+    text={t('people_facet_text')}
     criteria={props.criteria}
     aggregation={props.results.aggregations().involved}
     add-filter={newFilter => addFilter('involved', newFilter)}
@@ -63,7 +65,9 @@
 
   <dfk-facet
     if={props.results}
+    tag_line={t('journal_facet_tag_line')}
     name={t('journals')}
+    text={t('journal_facet_text')}
     criteria={props.criteria}
     aggregation={props.results.aggregations().journal}
     add-filter={newFilter => addFilter('journal', newFilter)}
@@ -122,8 +126,6 @@
       }
 
       delayedUpdateUrl(event) {
-        console.log(new Error().stack)
-
         if (this.timeout) {
           window.clearTimeout(this.timeout)
           this.timeout = null

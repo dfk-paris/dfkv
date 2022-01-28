@@ -143,25 +143,29 @@ class Dfkv::Elastic
         "creator" => {
           "terms" => {
             "field" => "creators.display_name.keyword",
-            "size" => 10000
+            "size" => 10000,
+            "exclude" => to_array(params['creator'])
           }
         },
         "involved" => {
           "terms" => {
             "field" => "involved.display_name.keyword",
-            "size" => 10000
+            "size" => 10000,
+            "exclude" => to_array(params['involved'])
           }
         },
         "journal" => {
           "terms" => {
             "field" => "volumes.journal.#{locale}.keyword",
-            "size" => 500
+            "size" => 500,
+            "exclude" => to_array(params['journal'])
           }
         },
         "type" => {
           "terms" => {
             "field" => "text_types.#{locale}.keyword",
-            "size" => 500
+            "size" => 500,
+            "exclude" => to_array(params['type'])
           }
         }
       }

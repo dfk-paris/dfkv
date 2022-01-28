@@ -1,14 +1,59 @@
-<dfk-facet>
+<dfk-facet class={classes()}>
   <div class="d-flex justify-content-between mb-2">
     <div>{props.name}</div>
-    <div class="text-end">
-      <a href="#">{t('show_all')}</a>
+    <div
+      if={total() > 5}
+      class="text-end"
+    >
+      <a onclick={event => showAll(event)}>{t('show_all')}</a>
     </div>
   </div>
 
+  <dfk-popup open={this.state.popup} class="facet">
+    <div style="margin: 40px">
+      <div class="tag-line">{props.tag_line}</div>
+      <div class="header d-flex justify-content-between">
+        <h2 class="mt-1">{props.name}</h2>
+        <a onclick={event => showAll(event)}>
+          <dfk-icon type="cross" />
+        </a>
+      </div>
+      <div class="body">
+        <div class="row">
+          <div class="col-3">
+            <dfk-input update-handler={this.setFilter} />
+          </div>
+        </div>
+
+        <p if={props.text}>{props.text}</p>
+
+        <dfk-pagination
+          class="mt-6 mb-5"
+          page={state.page}
+          per-page={10}
+          total={count()}
+          page-to={page => this.update({page: page})}
+        />
+
+        <div class="d-flex flex-column align-items-start">
+          <a
+            each={bucket in bucketsPage()}
+            class="d-block rounded bg-gray mb-2 p-2"
+            onclick={event => addFilter(event, bucket.key)}
+          >
+            <div class="d-flex">
+              <div>+</div>
+              <div class="ml-1">{bucket.key} ({bucket.doc_count})</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </dfk-popup>
+
   <div class="d-flex flex-column align-items-start">
     <a
-      each={bucket in props.aggregation.buckets.slice(0, 5)}
+      each={bucket in bigBuckets()}
       class="d-block rounded bg-gray mb-2 p-2"
       onclick={event => addFilter(event, bucket.key)}
     >
@@ -20,11 +65,40 @@
   </div>
 
   <script>
-    import {i18n} from '@wendig/lib'
+    import {i18n, util} from '@wendig/lib'
+
+    import Icon from './icon.riot'
+    import Input from './input.riot'
+    import Pagination from './pagination.riot'
+    import Popup from './popup.riot'
 
     export default class {
+      static components = {
+        'dfk-icon': Icon,
+        'dfk-input': Input,
+        'dfk-pagination': Pagination,
+        'dfk-popup': Popup
+      }
+
       constructor() {
         this.t = i18n.translate
+
+        this.setFilter = this.setFilter.bind(this)
+      }
+
+      classes() {
+        return [
+          this.props.class,
+          this.total() ? '' : 'd-none'
+        ].join(' ')
+      }
+
+      onBeforeMount() {
+        this.state = {
+          expanded: false,
+          popup: false,
+          page: 1
+        }
       }
 
       addFilter(event, newFilter) {
@@ -35,10 +109,56 @@
         }
       }
 
-      // lookup(key) {
-      //   const f = this.props.lookup
-      //   return f ? f(key) : key
-      // }
+      total() {
+        return this.buckets().length
+      }
+
+      count() {
+        return this.filteredBuckets().length
+      }
+
+      buckets() {
+        return this.props.aggregation.buckets
+      }
+
+      filteredBuckets() {
+        let buckets = this.buckets()
+        if (this.state.filter) {
+          const r = new RegExp(util.fold(this.state.filter))
+          buckets = buckets.filter(e => {
+            const folded = util.fold(e.key)
+            return folded.match(r)
+          })
+        }
+        return buckets
+      }
+
+      bigBuckets() {
+        const limit = this.state.expanded ? 10 : 5
+        return this.buckets().slice(0, limit)
+      }
+
+      bucketsPage() {
+        const page = this.state.page - 1
+        return this.filteredBuckets().slice(page * 10, page * 10 + 10)
+      }
+
+      showAll(event) {
+        event.preventDefault()
+
+        if (this.total() > 10) {
+          this.update({popup: !this.state.popup})
+        } else {
+          this.update({expanded: !this.state.open})
+        }
+      }
+
+      setFilter(event, value) {
+        this.update({
+          filter: value,
+          page: 1
+        })
+      }
     }
   </script>
 </dfk-facet>

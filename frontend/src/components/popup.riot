@@ -6,7 +6,8 @@
       classes() {
         return [
           this.state.animate ? '' : 'preload',
-          this.props.open ? 'open' : 'close'
+          this.props.open ? 'open' : 'close',
+          this.props.class
         ].join(' ')
       }
 
