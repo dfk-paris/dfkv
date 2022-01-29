@@ -5,7 +5,7 @@
       if={total() > 5}
       class="text-end"
     >
-      <a onclick={event => showAll(event)}>{t('show_all')}</a>
+      <a onclick={event => toggleShowAll(event)}>{t('show_all')}</a>
     </div>
   </div>
 
@@ -14,7 +14,7 @@
       <div class="tag-line">{props.tag_line}</div>
       <div class="header d-flex justify-content-between">
         <h2 class="mt-1">{props.name}</h2>
-        <a onclick={event => showAll(event)}>
+        <a onclick={event => toggleShowAll(event)}>
           <dfk-icon type="cross" />
         </a>
       </div>
@@ -143,7 +143,7 @@
         return this.filteredBuckets().slice(page * 10, page * 10 + 10)
       }
 
-      showAll(event) {
+      toggleShowAll(event) {
         event.preventDefault()
 
         if (this.total() > 10) {

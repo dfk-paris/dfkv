@@ -33,6 +33,37 @@ module Dfkv::Tasks
     end
   end
 
+  def self.wikidata_for(id)
+    return nil unless id
+
+    cache_file = "#{ENV['WIKIDATA_CACHE_DIR']}/#{id}.json"
+    return JSON.load(File.read cache_file) if File.exists?(cache_file)
+
+    url = "https://www.wikidata.org/wiki/Special:EntityData/#{id}.json"
+    puts "retrieving '#{url}'"
+
+    response = Faraday.get(url)
+    # we deal with qid redirects, e.g. Q1873356
+    entity = JSON.parse(response.body)['entities'].values.first
+
+    File.open cache_file, 'w' do |f|
+      f.write JSON.pretty_generate(entity)
+    end
+
+    entity
+  end
+
+  def self.try(&block)
+    yield
+  rescue NoMethodError => e
+    nil
+  end
+
+  def self.label_for(entity)
+    v = entity['labels']['en'] || entity['labels']['fr'] || entity['labels']['de']
+    v['value']
+  end
+
   def self.index
     records = read_excel(ENV['DATA_FILE_RECORDS'], 'Data_complet')
     volumes = read_excel(ENV['DATA_FILE_MASTER'], 'Volume_ID')
@@ -53,6 +84,40 @@ module Dfkv::Tasks
 
     elastic = Dfkv::Elastic.new
     elastic.reset!
+
+    # get wikidata for people
+    puts "fetching and parsing wikidata entities ..."
+    system 'mkdir', '-p', ENV['WIKIDATA_CACHE_DIR']
+    people.each do |id, person|
+      next unless person['wikidata_id']
+      entity = wikidata_for(person['wikidata_id'])
+
+      if v = try{entity['claims']['P569'].first['mainsnak']['datavalue']['value']['time']}
+        person['birth_date'] = v
+      end
+
+      if v = try{entity['claims']['P19'].first['mainsnak']['datavalue']['value']['id']}
+        place = wikidata_for(v)
+
+        person['birth_place'] = {
+          'id' => v,
+          'name' => label_for(place)
+        }
+      end
+
+      if v = try{entity['claims']['P570'].first['mainsnak']['datavalue']['value']['time']}
+        person['death_date'] = v
+      end
+
+      if v = try{entity['claims']['P20'].first['mainsnak']['datavalue']['value']['id']}
+        place = wikidata_for(v)
+
+        person['death_place'] = {
+          'id' => v,
+          'name' => label_for(place)
+        }
+      end
+    end
 
     # records
     pb = Dfkv.progress_bar('indexing records', records.size)

@@ -280,5 +280,41 @@
     "de": "Merkliste leeren",
     "en": null,
     "fr": null
+  },
+  "person_details": {
+    "id": "person_details",
+    "de": "Personendetails",
+    "en": null,
+    "fr": null
+  },
+  "authority_data": {
+    "id": "authority_data",
+    "de": "Normdatenverknüpfung",
+    "en": null,
+    "fr": null
+  },
+  "from_wikidata": {
+    "id": "from_wikidata",
+    "de": "aus Wikidata",
+    "en": null,
+    "fr": null
+  },
+  "born": {
+    "id": "born",
+    "de": "geboren",
+    "en": null,
+    "fr": null
+  },
+  "died": {
+    "id": "died",
+    "de": "verstorben",
+    "en": null,
+    "fr": null
+  },
+  "journal_details": {
+    "id": "journal_details",
+    "de": "Quellendetails",
+    "en": null,
+    "fr": null
   }
 }

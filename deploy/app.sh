@@ -23,6 +23,9 @@ function deploy {
   remote "mkdir $CURRENT_PATH/tmp"
   upload "frontend/public/" "$CURRENT_PATH/public/"
   remote "touch $CURRENT_PATH/tmp/restart.txt"
+
+  remote "mkdir $CURRENT_PATH/data/wikidata_cache"
+  upload "data/wikidata_cache/" "$CURRENT_PATH/data/wikidata_cache/"
   within_do $CURRENT_PATH "bundle exec bin/index"
 
   finalize

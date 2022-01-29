@@ -20,6 +20,10 @@
         }
       }
 
+      onUnmonted() {
+        this.root.remove()
+      }
+
       onBeforeUpdate(props, state) {
         if (!state.animate && props.open != state.initial) {
           this.update({animate: true})

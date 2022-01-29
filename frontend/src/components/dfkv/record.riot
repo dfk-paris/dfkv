@@ -38,7 +38,12 @@
           each={volume in state.item.volumes()}
           class="volume"
         >
-          <div if={volume.journal}>{l(volume.journal)}</div>
+          <div if={volume.journal}>
+            <a
+              class="d-block text-decoration-underline"
+              onclick={event => openJournal(volume.journal, event)}
+            >{l(volume.journal)}</a>
+          </div>
           <div class="d-flex justify-content-between">
             <div>{volume.bibliography}</div>
             <div class="text-right"><dfk-icon type="book" /></div>
@@ -59,7 +64,13 @@
           <div class="value">{state.item.transcription()}</div>
 
           <div class="attribute">{cap(t('people'))}</div>
-          <div class="value">{state.item.involved()}</div>
+          <div class="value">
+            <a
+              each={(person, i) in state.item.involved()}
+              class="d-block text-decoration-underline"
+              onclick={event => openPerson(person, event)}
+            >{person.display_name}</a>
+          </div>
 
           <div class="attribute">{cap(t('text_type'))}</div>
           <div class="value">{state.item.textTypes()}</div>
@@ -83,19 +94,99 @@
         </div>
       </div>
     </div>
+
+    <dfk-popup open={!!state.person}  if={!!state.person}>
+      <div style="margin: 40px">
+        <div class="header d-flex justify-content-between">
+          <div class="tag-line mb-5">{cap(t('person_details'))}</div>
+          <a onclick={event => closePerson(event)}>
+            <dfk-icon type="cross" />
+          </a>
+        </div>
+        <h2 class="mt-1">{state.person.display_name}</h2>
+        <div class="body">
+          <div class="attribute-list mt-7">
+            <div class="value">
+              <div if={state.person.birth_date}>
+                {cap(t('born'))} {formatDate(state.person.birth_date)}
+
+                <span if={state.person.birth_place}>
+                  ,
+                  <a
+                    href="https://www.wikidata.org/wiki/{state.person.birth_place.id}"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    {state.person.birth_place.name}
+                  </a>
+                </span>
+              </div>
+              <div if={state.person.death_date}>
+                {cap(t('died'))} {formatDate(state.person.death_date)}
+
+                <span if={state.person.death_place}>
+                  ,
+                  <a
+                    href="https://www.wikidata.org/wiki/{state.person.death_place.id}"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    {state.person.death_place.name}
+                  </a>
+                </span>
+              </div>
+            </div>
+
+            <div class="attribute">{cap(t('authority_data'))}</div>
+            <div class="value">
+              <dfk-authority-link type="ulan" id={state.person.ulan_id} />
+              <dfk-authority-link type="wikidata" id={state.person.wikidata_id} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </dfk-popup>
+
+    <dfk-popup open={!!state.journal}  if={!!state.journal}>
+      <div style="margin: 40px">
+        <div class="header d-flex justify-content-between">
+          <div class="tag-line mb-5">{cap(t('journal_details'))}</div>
+          <a onclick={event => closeJournal(event)}>
+            <dfk-icon type="cross" />
+          </a>
+        </div>
+
+        <h2 class="mt-1">{l(state.journal)}</h2>
+        <div class="body">
+          <div class="attribute-list mt-7">
+            <div class="attribute">
+              {cap(t('authority_data'))}
+            </div>
+            <div class="value">
+              <dfk-authority-link type="gnd" id={state.journal.gnd_id} />
+              <dfk-authority-link type="bnf" id={state.journal.bnf_id} />
+              <dfk-authority-link type="wikidata" id={state.journal.wikidata_id} />
+            </div>
+        </div>
+      </div>
+    </dfk-popup>
   </template>
   
   <script>
     import {Url} from '@wendig/lib'
 
+    import AuthorityLink from '../authority_link.riot'
     import Blockquote from '../blockquote.riot'
     import Icon from '../icon.riot'
+    import Popup from '../popup.riot'
     import Search from '../../lib/search'
 
     export default class {
       static components = {
+        'dfk-authority-link': AuthorityLink,
         'dfk-blockquote': Blockquote,
-        'dfk-icon': Icon
+        'dfk-icon': Icon,
+        'dfk-popup': Popup
       }
 
       constructor() {
@@ -141,6 +232,42 @@
         const url = Url.current()
         url.setHashPath('')
         return url.formatHash() || '#'
+      }
+
+      openPerson(person, event) {
+        event.preventDefault()
+
+        this.update({person: person})
+      }
+
+      closePerson() {
+        this.update({person: null})
+      }
+
+      openJournal(journal, event) {
+        event.preventDefault()
+
+        this.update({journal: journal})
+      }
+
+      closeJournal() {
+        this.update({journal: null})
+      }
+
+      formatDate(str) {
+        const m = str.match(/^([+-])?([\d]+)\-(\d+)\-(\d+)/)
+        if (!m) {return null}
+
+        let [_, sign, year, month, day] = m
+        year = parseInt(year) * (sign == '-' ? -1 : 1)
+        month = parseInt(month)
+        day = parseInt(day)
+
+        const result = [year]
+        if (month > 0) {result.unshift(month)}
+        if (day > 0) {result.unshift(day)}
+
+        return result.join('.')
       }
     }
   </script>

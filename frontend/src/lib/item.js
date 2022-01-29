@@ -33,8 +33,11 @@ export default class Item {
   }
 
   involved() {
-    return this.data['_source']['involved'].
-      map(e => e.display_name).join(', ')
+    return this.data['_source']['involved']
+  }
+
+  involvedStr() {
+    return this.involved().map(e => e.display_name).join(', ')
   }
 
   textTypes() {
