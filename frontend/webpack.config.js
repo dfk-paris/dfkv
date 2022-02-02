@@ -9,6 +9,7 @@ module.exports = (env, argv) => {
     dotenv.config({path: '.env.production'})
   }
   dotenv.config({path: '.env'})
+  const useSsl = (process.env.USE_SSL == 'true')
 
   return {
     mode: mode,
@@ -28,7 +29,7 @@ module.exports = (env, argv) => {
       compress: true,
       port: 4000,
       hot: false,
-      https: true,
+      https: useSsl,
       headers: {
         'ACCESS-CONTROL-ALLOW-ORIGIN': 'https://dfk-paris.org'
       },
@@ -56,6 +57,15 @@ module.exports = (env, argv) => {
             }
           }]
         }, {
+          test: /\.css$/i,
+          use: [
+            'style-loader',
+            {
+              loader: 'css-loader',
+              options: {url: false}
+            }
+          ]
+        }, {
           test: /\.s[ac]ss$/i,
           use: [
             'style-loader',
@@ -80,7 +90,8 @@ module.exports = (env, argv) => {
     plugins: [
       new webpack.DefinePlugin({
         apiUrl: JSON.stringify(process.env.API_URL),
-        staticUrl: JSON.stringify(process.env.STATIC_URL)
+        staticUrl: JSON.stringify(process.env.STATIC_URL),
+        iiifViewerUrl: JSON.stringify(process.env.IIIF_VIEWER_URL)
       }),
       new HtmlWebpackPlugin({
         template: 'frontend/src/index.ejs',

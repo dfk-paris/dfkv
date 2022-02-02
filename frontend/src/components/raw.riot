@@ -1,0 +1,17 @@
+<dfk-raw>
+  <script>
+    export default class {
+      setInnerHTML() {
+        this.root.innerHTML = this.props.html
+      }
+
+      onMounted() {
+        this.setInnerHTML()
+      }
+
+      onUpdated() {
+        this.setInnerHTML()
+      }
+    }
+  </script>
+</dfk-raw>

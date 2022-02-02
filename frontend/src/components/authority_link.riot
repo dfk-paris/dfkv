@@ -1,42 +1,43 @@
 <dfk-authority-link>
-  <a
-    if={props.type == 'wikidata'}
-    href="https://www.wikidata.org/wiki/{props.id}"
-    class="d-block"
-    target="_blank"
-    rel="noopener"
-  >Wikidata</a>
+  <template if={props.id}>
+    <a
+      if={props.type == 'wikidata'}
+      href="https://www.wikidata.org/wiki/{props.id}"
+      class="d-block"
+      target="_blank"
+      rel="noopener"
+    >Wikidata</a>
 
-  <a
-    if={props.type == 'ulan'}
-    href="http://vocab.getty.edu/page/{props.id}"
-    class="d-block"
-    target="_blank"
-    rel="noopener"
-  >Getty ULAN</a>
+    <a
+      if={props.type == 'ulan'}
+      href="http://vocab.getty.edu/page/{props.id}"
+      class="d-block"
+      target="_blank"
+      rel="noopener"
+    >Getty ULAN</a>
 
-  <a
-    if={props.type == 'gnd'}
-    href="https://d-nb.info/gnd/{props.id}"
-    class="d-block"
-    target="_blank"
-    rel="noopener"
-  >GND</a>
+    <a
+      if={props.type == 'gnd'}
+      href="https://d-nb.info/gnd/{props.id}"
+      class="d-block"
+      target="_blank"
+      rel="noopener"
+    >GND</a>
 
-  <a
-    if={props.type == 'viaf'}
-    href="https://viaf.org/viaf/{props.id}"
-    class="d-block"
-    target="_blank"
-    rel="noopener"
-  >VIAF</a>
+    <a
+      if={props.type == 'viaf'}
+      href="https://viaf.org/viaf/{props.id}"
+      class="d-block"
+      target="_blank"
+      rel="noopener"
+    >VIAF</a>
 
-  <a
-    if={props.type == 'bnf'}
-    href="https://bla.blub/{props.id}"
-    class="d-block"
-    target="_blank"
-    rel="noopener"
-  >BNF</a>
-
+    <a
+      if={props.type == 'bnf'}
+      href="https://catalogue.bnf.fr/ark:/12148/{props.id}"
+      class="d-block"
+      target="_blank"
+      rel="noopener"
+    >BNF</a>
+  </template>
 </dfk-authority-link>

@@ -69,4 +69,8 @@ export default class Item {
   dateHuman() {
     return this.data['_source']['date_human']
   }
+
+  json() {
+    return JSON.stringify(this.data['_source'], null, 2)
+  }
 }

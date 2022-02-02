@@ -316,5 +316,11 @@
     "de": "Quellendetails",
     "en": null,
     "fr": null
+  },
+  "source_wikidata": {
+    "id": "source_wikidata",
+    "de": "aus Wikidata",
+    "en": null,
+    "fr": null
   }
 }
