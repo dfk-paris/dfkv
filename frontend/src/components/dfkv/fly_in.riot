@@ -2,7 +2,12 @@
   <dfk-fly-in open={state.open} element={root}>
     <div class="fly-in-open h-100">
       <div class="h-100 d-flex align-items-center">
-        <a class="ml-4" onclick={event => toggle(event)}>&gt;&gt;</a>
+        <a
+          class="ml-4"
+          onclick={event => toggle(event)}
+        >
+          <dfk-icon type="arrow-right" />
+        </a>
         <div class="h-100 ml-6 overflow-y-scroll">
           <h1 class="mt-6">{cap(t('help'))}</h1>
 
@@ -58,7 +63,12 @@
 
     <div class="fly-in-closed">
       <div class="h-100 d-flex align-items-center p-2">
-        <a onclick={event => toggle(event)}>&lt;&lt;</a>
+        <a
+          class="ml-2"
+          onclick={event => toggle(event)}
+        >
+          <dfk-icon type="arrow-left" />
+        </a>
       </div>
     </div>
   </dfk-fly-in>

@@ -313,7 +313,12 @@
       openJson(event) {
         event.preventDefault()
 
-        this.update({json: true})
+        util.download(this.state.item.json(), {
+          contentType: 'applicat/json',
+          filename: `${this.state.item.id()}.json`
+        })
+
+        // this.update({json: true})
       }
 
       closeJson() {
