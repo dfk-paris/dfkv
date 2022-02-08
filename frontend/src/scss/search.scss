@@ -17,6 +17,12 @@
     flex-grow: 1;
     margin-left: 80px;
 
+    [many-results] {
+      svg {
+        fill: gray;
+      }
+    }
+
     .search-results {
       width: 100%;
     }
@@ -53,7 +59,10 @@
   }
 }
 
-[is='dfkv-record'] {
+dfkv-record, [is='dfkv-record'] {
+  display: block;
+  break-before: page;
+
   .close, .previous, .next {
     position: absolute;
     // top: 133px;

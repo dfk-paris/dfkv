@@ -5,13 +5,19 @@ import Item from './item'
 import {bus} from './bus'
 
 class Search {
-  static search(criteria) {
+  static fetch(criteria) {
     const url = Url.parse(`${apiUrl}/search`)
     url.updateParams(criteria)
 
-    fetch(url.url()).then(r => r.json()).then(data => {
-      const items = new Items(data)
+    return fetch(url.url()).
+      then(r => r.json()).
+      then(data => new Items(data))
+  }
+
+  static search(criteria) {
+    Search.fetch(criteria).then(items => {
       bus.emit('search-results', items)
+      bus.emit('search-criteria', criteria)
     })
   }
 

@@ -1,4 +1,4 @@
-import {i18n} from '@wendig/lib'
+import {i18n, util} from '@wendig/lib'
 
 const l = i18n.localize
 
@@ -27,13 +27,20 @@ export default class Item {
     return 'https://ownreality.dfkg.org/files/e4044e9aa708504f9b473d14a84dcf7f8422bf9a/140.jpg'
   }
 
+  creators() {
+    const data = this.data['_source']['creators']
+    return util.sortBy(data, e => e.display_name)
+  }
+
   authors() {
-    return this.data['_source']['creators'].
-      map(e => e.display_name).join(', ')
+    return this.creators().
+      map(e => e.display_name).
+      join(', ')
   }
 
   involved() {
-    return this.data['_source']['involved']
+    const data = this.data['_source']['involved']
+    return util.sortBy(data, e => e.display_name)
   }
 
   involvedStr() {

@@ -322,5 +322,17 @@
     "de": "aus Wikidata",
     "en": null,
     "fr": null
+  },
+  "json": {
+    "id": "json",
+    "de": "JSON",
+    "en": "JSON",
+    "fr": "JSON"
+  },
+  "data": {
+    "id": "data",
+    "de": "data",
+    "en": null,
+    "fr": null
   }
 }

@@ -1,0 +1,20 @@
+<dfkv-multi-record>
+  <dfkv-record
+    each={item in props.items}
+    item={item}
+  />
+
+  <script>
+    import Record from './record.riot'
+
+    export default class {
+      static components = {
+        'dfkv-record': Record
+      }
+
+      onBeforeMount(props, state) {
+        console.log(props, state)
+      }
+    }
+  </script>
+</dfkv-multi-record>

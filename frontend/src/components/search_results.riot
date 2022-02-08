@@ -1,4 +1,10 @@
 <dfkv-search-results>
+  <div class="mb-3 d-print-none">
+    <a many-results={manyResults()} onclick={event => print(event)}>
+      <dfk-icon type="print" />
+    </a>
+  </div>
+
   <div>{t('search_results')}: {props.results.total()}</div>
 
   <dfk-pagination
@@ -86,6 +92,11 @@
     </div>
   </div>
 
+  <dfkv-multi-record
+    items={state.printItems}
+    style="display: none"
+  />
+
 
   <script>
     import {i18n, Url} from '@wendig/lib'
@@ -94,6 +105,8 @@
     import Pagination from './pagination.riot'
     import Tab from './tab.riot'
     import Icon from './icon.riot'
+    import MultiRecord from './dfkv/multi_record.riot'
+    import Search from '../lib/search'
 
     import watchlist from '../lib/watchlist'
 
@@ -101,11 +114,13 @@
       static components = {
         'dfk-icon': Icon,
         'dfk-pagination': Pagination,
-        'dfk-tab': Tab
+        'dfk-tab': Tab,
+        'dfkv-multi-record': MultiRecord
       }
 
       onBeforeMount() {
         this.on('watchlist-changed', event => this.update())
+        this.on('search-criteria', event => this.update({criteria: event.data}))
 
         fetch(`${staticUrl}/projects.json`).then(r => r.json()).then(data => {
           this.update({projects: data})
@@ -152,6 +167,33 @@
         event.preventDefault()
 
         watchlist.toggle(item.id())
+      }
+
+      manyResults() {
+        return this.props.results.total() > 100
+      }
+
+      print(event) {
+        event.preventDefault()
+
+        if (this.manyResults()) {
+          return false
+        }
+
+        const criteria = {
+          ...this.state.criteria,
+          ...{page: 1, per_page: 10000}
+        }
+
+        Search.fetch(criteria).then(items => {
+          console.log(items)
+          this.update({printItems: items.items()})
+          const element = this.root.querySelector('dfkv-multi-record')
+          const styles = document.querySelectorAll('head > style')
+          const css = [...styles].map(e => e.innerHTML).join()
+          util.printElement(element, {css: css, print: true})
+          this.update({printItems: []})
+        })
       }
     }
   </script>

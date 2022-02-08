@@ -1,9 +1,16 @@
 <dfkv-record class="overlay-page">
-  <a class="close d-print-none" href={closePath()}><dfk-icon type="cross" /></a>
+  <a
+    if={isSingle()}
+    class="close d-print-none"
+    href={closePath()}
+  ><dfk-icon type="cross" /></a>
 
   <template if={state.item}>
     <div class="p-7">
-      <div class="mb-6 d-print-none">
+      <div
+        if={isSingle()}
+        class="mb-6 d-print-none"
+      >
         <a
           class="mr-3"
           onclick={event => print(event)}><dfk-icon type="print"
@@ -15,7 +22,7 @@
 
       <div class="position-relative">
         <a
-          if={!props.first(id())}
+          if={isSingle() && !props.first(id())}
           class="previous d-print-none"
           onclick={event => previous(event)}
         >
@@ -23,7 +30,7 @@
         </a>
 
         <a
-          if={!props.last(id())}
+          if={isSingle() && !props.last(id())}
           class="next d-print-none"
           onclick={event => next(event)}
         >
@@ -250,17 +257,30 @@
       }
 
       title() {
-        return this.state.item && this.state.item.id()
+        if (this.isSingle()) {
+          return this.state.item && this.state.item.id()
+        } else {
+          return ''
+        }
       }
 
       onBeforeMount() {
-        window.addEventListener('hashchange', this.fetch)
+        if (this.isSingle()) {
+          window.addEventListener('hashchange', this.fetch)
+          this.fetch()
+        } else {
+          this.state.item = this.props.item
+        }
+      }
 
-        this.fetch()
+      isSingle() {
+        return !this.props.item
       }
 
       onUnmounted() {
-        window.removeEventListener('hashchange', this.fetch)
+        if (!this.props.item) {
+          window.removeEventListener('hashchange', this.fetch)
+        }
       }
 
       fetch() {
@@ -280,8 +300,12 @@
       }
 
       id() {
-        const url = Url.current()
-        return parseInt(url.hashPath().split('/')[2])
+        if (this.isSingle()) {
+          const url = Url.current()
+          return parseInt(url.hashPath().split('/')[2])
+        } else {
+          return this.state.item.id()
+        }
       }
 
       closePath() {
@@ -313,12 +337,12 @@
       openJson(event) {
         event.preventDefault()
 
-        util.download(this.state.item.json(), {
-          contentType: 'applicat/json',
-          filename: `${this.state.item.id()}.json`
-        })
+        // util.download(this.state.item.json(), {
+        //   contentType: 'applicat/json',
+        //   filename: `${this.state.item.id()}.json`
+        // })
 
-        // this.update({json: true})
+        this.update({json: true})
       }
 
       closeJson() {
