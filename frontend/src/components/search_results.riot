@@ -1,8 +1,14 @@
 <dfkv-search-results>
   <div class="mb-3 d-print-none">
-    <a many-results={manyResults()} onclick={event => print(event)}>
-      <dfk-icon type="print" />
-    </a>
+    <a
+      if={manyResults()}
+      many-results="true"
+      title={t('print_too_many_results')}
+    ><dfk-icon type="print" /></a>
+    <a
+      if={!manyResults()}
+      onclick={event => print(event)}
+    ><dfk-icon type="print" /></a>
   </div>
 
   <div>{t('search_results')}: {props.results.total()}</div>
@@ -176,17 +182,12 @@
       print(event) {
         event.preventDefault()
 
-        if (this.manyResults()) {
-          return false
-        }
-
         const criteria = {
           ...this.state.criteria,
           ...{page: 1, per_page: 10000}
         }
 
         Search.fetch(criteria).then(items => {
-          console.log(items)
           this.update({printItems: items.items()})
           const element = this.root.querySelector('dfkv-multi-record')
           const styles = document.querySelectorAll('head > style')
