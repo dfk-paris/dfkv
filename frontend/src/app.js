@@ -20,8 +20,6 @@ i18n.fetch(`${staticUrl}/translations.json`).then(() => {
   riot.install(BusRiotPlugin)
 
   riot.register('dfkv', Search)
-  // riot.register('dfkv-fly-in', FlyIn)
-  // riot.register('dfkv-routed-modal', RoutedModal)
 
   riot.mount('[is]')
 

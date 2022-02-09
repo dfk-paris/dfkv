@@ -3,9 +3,9 @@
     class="dfkv-reset float-right fs-6"
     href="#"
   >{t('reset')}</a>
-  <h3>
+  <div class="dfk-sans-serif fw-bold mb-4">
     {t('search_criteria')}
-  </h3>
+  </div>
 
   <template if={watchlistCount() > 0}>
     <dfk-input
@@ -24,6 +24,7 @@
 
   <dfk-input
     placeholder={t('fulltext_search')}
+    type="text"
     name="terms"
     update-handler={this.delayedUpdateUrl}
     value={props.criteria.terms}
@@ -37,9 +38,10 @@
     max={lastYear()}
     bins={props.results.aggregations().year.buckets.map(e => e.doc_count)}
     on-inputs-changed={props.onInputsChanged}
+    class="mt-5 mb-5"
   />
 
-  <h3>{t('your_selection')}</h3>
+  <div class="dfk-sans-serif fw-bold my-4">{t('your_selection')}</div>
 
   <dfk-active-filters
     criteria={props.criteria}
@@ -47,7 +49,7 @@
     remove-filter={(param, value) => removeFilter(param, value)}
   />
 
-  <h3>{t('filters')}</h3>
+  <div class="dfk-sans-serif fw-bold my-6">{t('filters')}</div>
 
   <dfk-facet
     if={props.results}
@@ -57,7 +59,7 @@
     criteria={props.criteria}
     aggregation={props.results.aggregations().involved}
     add-filter={newFilter => addFilter('involved', newFilter)}
-    class="d-block mb-4"
+    class="d-block mb-6"
   />
 
   <dfk-facet
@@ -65,7 +67,7 @@
     name={t('authors')}
     aggregation={props.results.aggregations().creator}
     add-filter={newFilter => addFilter('creator', newFilter)}
-    class="d-block mb-4"
+    class="d-block mb-6"
   />
 
   <dfk-facet
@@ -76,7 +78,7 @@
     criteria={props.criteria}
     aggregation={props.results.aggregations().journal}
     add-filter={newFilter => addFilter('journal', newFilter)}
-    class="d-block mb-4"
+    class="d-block mb-6"
   />
 
   <dfk-facet
@@ -85,7 +87,7 @@
     criteria={props.criteria}
     aggregation={props.results.aggregations().type}
     add-filter={newFilter => addFilter('type', newFilter)}
-    class="d-block mb-4"
+    class="d-block mb-6"
   />
 
   <script>

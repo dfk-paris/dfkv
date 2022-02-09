@@ -24,7 +24,7 @@
         </a>
       </div>
 
-      <div class="position-relative">
+      <div class="position-relative h-auto">
         <a
           if={isSingle() && !props.first(id())}
           class="previous d-print-none"
@@ -41,13 +41,13 @@
           <dfk-icon type="chevron-right" />
         </a>
 
-        <div class="float-right mt-2">{t('id')} {id()}</div>
-        <h1 class="mt-4 mb-6">{state.item.title()}</h1>
+        <div class="float-right mt-4">{t('id')} {id()}</div>
+        <h1 class="mt-4 mb-6 dfk-serif fw-normal">{state.item.title()}</h1>
       </div>
 
       <div
         if={state.item.authors()}
-        class="mb-3 fst-italic"
+        class="mb-6 fst-italic"
       >{state.item.authors()}</div>
 
       <div class="volumes">
@@ -55,7 +55,7 @@
           each={volume in state.item.volumes()}
           class="volume"
         >
-          <div if={volume.journal}>
+          <div if={volume.journal} class="mb-3">
             <a
               class="d-block text-decoration-underline"
               onclick={event => openJournal(volume.journal, event)}

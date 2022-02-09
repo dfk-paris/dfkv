@@ -59,6 +59,12 @@
     "en": null,
     "fr": null
   },
+  "author": {
+    "id": "author",
+    "de": "Autor",
+    "en": null,
+    "fr": null
+  },
   "authors": {
     "id": "authors",
     "de": "Autoren",

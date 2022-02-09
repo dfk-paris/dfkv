@@ -78,6 +78,10 @@
   font-weight: bold;
 }
 
+.fw-normal {
+  font-weight: normal;
+}
+
 .fst-italic {
   font-style: italic;
 }
@@ -94,8 +98,12 @@
   color: $tag-gray !important;
 }
 
+.text-decoration-none {
+  text-decoration: none !important;
+}
+
 .text-decoration-underline {
-  text-decoration: underline;
+  text-decoration: underline !important;
 }
 
 
@@ -103,6 +111,10 @@
 
 .h-100 {
   height: 100%;
+}
+
+.h-auto {
+  height: auto;
 }
 
 .w-100 {
@@ -135,20 +147,40 @@ $sides: (
 
 @each $size, $amount in $spacers {
   .m-#{$size} {
-    margin: $amount;
+    margin: $amount !important;
+  }
+
+  .mx-#{$size} {
+    margin-right: $amount !important;
+    margin-left: $amount !important;
+  }
+
+  .my-#{$size} {
+    margin-top: $amount !important;
+    margin-bottom: $amount !important;
   }
 
   .p-#{$size} {
-    padding: $amount;
+    padding: $amount !important;
+  }
+
+  .px-#{$size} {
+    padding-right: $amount !important;
+    padding-left: $amount !important;
+  }
+
+  .py-#{$size} {
+    padding-top: $amount !important;
+    padding-bottom: $amount !important;
   }
 
   @each $s, $side in $sides {
     .m#{$s}-#{$size} {
-      margin-#{$side}: $amount;
+      margin-#{$side}: $amount !important;
     }
 
     .p#{$s}-#{$size} {
-      padding-#{$side}: $amount;
+      padding-#{$side}: $amount !important;
     }
   }
 }

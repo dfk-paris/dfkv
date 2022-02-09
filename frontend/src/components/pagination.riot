@@ -3,7 +3,7 @@
     <a
       onclick={event => pageTo(1, event)}
       href="#"
-      class="dfkv-first {show(!isFirst())}"
+      class="dfkv-first text-decoration-none dfk-sans-serif {show(!isFirst())}"
     >
       <dfk-icon type="arrow-left" />
       <dfk-icon type="arrow-left" />
@@ -12,16 +12,16 @@
     <a
       onclick={event => pageTo(this.props.page - 1, event)}
       href="#"
-      class="dfkv-previous {show(!isFirst())}"
+      class="dfkv-previous text-decoration-none dfk-sans-serif {show(!isFirst())}"
     >
       <dfk-icon type="arrow-left" />
       <span class="text">vorherige Seite</span>
     </a>
-    <strong>{this.props.page}/{totalPages()}</strong>
+    <div class="mx-4 pt-1">{this.props.page}/{totalPages()}</div>
     <a
       onclick={event => pageTo(this.props.page + 1, event)}
       href="#"
-      class="dfkv-next {show(!isLast())}"
+      class="dfkv-next text-decoration-none dfk-sans-serif {show(!isLast())}"
     >
       <span class="text">nächste Seite</span>
       <dfk-icon type="arrow-right" />
@@ -29,7 +29,7 @@
     <a
       onclick={event => pageTo(totalPages(), event)}
       href="#"
-      class="dfkv-last {show(!isLast())}"
+      class="dfkv-last text-decoration-none dfk-sans-serif {show(!isLast())}"
     >
       <span class="text">letzte Seite</span>
       <dfk-icon type="arrow-right" />
@@ -95,7 +95,7 @@
       }
 
       show(value) {
-        return value ? '' : 'hidden'
+        return value ? '' : 'd-none'
       }
     }
   </script>
