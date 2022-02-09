@@ -24,18 +24,26 @@
       }
 
       mountCmp(component) {
-        this.unmountCmp()
+        this.unmountCmp(false)
 
         const mounter = riot.component(component)
         this.state.component = mounter(this.element, this.props.props)
         this.update()
+
+        if (this.props.onComponentMounted) {
+          this.props.onComponentMounted()
+        }
       }
 
-      unmountCmp() {
+      unmountCmp(notify = true) {
         if (this.state.component) {
           this.state.component.unmount(true)
           delete this.state['component']
           this.update()
+        }
+
+        if (this.props.onComponentUnmounted) {
+          this.props.onComponentUnmounted()
         }
       }
 

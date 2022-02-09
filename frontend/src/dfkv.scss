@@ -1,3 +1,13 @@
+body.dfkv-has-modal {
+  & > * {
+    display: none;
+  }
+
+  & > dfk-routed-modal {
+    display: block;
+  }
+}
+
 .text-underline {
   text-decoration: underline;
 }

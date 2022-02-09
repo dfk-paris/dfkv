@@ -334,5 +334,17 @@
     "de": "data",
     "en": null,
     "fr": null
+  },
+  "print_too_many_results": {
+    "id": "print_too_many_results",
+    "de": "Ihre Suchanfrage liefert zu viele Resultate, die Druckfunktion steht nur für bis zu 100 Einträge zur Verfügung",
+    "en": null,
+    "fr": null
+  },
+  "reset": {
+    "id": "reset",
+    "de": "zurücksetzen",
+    "en": null,
+    "fr": null
   }
 }

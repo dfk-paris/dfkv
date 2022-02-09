@@ -8,6 +8,10 @@
     flex-grow: 0;
     flex-shrink: 0;
     margin-right: 10px;
+
+    .dfkv-reset {
+      margin-top: 24px;
+    }
   }
 
   dfkv-search-results {
@@ -33,28 +37,16 @@
       dfk-icon {
         width: 20px;
       }
-
-      a.bookmark {
-        position: absolute;
-        top: 42px;
-        left: -40px;
-
-        path {
-          stroke: $tag-gray;
-          fill: $tag-gray;
-        }
-      }
-
-      a.bookmark.active {
-        path {
-          stroke: $text-color;
-          fill: $text-color;
-        }
-      }
     }
 
     dfk-pagination {
       height: 21px;
+    }
+
+    dfkv-bookmark {
+      position: absolute;
+      top: 42px;
+      left: -40px;
     }
   }
 }
@@ -121,4 +113,21 @@ dfk-input[type='checkbox'] {
 
 dfk-popup.facet {
   width: 800px;
+}
+
+
+dfkv-bookmark {
+  a {
+    path {
+      stroke: $tag-gray;
+      fill: $tag-gray;
+    }
+  }
+
+  a.active {
+    path {
+      stroke: $text-color;
+      fill: $text-color;
+    }
+  }
 }

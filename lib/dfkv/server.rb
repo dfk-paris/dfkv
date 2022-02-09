@@ -126,7 +126,7 @@ class Dfkv::Server
     end
 
     def sort
-      request.params['sort'] || 'title'
+      request.params['sort'] || 'creator'
     end
 
     def direction

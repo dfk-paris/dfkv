@@ -1,10 +1,14 @@
 <dfkv-routed-modal>
-  <dfk-routed-modal routes={routes()} props={props} />
+  <dfk-routed-modal
+    routes={routes()}
+    props={props}
+    on-component-mounted={onComponentMounted}
+    on-component-unmounted={onComponentUnmounted}
+  />
 
   <script>
     import RoutedModal from '../routed_modal.riot'
     import Record from './record.riot'
-    import Watchlist from './watchlist.riot'
 
     export default class {
       static components = {
@@ -16,11 +20,18 @@
         document.querySelector('body').append(element)
       }
 
+      onComponentMounted() {
+        document.querySelector('body').classList.add('dfkv-has-modal')
+      }
+
+      onComponentUnmounted() {
+        document.querySelector('body').classList.remove('dfkv-has-modal')
+      }
+
       routes() {
         return [
           {url: /^$/, component: null},
-          {url: /^\/records\/(?<id>\d+)$/, component: Record},
-          {url: /^\/watchlist$/, component: Watchlist}
+          {url: /^\/records\/(?<id>\d+)$/, component: Record}
         ]
       }
     }

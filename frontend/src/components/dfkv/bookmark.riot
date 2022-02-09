@@ -1,0 +1,33 @@
+<dfkv-bookmark>
+  <a
+    class="{isBookmarked() ? 'active' : ''}"
+    onclick={event => bookmark(event)}
+  >
+    <dfk-icon type="bookmark" />
+  </a>
+
+  <script>
+    import Icon from '../icon.riot'
+    import watchlist from '../../lib/watchlist'
+
+    export default class {
+      static components = {
+        'dfk-icon': Icon
+      }
+
+      onBeforeMount() {
+        this.on('watchlist-changed', event => this.update())
+      }
+
+      isBookmarked() {
+        return watchlist.has(this.props.item.id())
+      }
+
+      bookmark(event) {
+        event.preventDefault()
+
+        watchlist.toggle(this.props.item.id())
+      }
+    }
+  </script>
+</dfkv-bookmark>

@@ -1,5 +1,11 @@
 <dfkv-search-form>
-  <h3>{t('search_criteria')}</h3>
+  <a
+    class="dfkv-reset float-right fs-6"
+    href="#"
+  >{t('reset')}</a>
+  <h3>
+    {t('search_criteria')}
+  </h3>
 
   <template if={watchlistCount() > 0}>
     <dfk-input
@@ -14,7 +20,6 @@
       onclick={event => clearWatchlist()}
       class="d-block mt-1 mb-4 fs-6 text-decoration-underline"
     >{t('empty_watchlist')}</a>
-
   </template>
 
   <dfk-input
@@ -174,6 +179,14 @@
 
       clearWatchlist() {
         watchlist.clear()
+      }
+
+      clearSearch(event) {
+        event.preventDefault()
+
+        const url = Url.current()
+        url.setHashParams({})
+        url.apply()
       }
     }
   </script>

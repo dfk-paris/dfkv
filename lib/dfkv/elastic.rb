@@ -173,6 +173,7 @@ class Dfkv::Elastic
 
     if s = params['sort']
       field = {
+        'creator' => 'creators.display_name.keyword',
         'title' => 'title.keyword'
       }[s] || s
 

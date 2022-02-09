@@ -33,9 +33,9 @@
     <div>
       {t('sort_by')}:&nbsp;
       <a
-        onclick={event => this.sortBy('title', event)}
-        class={props.criteria.sort == 'title' ? 'text-underline' : ''}
-      >{t('title')}</a>
+        onclick={event => this.sortBy('creator', event)}
+        class={props.criteria.sort == 'creator' ? 'text-underline' : ''}
+      >{t('author')}</a>
       |
       <a
         onclick={event => this.sortBy('date', event)}
@@ -49,12 +49,7 @@
       each={item in props.results.items()}
       class="search-result"
     >
-      <a
-        class="bookmark {isBookmarked(item) ? 'active' : ''}"
-        onclick={event => bookmark(item, event)}
-      >
-        <dfk-icon type="bookmark" />
-      </a>
+      <dfkv-bookmark item={item} />
 
       <div class="active-box">
         <a class="stretched-link" href={itemPath(item.id())}></a>
@@ -108,16 +103,16 @@
     import {i18n, Url} from '@wendig/lib'
     import {util} from '@wendig/lib'
 
+    import Bookmark from './dfkv/bookmark.riot'
     import Pagination from './pagination.riot'
     import Tab from './tab.riot'
     import Icon from './icon.riot'
     import MultiRecord from './dfkv/multi_record.riot'
     import Search from '../lib/search'
 
-    import watchlist from '../lib/watchlist'
-
     export default class {
       static components = {
+        'dfkv-bookmark': Bookmark,
         'dfk-icon': Icon,
         'dfk-pagination': Pagination,
         'dfk-tab': Tab,
@@ -125,7 +120,6 @@
       }
 
       onBeforeMount() {
-        this.on('watchlist-changed', event => this.update())
         this.on('search-criteria', event => this.update({criteria: event.data}))
 
         fetch(`${staticUrl}/projects.json`).then(r => r.json()).then(data => {
@@ -163,16 +157,6 @@
         const url = Url.current()
         url.setHashPath(`/records/${itemId}`)
         return url.formatHash()
-      }
-
-      isBookmarked(item) {
-        return watchlist.has(item.id())
-      }
-
-      bookmark(item, event) {
-        event.preventDefault()
-
-        watchlist.toggle(item.id())
       }
 
       manyResults() {

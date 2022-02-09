@@ -11,6 +11,10 @@
         if={isSingle()}
         class="mb-6 d-print-none"
       >
+        <dfkv-bookmark
+          class="mr-3"
+          item={state.item}
+        />
         <a
           class="mr-3"
           onclick={event => print(event)}><dfk-icon type="print"
@@ -236,6 +240,7 @@
 
     import AuthorityLink from '../authority_link.riot'
     import Blockquote from '../blockquote.riot'
+    import Bookmark from './bookmark.riot'
     import Icon from '../icon.riot'
     import Popup from '../popup.riot'
     import Raw from '../raw.riot'
@@ -247,6 +252,7 @@
       static components = {
         'dfk-authority-link': AuthorityLink,
         'dfk-blockquote': Blockquote,
+        'dfkv-bookmark': Bookmark,
         'dfk-icon': Icon,
         'dfk-popup': Popup,
         'dfk-raw': Raw
