@@ -14,13 +14,40 @@ class Dfkv::Elastic
 
     create_index 'records', {
       'settings' => {
-        
+        'analysis' => {
+          'char_filter' => {
+            'no_dash' => {
+              'type' => 'pattern_replace',
+              'pattern' => '(^-|-$)',
+              'replacement' => ''
+            }
+          },
+          'normalizer' => {
+            'no_dash' => {
+              'type' => 'custom',
+              'char_filter' => ['no_dash']
+            }
+          }
+        }
       },
       'mappings' => {
         'properties' => {
           'date' => {
             'type' => 'date',
             'format' => 'strict_date_optional_time_nanos'
+          },
+          'creators' => {
+            'properties' => {
+              'display_name' => {
+                'type' => 'text',
+                'fields' => {
+                  'keyword' => {
+                    'type' => 'keyword',
+                    'normalizer' => 'no_dash'
+                  }
+                }
+              }
+            }
           }
         }
       }

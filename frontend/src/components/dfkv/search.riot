@@ -57,11 +57,6 @@
 
       onUnmounted() {
         window.removeEventListener('hashchange', this.onHashChanged)
-        // this.bus.removeEventListener('search-results', this.onResults)
-        // this.bus.removeEventListener('to-previous-record', this.toPreviousRecord)
-        // this.bus.removeEventListener('to-next-record', this.toNextRecord)
-        // this.bus.removeEventListener('open-item', this.open)
-        // this.bus.removeEventListener('watchlist-changed', this.onHashChanged)
       }
 
       onHashChanged(event, doUpdate = true) {
