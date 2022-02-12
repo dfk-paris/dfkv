@@ -4,7 +4,7 @@ import search from './search'
 const params = () => {
   const defaults = {
     decode: true,
-    parseInt: ['page', 'per_page']
+    parseIntList: ['page', 'per_page']
   }
 
   const url = Url.current()
