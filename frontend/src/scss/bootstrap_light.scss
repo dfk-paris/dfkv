@@ -66,11 +66,20 @@
   position: relative;
 }
 
+.d-screen-none {
+  display: none;
+}
+
 @media print {
   .d-print-none {
     display: none;
   }
+
+  .d-screen-none {
+    display: inherit;
+  }
 }
+
 
 // typography
 
@@ -96,6 +105,10 @@
 
 .text-muted {
   color: $tag-gray !important;
+}
+
+.text-half-muted {
+  color: $active-gray !important;
 }
 
 .text-decoration-none {

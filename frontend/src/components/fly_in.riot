@@ -7,14 +7,15 @@
     export default class {
       classes() {
         return [
+          this.props.class,
           this.state.animate ? '' : 'preload',
           this.props.open ? 'open' : 'closed'
         ].join(' ')
       }
 
       onBeforeMount(props) {
-        const element = this.props.element || this.root
-        document.body.append(element)
+        // const element = this.props.element || this.root
+        // document.body.append(element)
 
         this.state = {
           animate: false,

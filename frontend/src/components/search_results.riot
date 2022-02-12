@@ -1,16 +1,4 @@
 <dfkv-search-results>
-  <div class="mb-3 d-print-none">
-    <a
-      if={manyResults()}
-      many-results="true"
-      title={t('print_too_many_results')}
-    ><dfk-icon type="print" /></a>
-    <a
-      if={!manyResults()}
-      onclick={event => print(event)}
-    ><dfk-icon type="print" /></a>
-  </div>
-
   <div class="dfk-sans-serif fw-bold mb-4">{t('search_results')}: {props.results.total()}</div>
 
   <dfk-tabs if={state.projects}>
@@ -22,7 +10,19 @@
     >{l(project)} ({countForBucket('project_id', project.id)})</dfk-tab>
   </dfk-tabs>
 
-  <div class="d-flex justify-content-between mt-6 mb-2">
+  <div class="mt-4 d-print-none">
+    <a
+      if={manyResults()}
+      many-results="true"
+      title={t('print_too_many_results')}
+    ><dfk-icon type="print" /></a>
+    <a
+      if={!manyResults()}
+      onclick={event => print(event)}
+    ><dfk-icon type="print" /></a>
+  </div>
+
+  <div class="d-flex justify-content-between mt-3 mb-2">
     <div class="sort dfk-sans-serif">
       {t('sort_by')}:&nbsp;
       <a
@@ -95,6 +95,7 @@
 
   <dfkv-multi-record
     items={state.printItems}
+    criteria={props.criteria}
     style="display: none"
   />
 

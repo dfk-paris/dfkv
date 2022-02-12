@@ -1,12 +1,4 @@
 <dfkv-search-form>
-  <a
-    class="dfkv-reset float-right fs-6"
-    href="#"
-  >{t('reset')}</a>
-  <div class="dfk-sans-serif fw-bold mb-4">
-    {t('search_criteria')}
-  </div>
-
   <template if={watchlistCount() > 0}>
     <dfk-input
       label="{cap(t('watchlist_only'))} ({tCounter(watchlistCount(), 'record', 'records')})"
@@ -14,13 +6,22 @@
       type="checkbox"
       value={props.criteria.watchlist}
       update-handler={this.updateUrl}
+      class="fw-bold"
     />
 
     <a
       onclick={event => clearWatchlist()}
-      class="d-block mt-1 mb-4 fs-6 text-decoration-underline"
+      class="d-block mt-1 mb-4 fw-bold text-decoration-underline"
     >{t('empty_watchlist')}</a>
   </template>
+
+  <a
+    class="dfkv-reset float-right fw-bold"
+    href="#"
+  >{t('reset')}</a>
+  <div class="dfk-sans-serif fw-bold mb-4">
+    {t('search_criteria')}
+  </div>
 
   <dfk-input
     placeholder={t('fulltext_search')}

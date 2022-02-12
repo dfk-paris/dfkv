@@ -1,6 +1,7 @@
 :root {
   --fly-in-width: 45vw;
   --fly-in-width-collapsed: 3.5vw;
+  --fly-in-offset-right: 0;
 }
 
 $shadow: -3px 0px 20px 5px rgba(0.4, 0.4, 0.4, 0.3);
@@ -11,7 +12,7 @@ fly-in, [is='fly-in'] {
   width: var(--fly-in-width-collapsed);
   position: fixed;
   top: 0;
-  right: 0;
+  right: var(--fly-in-offset-right);
   // overflow-x: clip;
   // overflow-y: clip;
   height: 100vh;

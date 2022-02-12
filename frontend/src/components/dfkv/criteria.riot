@@ -1,0 +1,60 @@
+<dfkv-criteria>
+  {text()}    
+
+  <script>
+    import {params} from '../../lib/url_search'
+
+    export default class {
+      constructor() {
+        this.data = {}
+      }
+
+      onBeforeMount(props, state) {
+        state.criteria = params()
+      }
+
+      text() {
+        console.log(this.state)
+        const result = {}
+        const c = this.state.criteria
+
+        if (c['terms']) {
+          result[this.t('fulltext_search')] = c['terms']
+        }
+
+        if (c['from'] && c['to']) {
+          result[this.t('date')] = `${c['from']} – ${c['to']}`
+        }
+
+        if (c['creator']) {
+          result[this.t('author')] = c['creator']
+        }
+
+        if (c['involved']) {
+          result[this.t('people')] = c['involved']
+        }
+
+        if (c['journal']) {
+          result[this.t('journals')] = c['journal']
+        }
+
+        if (c['type']) {
+          result[this.t('text_type')] = c['type']
+        }
+
+        if (c['type']) {
+          result[this.t('text_type')] = c['type']
+        }
+
+        if (c['project']) {
+          const project = this.bus.data.projects[c['project']]
+          result[this.t('project')] = this.l(project)
+        }
+
+        return Object.entries(result).
+          map(([k, v]) => `${k}: ${v}`).
+          join(', ')
+      }
+    }
+  </script>
+</dfkv-criteria>

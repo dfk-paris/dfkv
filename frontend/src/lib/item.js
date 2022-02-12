@@ -54,7 +54,7 @@ export default class Item {
 
   tags() {
     return this.data['_source']['tags'].
-      map(e => l(e)).join(', ')
+      map(e => l(e)).join('; ')
   }
 
   project() {

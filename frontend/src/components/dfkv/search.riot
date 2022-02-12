@@ -12,13 +12,14 @@
     results={state.results}
   />
 
-  <dfkv-fly-in />
   <dfkv-routed-modal first={isFirst} last={isLast} />
+  <dfkv-fly-in />
 
   <script>
     import {Url} from '@wendig/lib'
 
     import Search from '../../lib/search'
+    import {params} from '../../lib/url_search'
     import watchlist from '../../lib/watchlist'
 
     import FlyIn from './fly_in.riot'
@@ -35,6 +36,8 @@
       }
 
       constructor() {
+        this.params = params
+        
         this.onHashChanged = this.onHashChanged.bind(this)
         this.onResults = this.onResults.bind(this)
         this.toPreviousRecord = this.toPreviousRecord.bind(this)
@@ -42,6 +45,7 @@
         this.isFirst = this.isFirst.bind(this)
         this.isLast = this.isLast.bind(this)
         this.open = this.open.bind(this)
+
       }
 
       onBeforeMount() {
@@ -53,6 +57,7 @@
         this.on('watchlist-changed', this.onHashChanged)
 
         this.onHashChanged(null, false)
+        this.fetchProjects()
       }
 
       onUnmounted() {
@@ -108,19 +113,11 @@
         this.update()
       }
 
-      params() {
-        const defaults = {
-          decode: true,
-          parseInt: ['page', 'per_page']
-        }
-
-        const url = Url.current()
-        const result = {
-          page: 1,
-          perPage: 10,
-          ...url.hashParams(defaults)
-        }
-        return result
+      fetchProjects() {
+        fetch(`${staticUrl}/projects.json`).then(r => r.json()).then(data => {
+          this.bus.data['projects'] = data
+          this.update()
+        })
       }
 
       isFirst(id) {

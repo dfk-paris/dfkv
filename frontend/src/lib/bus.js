@@ -6,6 +6,12 @@ class AppEvent extends Event {
 }
 
 class Bus extends EventTarget {
+  constructor() {
+    super()
+
+    this.data = {}
+  }
+
   emit(name, data) {
     const event = new AppEvent(name, data)
     this.dispatchEvent(event)

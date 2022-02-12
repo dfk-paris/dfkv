@@ -1,4 +1,11 @@
 [is='dfkv'], dfk-routed-modal {
+  padding-right: 100px;
+
+  .close {
+    top: 40px !important;
+    right: 80px !important;
+  }
+
   pre {
     white-space: pre-wrap;
   }
@@ -14,6 +21,10 @@
 
 dfkv-fly-in {
   font-size: 0.8em;
+
+  // dfk-fly-in {
+  //   z-index: 700;
+  // }
 
   table {
     td {
@@ -74,17 +85,18 @@ dfkv-record, [is='dfkv-record'] {
   }
 }
 
+dfk-facet {
+  .header {
+    font-weight: bold;
+  }
+}
+
 dfkv-search-form {
-  padding-top: 40px;
   margin-right: 10px;
 
   width: 300px;
   flex-grow: 0;
   flex-shrink: 0;
-
-  .dfkv-reset {
-    margin-top: 2px;
-  }
 }
 
 body.dfkv-has-modal {
@@ -99,4 +111,8 @@ body.dfkv-has-modal {
   & > dfk-popup {
     visibility: visible;
   }
+
+  // & > dfkv-fly-in {
+  //   visibility: visible;
+  // }
 }

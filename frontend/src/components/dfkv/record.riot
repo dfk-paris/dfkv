@@ -12,11 +12,11 @@
         class="mb-6 d-print-none"
       >
         <dfkv-bookmark
-          class="mr-3"
+          class="mr-2"
           item={state.item}
         />
         <a
-          class="mr-3"
+          class="mr-2"
           onclick={event => print(event)}><dfk-icon type="print"
         /></a>
         <a onclick={event => openJson(event)}>
@@ -45,10 +45,15 @@
         <h1 class="mt-4 mb-6 dfk-serif fw-normal">{state.item.title()}</h1>
       </div>
 
-      <div
-        if={state.item.authors()}
-        class="mb-6 fst-italic"
-      >{state.item.authors()}</div>
+      <div class="mb-6 fst-italic">
+        <span each={(person, i) in state.item.creators()}>
+          {i == 0 ? '' : ', '}
+          <a
+            class="text-decoration-underline"
+            onclick={event => openPerson(person, event)}
+          >{person.display_name}</a>
+        </span>
+      </div>
 
       <div class="volumes">
         <div
@@ -124,7 +129,13 @@
           </div>
         </div>
       </div>
+
+      <dfkv-criteria
+        class="d-block d-screen-none mt-6 text-half-muted"
+        criteria={props.criteria}
+      />
     </div>
+
 
     <!-- person dialog -->
     <dfk-popup open={!!state.person}  if={!!state.person}>
@@ -241,6 +252,7 @@
     import AuthorityLink from '../authority_link.riot'
     import Blockquote from '../blockquote.riot'
     import Bookmark from './bookmark.riot'
+    import Criteria from './criteria.riot'
     import Icon from '../icon.riot'
     import Popup from '../popup.riot'
     import Raw from '../raw.riot'
@@ -253,6 +265,7 @@
         'dfk-authority-link': AuthorityLink,
         'dfk-blockquote': Blockquote,
         'dfkv-bookmark': Bookmark,
+        'dfkv-criteria': Criteria,
         'dfk-icon': Icon,
         'dfk-popup': Popup,
         'dfk-raw': Raw
