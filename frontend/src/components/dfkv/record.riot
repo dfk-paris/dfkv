@@ -123,9 +123,7 @@
 
           <div class="attribute">{cap(t('citation_format'))}</div>
           <div class="value">
-            <a href={state.item.citationLink()}>
-              {state.item.citationLink()}
-            </a>
+            <dfkv-citation item={state.item} />
           </div>
         </div>
       </div>
@@ -252,6 +250,7 @@
     import AuthorityLink from '../authority_link.riot'
     import Blockquote from '../blockquote.riot'
     import Bookmark from './bookmark.riot'
+    import Citation from './citation.riot'
     import Criteria from './criteria.riot'
     import Icon from '../icon.riot'
     import Popup from '../popup.riot'
@@ -265,6 +264,7 @@
         'dfk-authority-link': AuthorityLink,
         'dfk-blockquote': Blockquote,
         'dfkv-bookmark': Bookmark,
+        'dfkv-citation': Citation,
         'dfkv-criteria': Criteria,
         'dfk-icon': Icon,
         'dfk-popup': Popup,

@@ -41,7 +41,6 @@
       compensateForScrollBar(activate = true) {
         const dialog = document.body.querySelector('dfk-routed-modal')
         const width = activate ? (dialog.offsetWidth - dialog.clientWidth) : '0'
-        console.log(dialog, width)
         document.documentElement.style.setProperty(
           '--fly-in-offset-right', `${width}px`
         )

@@ -223,21 +223,21 @@
   },
   "description_comment": {
     "id": "description_comment",
-    "de": "Beschreibung / Kommentar",
+    "de": "Kommentar",
     "en": null,
     "fr": null
   },
   "project_affiliation": {
     "id": "project_affiliation",
-    "de": "Projektzugehörigkeit",
+    "de": "Projekt",
     "en": null,
     "fr": null
   },
   "citation_format": {
     "id": "citation_format",
-    "de": "empfohlene Zitation",
+    "de": "Wenn Sie auf diese Ressource verweisen möchten, schlagen wir Ihnen folgendes Zitationsformat vor:",
     "en": null,
-    "fr": null
+    "fr": "Si vous souhaitez faire référence à cette ressource, nous vous invitons à la citer sous cette forme :"
   },
   "watchlist_only": {
     "id": "watchlist_only",
@@ -350,6 +350,12 @@
   "reset": {
     "id": "reset",
     "de": "zurücksetzen",
+    "en": null,
+    "fr": null
+  },
+  "project": {
+    "id": "project",
+    "de": "Projekt",
     "en": null,
     "fr": null
   }

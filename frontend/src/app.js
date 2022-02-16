@@ -11,7 +11,10 @@ import RoutedModal from './components/dfkv/routed_modal.riot'
 import Search from './components/dfkv/search.riot'
 
 i18n.fetch(`${staticUrl}/translations.json`).then(() => {
-  i18n.setLocale('de')
+  const url = document.location.href
+  const locale = url.match(/^https:\/\/dfk-paris\.org\/([a-z]{2})/)[1]
+  i18n.setLocale(locale)
+  i18n.setFallbacks(['fr', 'de', 'en'])
 
   RiotPlugins.setup(riot)
   riot.install(RiotPlugins.i18n)

@@ -1,0 +1,44 @@
+<dfkv-citation>
+  {text()}, <a href={props.item.url()}>{props.item.url()}</a>, {date()}
+
+  <script>
+    import strftime from 'strftime'
+    import {i18n} from '@wendig/lib'
+
+    const strftimeDe = strftime
+    const strftimeFr = strftime.localizeByIdentifier('fr_FR')
+
+    export default class {
+      date() {
+        if (i18n.locale == 'de') {
+          return `(Zugriff: ${strftimeDe('%d.%m.%Y')})`
+        }
+
+        if (i18n.locale == 'fr') {
+          return `(consulté le ${strftimeFr('%d %B %Y')})`
+        }
+      }
+
+      text() {
+        console.log(i18n.locale)
+        if (i18n.locale == 'de') {
+          return [
+            'Datenbank „Deutsch-französische Kunstvermittlung, 1871-1940“',
+            'Paris, Deutsches Forum für Kunstgeschichte (DFK Paris), 2022',
+            '<www.dfk-paris.org/de/DFKV>',
+            `siehe insbesondre Eintrag/Datensatz ID ${this.props.item.id()}`
+          ].join(', ')
+        }
+
+        if (i18n.locale == 'fr') {
+          return [
+            'Base de données « Deutsch-französische Kunstvermittlung, 1871-1940 »',
+            'Paris, Centre allemand d’histoire de l’art (DFK Paris), 2022',
+            '<www.dfk-paris.org/fr/DFKV>',
+            `voir notamment l’entrée ID ${this.props.item.id()}`
+          ].join(', ')
+        }
+      }
+    }
+  </script>
+</dfkv-citation>

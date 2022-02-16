@@ -10,6 +10,7 @@ import Search from './components/dfkv/search.riot'
 
 i18n.fetch(`${staticUrl}/translations.json`).then(() => {
   i18n.setLocale('de')
+  i18n.setFallbacks(['fr', 'de', 'en'])
 
   RiotPlugins.setup(riot)
   riot.install(RiotPlugins.i18n)

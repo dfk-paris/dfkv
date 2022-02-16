@@ -11,6 +11,10 @@ export default class Item {
     return this.data['_source']['id']
   }
 
+  url() {
+    return `${staticUrl}/#/records/${this.id()}`
+  }
+
   title() {
     return this.data['_source']['title']
   }
