@@ -25,7 +25,8 @@ class Dfkv::Elastic
           'normalizer' => {
             'no_dash' => {
               'type' => 'custom',
-              'char_filter' => ['no_dash']
+              'char_filter' => ['no_dash'],
+              'filter' => ['lowercase']
             }
           }
         }
