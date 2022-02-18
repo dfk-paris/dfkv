@@ -52,14 +52,14 @@
       }
 
       from() {
-        const v = (this.state.dragging ? this.state.from : toInt(this.props.from))
+        const v = (this.state.dragging ? this.state.fromTmp : toInt(this.props.from))
         if (v == undefined) {return toInt(this.props.from)}
 
         return this.clamp(v)
       }
 
       to() {
-        const v = (this.state.dragging ? this.state.to : this.props.to)
+        const v = (this.state.dragging ? this.state.toTmp : this.props.to)
         if (v == undefined) {return this.props.max}
 
         return this.clamp(v)
@@ -68,8 +68,8 @@
       onBeforeMount() {
         this.state = {
           dragging: false,
-          from: toInt(this.props.from) || this.props.min,
-          to: this.props.to || this.props.max
+          fromTmp: toInt(this.props.from) || this.props.min,
+          toTmp: this.props.to || this.props.max
         }
       }
 
@@ -93,21 +93,22 @@
           cmp.state.dragging = true
 
           const value = Math.round(m(event.x))
-          const side = (this.classList.contains('from') ? 'from' : 'to')
+          const side = (this.classList.contains('from') ? 'fromTmp' : 'toTmp')
           cmp.update({[side]: value})
 
           if (side == 'from' && value > cmp.to()) {
-            cmp.update({to: value})
+            cmp.update({toTmp: value})
           }
 
           if (side == 'to' && value < cmp.from()) {
-            cmp.update({from: value})
+            cmp.update({fromTmp: value})
           }
         }
 
         const end = (event) => {
-          cmp.props.onInputsChanged({from: cmp.state.from, to: cmp.state.to})
-          cmp.update({stopDragging: false})
+          cmp.props.onInputsChanged({from: cmp.state.fromTmp, to: cmp.state.toTmp})
+          cmp.state.stopDragging = true
+          // cmp.update({stopDragging: true})
         }
 
         d3.select(this.root).
@@ -115,24 +116,21 @@
           call(d3.drag().on('drag', drag).on('end', end))
       }
 
-      // dragging mode is not stopped immediately to prevent a brief jump-back
-      // of the slider to the previous position because the new url value hasn't
-      // been propagated to this component yet
       onBeforeUpdate(props, state) {
-        // this.state.from = this.clamp(this.state.from)
-        // this.state.to = this.clamp(this.state.to)
-        // this.props.onInputsChanged({from: this.state.from, to: this.state.to})
-        // console.log(this.state, this.props, 'b')
+        // get updated range from parent component
+        if (!state.dragging) {
+          state.fromTmp = props.from
+          state.toTmp = props.to
+        }
 
+        // dragging mode is not stopped immediately to prevent a brief jump-back
+        // of the slider to the previous position because the new url value hasn't
+        // been propagated to this component yet
         if (state.stopDragging) {
           state.stopDragging = false
           state.dragging = false
         }
       }
-
-      // onUpdated() {
-      //   console.log(this.state, this.props, 'a')
-      // }
 
       binColor(index) {
         const active = (

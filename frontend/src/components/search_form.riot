@@ -33,8 +33,8 @@
 
   <dfk-range-control
     if={props.results}
-    from={props.criteria.from || firstYear()}
-    to={props.criteria.to || lastYear()}
+    from={props.criteria.from}
+    to={props.criteria.to}
     min={firstYear()}
     max={lastYear()}
     bins={props.results.aggregations().year.buckets.map(e => e.doc_count)}
