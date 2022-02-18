@@ -117,20 +117,18 @@ body.dfkv-has-modal {
   // }
 }
 
-dfk-active-filters, dfk-facet {
-  a.type-involved {
-    background-color: #d9e6d9;
-  }
+a.type-involved {
+  background-color: #d9e6d9;
+}
 
-  a.type-creator {
-    background-color: #3bf5f4;
-  }
+a.type-creator {
+  background-color: #3bf5f4;
+}
 
-  a.type-type {
-    background-color: $tag-gray;
-  }
+a.type-type {
+  background-color: $tag-gray;
+}
 
-  a.type-journal {
-    background-color: $tag-gray;
-  }
+a.type-journal {
+  background-color: $tag-gray;
 }

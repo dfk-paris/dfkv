@@ -85,6 +85,17 @@ module Dfkv::Tasks
     elastic = Dfkv::Elastic.new
     elastic.reset!
 
+    # link people by identify (id_2)
+    lookup = {}
+    people.each do |id, person|
+      lookup[person['id_2']] ||= []
+      lookup[person['id_2']] << person['display_name']
+    end
+    people.each do |id, person|
+      others = lookup[person['id_2']].select{|e| e != person['display_name']}
+      person['display_name'] = [person['display_name']] + others
+    end
+
     # get wikidata for people
     puts "fetching and parsing wikidata entities ..."
     system 'mkdir', '-p', ENV['WIKIDATA_CACHE_DIR']

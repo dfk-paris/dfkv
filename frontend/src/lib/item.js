@@ -33,22 +33,22 @@ export default class Item {
 
   creators() {
     const data = this.data['_source']['creators']
-    return util.sortBy(data, e => e.display_name)
+    return util.sortBy(data, e => e.display_name[0])
   }
 
   authors() {
     return this.creators().
-      map(e => e.display_name).
+      map(e => e.display_name[0]).
       join(', ')
   }
 
   involved() {
     const data = this.data['_source']['involved']
-    return util.sortBy(data, e => e.display_name)
+    return util.sortBy(data, e => e.display_name[0])
   }
 
   involvedStr() {
-    return this.involved().map(e => e.display_name).join(', ')
+    return this.involved().map(e => e.display_name[0]).join(', ')
   }
 
   textTypes() {

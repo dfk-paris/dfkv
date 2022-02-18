@@ -146,6 +146,18 @@
       toggleShowAll(event) {
         event.preventDefault()
 
+        // ensure closing opened popups
+        if (this.state.popup) {
+          this.update({popup: false})
+          return
+        }
+
+        // ensure collapsing expanded
+        if (this.state.expanded) {
+          this.update({expanded: false})
+          return
+        }
+
         if (this.total() > 10) {
           this.update({popup: !this.state.popup})
         } else {

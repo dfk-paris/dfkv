@@ -358,5 +358,11 @@
     "de": "Projekt",
     "en": null,
     "fr": null
+  },
+  "people_other_forms": {
+    "id": "people_other_forms",
+    "de": "Weitere in der Datenbank vorkommende Schreibweise / Benennung:",
+    "en": null,
+    "fr": null
   }
 }
