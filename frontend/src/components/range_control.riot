@@ -52,24 +52,32 @@
       }
 
       from() {
-        const v = (this.state.dragging ? this.state.fromTmp : toInt(this.props.from))
-        if (v == undefined) {return toInt(this.props.from)}
+        const v = (this.state.dragging ? this.state.fromTmp : this.propsFrom())
+        if (v == undefined) {return this.propsFrom()}
 
         return this.clamp(v)
       }
 
       to() {
-        const v = (this.state.dragging ? this.state.toTmp : this.props.to)
-        if (v == undefined) {return this.props.max}
+        const v = (this.state.dragging ? this.state.toTmp : this.propsTo())
+        if (v == undefined) {return this.propsTo()}
 
         return this.clamp(v)
+      }
+
+      propsFrom() {
+        return toInt(this.props.from || this.props.min)
+      }
+
+      propsTo() {
+        return toInt(this.props.to || this.props.max)
       }
 
       onBeforeMount() {
         this.state = {
           dragging: false,
-          fromTmp: toInt(this.props.from) || this.props.min,
-          toTmp: this.props.to || this.props.max
+          fromTmp: this.propsFrom(),
+          toTmp: this.propsTo()
         }
       }
 
