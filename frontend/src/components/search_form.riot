@@ -42,7 +42,7 @@
     class="mt-5 mb-5"
   />
 
-  <div class="dfk-sans-serif fw-bold my-4">{t('your_selection')}</div>
+  <div class="dfk-sans-serif fw-bold my-4 fs-2">{t('your_selection')}</div>
 
   <dfk-active-filters
     criteria={props.criteria}
@@ -50,7 +50,7 @@
     remove-filter={(param, value) => removeFilter(param, value)}
   />
 
-  <div class="dfk-sans-serif fw-bold my-6">{t('filters')}</div>
+  <div class="dfk-sans-serif fw-bold my-6 fs-2">{t('filters')}</div>
 
   <dfk-facet
     if={props.results}
@@ -60,6 +60,7 @@
     criteria={props.criteria}
     aggregation={props.results.aggregations().involved}
     add-filter={newFilter => addFilter('involved', newFilter)}
+    type={'involved'}
     class="d-block mb-6"
   />
 
@@ -68,6 +69,7 @@
     name={t('authors')}
     aggregation={props.results.aggregations().creator}
     add-filter={newFilter => addFilter('creator', newFilter)}
+    type={'creator'}
     class="d-block mb-6"
   />
 
@@ -79,6 +81,7 @@
     criteria={props.criteria}
     aggregation={props.results.aggregations().journal}
     add-filter={newFilter => addFilter('journal', newFilter)}
+    type={'journal'}
     class="d-block mb-6"
   />
 
@@ -88,6 +91,7 @@
     criteria={props.criteria}
     aggregation={props.results.aggregations().type}
     add-filter={newFilter => addFilter('type', newFilter)}
+    type={'type'}
     class="d-block mb-6"
   />
 

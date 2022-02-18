@@ -2,7 +2,7 @@
   <div class="d-flex flex-column align-items-start">
     <a
       each={filter in actives()}
-      class="d-block rounded bg-gray mb-2 p-2 text-decoration-none dfk-sans-serif"
+      class="d-block rounded type-{filter.param} mb-2 p-2 text-decoration-none dfk-sans-serif"
       onclick={event => removeFilter(event, filter.param, filter.value)}
     >
       <div class="d-flex">
