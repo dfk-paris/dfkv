@@ -9,20 +9,43 @@ The application is implemented as a set of
 
 # Development
 
-The frontend development and asset compilation are implemented with nodejs. To
-get started, run
+The application consists of a small ruby web API and a frontend to be embedded
+in virtually any website (static, cms, groupware etc.). Below, we provide
+basic instructions on how to get a development environment up and running.
 
- npm run dev
+## Requirements
 
-This starts a development server with a simple page at http://localhost:3000
+More recent versions will likely also work, here is what we used during
+development
 
-To start the backend rack app, first build the vagrant virtual machine. This
-requires that you have [vagrant](https://vagrantup.com) and
-[virtualbox](https://virtualbox.org) installed. Then run:
+* ruby 2.7.5
+* elasticsearch 7.16.3
+* nodejs 14.18.2
 
-~~~bash
-vagrant up
-bin/dev.sh
-~~~
+## Setup
 
-Then the development instance is available at http://127.0.0.1:3000
+Install required libraries
+
+    bundle install
+    npm install
+
+Start elastichsearch so that it accepts connections at `http://127.0.0.1:9200`.
+You may install (docker)[https://docker.com] and run
+
+    npm run elastic
+
+This will download relevant docker containers and run it (stop with `ctrl-c`).
+The data will not be saved when elasticsearch is restarted.
+
+In another terminal, run
+
+    npm run index
+
+which will feed the DFKV data to elasticsearch. The process will take a minute
+or two.
+
+In a third terminal, start the frontend development server
+
+    npm run dev
+
+so that the frontend is available at http://127.0.0.1:4000.
