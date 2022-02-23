@@ -39,7 +39,7 @@ export default class Item {
   authors() {
     return this.creators().
       map(e => e.display_name[0]).
-      join(', ')
+      join('; ')
   }
 
   involved() {

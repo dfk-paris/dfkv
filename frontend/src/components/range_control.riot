@@ -1,5 +1,5 @@
 <range-control>
-  <template if={props.min != props.max}>
+  <div class={props.min == props.max ? 'd-none' : 'd-block'}>
     <div class="graph">
       <svg viewBox="0 0 {svgWidth()} {svgHeight()}">
         <g class="bins" fill="#aaaaaa">
@@ -34,11 +34,11 @@
       <div>{from()} – {to()}</div>
       <div>{props.max}</div>
     </div>
-  </template>
+  </div>
 
   <template if={props.min == props.max}>
     <div class="literals">
-      <div>{from()} – {to()}</div>
+      <div>{from()}</div>
     </div>
   </template>
 

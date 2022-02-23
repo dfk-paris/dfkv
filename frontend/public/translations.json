@@ -388,5 +388,11 @@
     "de": "Textart",
     "en": null,
     "fr": null
+  },
+  "expand_all": {
+    "id": "expand_all",
+    "de": "alle ausklappen",
+    "en": null,
+    "fr": null
   }
 }
