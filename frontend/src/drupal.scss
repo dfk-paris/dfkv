@@ -24,7 +24,8 @@ html {
 body {
   margin: 0;
   font-family: $sans-serif;
-  line-height: calc(24 / 18 * 1em)
+  line-height: calc(24 / 18 * 1em);
+  padding-left: 60px;
 }
 
 // h2 {
@@ -42,4 +43,8 @@ a {
   color: $text-color;
   text-decoration: underline;
   cursor: pointer;
+}
+
+[is='dfkv-watchlist-trigger'] {
+  margin-right: 185px;
 }

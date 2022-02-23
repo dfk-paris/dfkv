@@ -1,20 +1,4 @@
 <dfkv-search-form>
-  <template if={watchlistCount() > 0}>
-    <dfk-input
-      label="{cap(t('watchlist_only'))} ({tCounter(watchlistCount(), 'record', 'records')})"
-      name="watchlist"
-      type="checkbox"
-      value={props.criteria.watchlist}
-      update-handler={this.updateUrl}
-      class="fw-bold"
-    />
-
-    <a
-      onclick={event => clearWatchlist()}
-      class="d-block mt-1 mb-4 fw-bold text-decoration-underline"
-    >{t('empty_watchlist')}</a>
-  </template>
-
   <a
     class="dfkv-reset float-right fw-bold"
     href="#"
@@ -42,13 +26,16 @@
     class="mt-5 mb-5"
   />
 
-  <div class="dfk-sans-serif fw-bold my-4 fs-2">{t('your_selection')}</div>
+  <div if={hasActiveFilters()} class="dfkv-active-filters">
+    <div class="dfkv-bar"></div>
+    <div class="dfk-sans-serif fw-bold my-4 fs-2">{t('your_selection')}</div>
 
-  <dfk-active-filters
-    criteria={props.criteria}
-    params={['creator', 'journal', 'involved', 'type']}
-    remove-filter={(param, value) => removeFilter(param, value)}
-  />
+    <dfk-active-filters
+      criteria={props.criteria}
+      params={['creator', 'journal', 'involved', 'type']}
+      remove-filter={(param, value) => removeFilter(param, value)}
+    />
+  </div>
 
   <div class="dfk-sans-serif fw-bold my-6 fs-2">{t('filters')}</div>
 
@@ -98,7 +85,6 @@
   <script>
     import {i18n, Url} from '@wendig/lib'
     import search from '../lib/search'
-    import watchlist from '../lib/watchlist'
 
     import ActiveFilters from './active_filters.riot'
     import Input from './input.riot'
@@ -118,10 +104,6 @@
         this.updateUrl = this.updateUrl.bind(this)
 
         this.t = i18n.translate
-      }
-
-      onMounted() {
-        this.on('watchlist-changed', event => this.update())
       }
 
       updateUrl() {
@@ -180,12 +162,14 @@
         }
       }
 
-      watchlistCount() {
-        return watchlist.count()
-      }
+      hasActiveFilters() {
+        for (const k of ['creator', 'journal', 'involved', 'type']) {
+          if (this.props.criteria[k]) {
+            return true
+          }
+        }
 
-      clearWatchlist() {
-        watchlist.clear()
+        return false
       }
 
       clearSearch(event) {

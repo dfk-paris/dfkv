@@ -364,5 +364,29 @@
     "de": "Weitere in der Datenbank vorkommende Schreibweise / Benennung:",
     "en": null,
     "fr": null
+  },
+  "filter_involved": {
+    "id": "filter_involved",
+    "de": "Person",
+    "en": null,
+    "fr": null
+  },
+  "filter_creator": {
+    "id": "filter_creator",
+    "de": "Autor",
+    "en": null,
+    "fr": null
+  },
+  "filter_journal": {
+    "id": "filter_journal",
+    "de": "Zeitschrift",
+    "en": null,
+    "fr": null
+  },
+  "filter_type": {
+    "id": "filter_type",
+    "de": "Textart",
+    "en": null,
+    "fr": null
   }
 }

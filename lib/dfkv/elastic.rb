@@ -25,6 +25,10 @@ class Dfkv::Elastic
           'normalizer' => {
             'no_dash' => {
               'type' => 'custom',
+              'char_filter' => ['no_dash']
+            },
+            'no_dash_lower' => {
+              'type' => 'custom',
               'char_filter' => ['no_dash'],
               'filter' => ['lowercase']
             }
@@ -45,6 +49,10 @@ class Dfkv::Elastic
                   'keyword' => {
                     'type' => 'keyword',
                     'normalizer' => 'no_dash'
+                  },
+                  'sort' => {
+                    'type' => 'keyword',
+                    'normalizer' => 'no_dash_lower'
                   }
                 }
               }
@@ -201,7 +209,7 @@ class Dfkv::Elastic
 
     if s = params['sort']
       field = {
-        'creator' => 'creators.display_name.keyword',
+        'creator' => 'creators.display_name.sort',
         'title' => 'title.keyword'
       }[s] || s
 

@@ -1,0 +1,140 @@
+<dfkv-watchlist>
+  <a
+    class="close d-print-none"
+    href={closePath()}
+  ><dfk-icon type="cross" /></a>
+
+  <h1>{cap(t('watchlist'))}</h1>
+
+  <div class="d-flex justify-content-between">
+    <a
+      onclick={event => print(event)}
+    ><dfk-icon type="print" /></a>
+    <div>
+      <dfk-input
+        label={t('expand_all')}
+        type="checkbox"
+        update-handler={toggle}
+      />
+    </div>
+  </div>
+
+  <div class="search-results" if={state.results}>
+    <template if={!state.expanded}>
+      <div
+        each={item in state.results.items()}
+        is="dfkv-search-result"
+        item={item}
+        class="search-result"
+      />
+    </template>
+    <template if={state.expanded}>
+      <dfkv-record
+        each={item in state.results.items()}
+        item={item}
+        criteria={{}}
+      />
+    </template>
+  </div>
+
+  <dfkv-multi-record
+    items={state.printItems}
+    style="display: none"
+  />
+
+  <script>
+    import {Url, util} from '@wendig/lib'
+    import watchlist from '../../lib/watchlist'
+
+    import Pagination from '../pagination.riot'
+    import Tab from '../tab.riot'
+    import Icon from '../icon.riot'
+    import MultiRecord from './multi_record.riot'
+    import SearchResult from './search_result.riot'
+    import Record from './record.riot'
+    import Input from '../input.riot'
+    import Search from '../../lib/search'
+
+    export default class {
+      static components = {
+        'dfk-icon': Icon,
+        'dfk-icon': Icon,
+        'dfk-pagination': Pagination,
+        'dfk-tab': Tab,
+        'dfkv-multi-record': MultiRecord,
+        'dfkv-search-result': SearchResult,
+        'dfkv-record': Record,
+        'dfk-input': Input
+      }
+
+      constructor() {
+        this.onInputsChanged = this.onInputsChanged.bind(this)
+        this.toggle = this.toggle.bind(this)
+      }
+
+      onBeforeMount() {
+        this.on('watchlist-changed', event => this.fetch())
+
+        this.state = {
+          expanded: false,
+          criteria: {}
+        }
+
+        this.fetch()
+      }
+
+      fetch() {
+        if (watchlist.count() > 0) {
+          Search.
+            fetch(this.params()).
+            then(items => this.update({results: items}))
+        }
+      }
+
+      params() {
+        const result = this.state.criteria
+        result['id'] = watchlist.unpack().join(',')
+        result['per_page'] = 9999
+        return result
+      }
+
+      onInputsChanged(values) {
+        this.state.criteria = Object.assign(this.state.criteria, values)
+        this.fetch()
+      }
+
+      toPage(newPage) {
+        this.onInputsChanged({page: newPage})
+      }
+
+      toggle() {
+        this.update({expanded: !this.state.expanded})
+      }
+
+      title() {
+        return 'Watchlist'
+      }
+
+      closePath() {
+        const url = Url.current()
+        url.setHashPath('')
+        return url.formatHash() || '#'
+      }
+
+      print(event) {
+        event.preventDefault()
+
+        this.update({printItems: this.state.results.items()})
+
+        const element = this.state.expanded ?
+          this.root.querySelector('dfkv-multi-record') :
+          this.root.querySelector('.search-results')
+
+        const styles = document.querySelectorAll('head > style')
+        const css = [...styles].map(e => e.innerHTML).join()
+        util.printElement(element, {css: css, print: true})
+        this.update({printItems: []})
+      }
+    }
+  </script>
+</dfkv-watchlist>

@@ -47,50 +47,10 @@
   <div class="search-results" if={props.results}>
     <div
       each={item in props.results.items()}
+      is="dfkv-search-result"
+      item={item}
       class="search-result"
-    >
-      <dfkv-bookmark item={item} />
-
-      <div class="active-box">
-        <a class="stretched-link" href={itemPath(item.id())}></a>
-
-        <div class="content-box">
-          <div class="meta">
-            <div class="d-flex justify-content-between">
-              <div>
-                <div
-                  if={item.authors()}
-                  class="mb-3 fst-italic"
-                >{item.authors()}</div>
-                <div class="mb-3 dfk-sans-serif fw-bold">{item.title()}</div>
-              </div>
-              <div>
-                <div class="text-end">
-                  <span class="text-muted">{t('id')}&nbsp;</span>
-                  {item.id()}
-                </div>
-                <div class="text-end">
-                  <span class="text-muted">{t('date')}&nbsp;</span>
-                  {item.date()}
-                </div>
-              </div>
-            </div>
-
-            <div class="volumes">
-              <div
-                each={volume in item.volumes()}
-                class="volume"
-              >
-                <div if={volume.journal}>{l(volume.journal)}</div>
-                <div class="d-flex justify-content-between">
-                  <div>{volume.bibliography}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    />
   </div>
 
   <dfkv-multi-record
@@ -110,6 +70,7 @@
     import Icon from './icon.riot'
     import MultiRecord from './dfkv/multi_record.riot'
     import Search from '../lib/search'
+    import SearchResult from './dfkv/search_result.riot'
 
     export default class {
       static components = {
@@ -117,7 +78,8 @@
         'dfk-icon': Icon,
         'dfk-pagination': Pagination,
         'dfk-tab': Tab,
-        'dfkv-multi-record': MultiRecord
+        'dfkv-multi-record': MultiRecord,
+        'dfkv-search-result': SearchResult
       }
 
       onBeforeMount() {

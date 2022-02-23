@@ -117,12 +117,31 @@ body.dfkv-has-modal {
   // }
 }
 
+.dfkv-active-filters {
+  position: relative;
+
+  dfk-active-filters {
+    a.d-block:last-child {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  .dfkv-bar {
+    position: absolute;
+    left: -25px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: $tag-gray;
+  }
+}
+
 a.type-involved {
-  background-color: #d9e6d9;
+  background-color: $tag-gray;
 }
 
 a.type-creator {
-  background-color: #3bf5f4;
+  background-color: $tag-gray;
 }
 
 a.type-type {
@@ -131,4 +150,20 @@ a.type-type {
 
 a.type-journal {
   background-color: $tag-gray;
+}
+
+[is='dfkv-watchlist'] {
+  margin: 50px;
+
+  dfkv-bookmark {
+    position: absolute;
+    top: 42px;
+    left: -40px;
+  }
+
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
 }

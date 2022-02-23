@@ -20,23 +20,23 @@
       width: 100%;
     }
 
-    .search-result {
-      position: relative;
-
-      dfk-icon {
-        width: 20px;
-      }
-    }
-
     dfk-pagination {
       height: 21px;
     }
+  }
+}
 
-    dfkv-bookmark {
-      position: absolute;
-      top: 42px;
-      left: -40px;
-    }
+.search-result {
+  position: relative;
+
+  dfk-icon {
+    width: 20px;
+  }
+
+  dfkv-bookmark {
+    position: absolute;
+    top: 42px;
+    left: -40px;
   }
 }
 

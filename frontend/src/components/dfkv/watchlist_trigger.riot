@@ -1,0 +1,36 @@
+<dfkv-watchlist-trigger>
+  <template if={watchlist.count() > 0}>
+    <a
+      class="float-right rounded p-2 bg-gray text-decoration-none"
+      href={watchlistPath()}
+    >
+      + {t('watchlist')} ({watchlist.count()})
+    </a>
+  </template>
+
+  <script>
+    import {Url} from '@wendig/lib'
+    import watchlist from '../../lib/watchlist'
+
+    export default class {
+      constructor() {
+        this.watchlist = watchlist
+        this.onWatchlistChanged = this.onWatchlistChanged.bind(this)
+      }
+
+      watchlistPath() {
+        const url = Url.current()
+        url.setHashPath('/watchlist')
+        return url.formatHash()
+      }
+
+      onBeforeMount() {
+        this.on('watchlist-changed', this.onWatchlistChanged)
+      }
+
+      onWatchlistChanged() {
+        this.update()
+      }
+    }
+  </script>
+</dfkv-watchlist-trigger>

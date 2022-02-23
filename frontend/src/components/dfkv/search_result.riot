@@ -1,0 +1,60 @@
+<dfkv-search-result>
+  <dfkv-bookmark item={props.item} />
+
+  <div class="active-box">
+    <a class="stretched-link" href={itemPath(props.item.id())}></a>
+
+    <div class="content-box">
+      <div class="meta">
+        <div class="d-flex justify-content-between">
+          <div>
+            <div
+              if={props.item.authors()}
+              class="mb-3 fst-italic"
+            >{props.item.authors()}</div>
+            <div class="mb-3 dfk-sans-serif fw-bold">{props.item.title()}</div>
+          </div>
+          <div>
+            <div class="text-end">
+              <span class="text-muted">{t('id')}&nbsp;</span>
+              {props.item.id()}
+            </div>
+            <div class="text-end">
+              <span class="text-muted">{t('date')}&nbsp;</span>
+              {props.item.date()}
+            </div>
+          </div>
+        </div>
+
+        <div class="volumes">
+          <div
+            each={volume in props.item.volumes()}
+            class="volume"
+          >
+            <div if={volume.journal}>{l(volume.journal)}</div>
+            <div class="d-flex justify-content-between">
+              <div>{volume.bibliography}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    import {Url, util} from '@wendig/lib'
+    import Bookmark from './bookmark.riot'
+
+    export default class {
+      static components = {
+        'dfkv-bookmark': Bookmark,
+      }
+
+      itemPath(itemId, position = null) {
+        const url = Url.current()
+        url.setHashPath(`/records/${itemId}`)
+        return url.formatHash()
+      }
+    }
+  </script>
+</dfkv-search-result>

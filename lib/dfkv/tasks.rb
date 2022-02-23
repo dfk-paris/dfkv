@@ -93,7 +93,7 @@ module Dfkv::Tasks
     end
     people.each do |id, person|
       others = lookup[person['id_2']].select{|e| e != person['display_name']}
-      person['display_name'] = [person['display_name']] + others
+      person['display_name'] = ([person['display_name']] + others).uniq
     end
 
     # get wikidata for people
@@ -150,6 +150,10 @@ module Dfkv::Tasks
         id = volume['journal_id']
         # binding.pry unless journals[id]
         volume['journal'] = journals[id]
+        if iiif = volume['link_iiif']
+          volume['manifest'] = iiif.gsub(/\/canvas.*$/, '/manifest.json')
+          volume['canvas'] = iiif.gsub(/\.json$/, '')
+        end
       end
 
       # if id = record['journal_id']
@@ -232,6 +236,14 @@ module Dfkv::Tasks
     
     book.close
     results
+  end
+
+  def with_csv(file, &block)
+    puts "reading CSV from '#{file}'"
+
+    CSV.read(read).each do |row|
+      yield row
+    end
   end
 
   def self.dump_json(data, file)

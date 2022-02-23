@@ -11,7 +11,9 @@
 
     import FlyIn from './fly_in.riot'
     import RoutedModal from '../routed_modal.riot'
+
     import Record from './record.riot'
+    import Watchlist from './watchlist.riot'
 
     export default class {
       static components = {
@@ -49,7 +51,8 @@
       routes() {
         return [
           {url: /^$/, component: null},
-          {url: /^\/records\/(?<id>\d+)$/, component: Record}
+          {url: /^\/records\/(?<id>\d+)$/, component: Record},
+          {url: /^\/watchlist$/, component: Watchlist}
         ]
       }
     }
