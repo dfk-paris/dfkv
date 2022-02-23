@@ -42,7 +42,9 @@ In another terminal, run
     npm run index
 
 which will feed the DFKV data to elasticsearch. The process will take a minute
-or two.
+or two. Once it is done, start the api with
+
+    npm run api
 
 In a third terminal, start the frontend development server
 
