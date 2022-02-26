@@ -1,6 +1,8 @@
 import {bus} from './bus'
 
 class Watchlist {
+  static VERSION = 1
+
   count() {
     return this.unpack().length
   }
@@ -12,18 +14,19 @@ class Watchlist {
 
   has(id) {
     const tmp = this.unpack()
-    const index = tmp.indexOf(id)
+    const found = tmp.find(e => e.id == id)
 
-    return index != -1
+    return !!found
   }
 
-  toggle(id) {
+  toggle(id, criteria = null) {
     const tmp = this.unpack()
-    const index = tmp.indexOf(id)
+    const found = tmp.find(e => e.id == id)
 
-    if (index == -1) {
-      tmp.push(id)
+    if (!found) {
+      tmp.push({id, criteria})
     } else {
+      const index = tmp.indexOf(found)
       tmp.splice(index, 1)
     }
 
@@ -42,4 +45,12 @@ class Watchlist {
 }
 
 const watchlist = new Watchlist()
+
+// to empty the watchlist when the data structure has changed, change the
+// version, see above
+if (window.localStorage.watchlistVersion != Watchlist.VERSION) {
+  watchlist.clear()
+  window.localStorage.watchlistVersion = Watchlist.VERSION
+}
+
 export default watchlist

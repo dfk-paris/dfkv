@@ -20,6 +20,7 @@ module Dfkv::Tasks
   def self.to_date(value)
     case value
     when nil then value
+    when Date then value
     when Integer then Date.new(value, 1, 1)
     when String
       return Date.parse(value)
@@ -35,6 +36,7 @@ module Dfkv::Tasks
 
   def self.wikidata_for(id)
     return nil unless id
+    id = id.strip
 
     cache_file = "#{ENV['WIKIDATA_CACHE_DIR']}/#{id}.json"
     return JSON.load(File.read cache_file) if File.exists?(cache_file)
@@ -72,7 +74,7 @@ module Dfkv::Tasks
     tags = read_excel(ENV['DATA_FILE_MASTER'], 'Sujets')
     categories = read_excel(ENV['DATA_FILE_MASTER'], 'Rubrique')
     locations = read_excel(ENV['DATA_FILE_MASTER'], 'Lieu de publication')
-    editors = read_excel(ENV['DATA_FILE_MASTER'], "Maison d'édition")
+    editors = read_excel(ENV['DATA_FILE_MASTER'], "editeurs")
     people = read_excel(ENV['DATA_FILE_MASTER'], "Personnes")
     roles = read_excel(ENV['DATA_FILE_MASTER'], "Rôles de personnes")
     attribs = read_excel(ENV['DATA_FILE_MASTER'], "Attributs")

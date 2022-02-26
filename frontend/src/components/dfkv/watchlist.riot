@@ -32,7 +32,7 @@
       <dfkv-record
         each={item in state.results.items()}
         item={item}
-        criteria={{}}
+        criteria={item.criteria()}
       />
     </template>
   </div>
@@ -87,13 +87,20 @@
         if (watchlist.count() > 0) {
           Search.
             fetch(this.params()).
-            then(items => this.update({results: items}))
+            then(items => {
+              const wl = watchlist.unpack()
+              for (const i of items.items()) {
+                const c = wl.find(e => e.id == i.id())
+                i.setCriteria(c)
+              }
+              this.update({results: items})
+            })
         }
       }
 
       params() {
         const result = this.state.criteria
-        result['id'] = watchlist.unpack().join(',')
+        result['id'] = watchlist.unpack().map(e => e.id).join(',')
         result['per_page'] = 9999
         return result
       }

@@ -57,6 +57,10 @@ dfkv-record, [is='dfkv-record'] {
   font-family: $serif;
   font-size: 18px;
 
+  &:first-child {
+    break-before: avoid;
+  }
+
   h1 {
     font-size: 44px;
     color: $logo-green;
@@ -165,5 +169,26 @@ a.type-journal {
     position: absolute;
     top: 20px;
     right: 20px;
+  }
+}
+
+@media print {
+  body {
+    padding: 0;
+  }
+
+  .expose {
+    padding: 0;
+  }
+}
+
+dfkv-watchlist-trigger {
+  position: relative;
+  top: -3px;
+
+  dfk-icon {
+    margin-right: 3px;
+    position: relative;
+    top: 5px;
   }
 }

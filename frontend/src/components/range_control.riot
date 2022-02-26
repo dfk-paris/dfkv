@@ -112,11 +112,11 @@
           const side = (this.classList.contains('from') ? 'fromTmp' : 'toTmp')
           cmp.update({[side]: value})
 
-          if (side == 'from' && value > cmp.to()) {
+          if (side == 'fromTmp' && value > cmp.to()) {
             cmp.update({toTmp: value})
           }
 
-          if (side == 'to' && value < cmp.from()) {
+          if (side == 'toTmp' && value < cmp.from()) {
             cmp.update({fromTmp: value})
           }
         }

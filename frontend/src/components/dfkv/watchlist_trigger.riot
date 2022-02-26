@@ -1,18 +1,23 @@
 <dfkv-watchlist-trigger>
   <template if={watchlist.count() > 0}>
     <a
-      class="float-right rounded p-2 bg-gray text-decoration-none"
+      class="p-2 text-decoration-none"
       href={watchlistPath()}
     >
-      + {t('watchlist')} ({watchlist.count()})
+      <dfk-icon type="folder" /> ({watchlist.count()})
     </a>
   </template>
 
   <script>
     import {Url} from '@wendig/lib'
     import watchlist from '../../lib/watchlist'
+    import Icon from '../icon.riot'
 
     export default class {
+      static components = {
+        'dfk-icon': Icon
+      }
+
       constructor() {
         this.watchlist = watchlist
         this.onWatchlistChanged = this.onWatchlistChanged.bind(this)

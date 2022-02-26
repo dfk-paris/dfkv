@@ -20,7 +20,10 @@
       if={!manyResults()}
       onclick={event => print(event)}
     ><dfk-icon type="print" /></a>
+
+    <dfkv-watchlist-trigger class="ml-2" />
   </div>
+
 
   <div class="d-flex justify-content-between mt-3 mb-2">
     <div class="sort dfk-sans-serif">
@@ -49,6 +52,7 @@
       each={item in props.results.items()}
       is="dfkv-search-result"
       item={item}
+      criteria={props.criteria}
       class="search-result"
     />
   </div>
@@ -71,6 +75,7 @@
     import MultiRecord from './dfkv/multi_record.riot'
     import Search from '../lib/search'
     import SearchResult from './dfkv/search_result.riot'
+    import WatchlistTrigger from './dfkv/watchlist_trigger.riot'
 
     export default class {
       static components = {
@@ -79,7 +84,8 @@
         'dfk-pagination': Pagination,
         'dfk-tab': Tab,
         'dfkv-multi-record': MultiRecord,
-        'dfkv-search-result': SearchResult
+        'dfkv-search-result': SearchResult,
+        'dfkv-watchlist-trigger': WatchlistTrigger
       }
 
       onBeforeMount() {

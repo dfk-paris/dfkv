@@ -7,6 +7,15 @@ export default class Item {
     this.data = data
   }
 
+  setCriteria(c) {
+    this.data.criteria = c
+  }
+
+  criteria() {
+    // console.log(this.data.criteria)
+    return this.data.criteria
+  }
+
   id() {
     return this.data['_source']['id']
   }

@@ -6,7 +6,7 @@
   ><dfk-icon type="cross" /></a>
 
   <template if={state.item}>
-    <div class="p-7">
+    <div class="p-7 p-print-0">
       <div
         if={isSingle()}
         class="mb-6 d-print-none"
@@ -130,7 +130,7 @@
 
       <dfkv-criteria
         class="d-block d-screen-none mt-6 text-half-muted"
-        criteria={props.criteria}
+        criteria={state.item.criteria()}
       />
     </div>
 

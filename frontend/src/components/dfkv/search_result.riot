@@ -1,5 +1,9 @@
 <dfkv-search-result>
-  <dfkv-bookmark item={props.item} />
+  <dfkv-bookmark
+    item={props.item}
+    criteria={props.criteria}
+    class="d-print-none"
+  />
 
   <div class="active-box">
     <a class="stretched-link" href={itemPath(props.item.id())}></a>

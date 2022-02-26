@@ -76,11 +76,15 @@
 
 @media print {
   .d-print-none {
-    display: none;
+    display: none !important;
   }
 
   .d-screen-none {
-    display: inherit;
+    display: inherit !important;
+  }
+
+  .p-print-0 {
+    padding: 0 !important;
   }
 }
 
