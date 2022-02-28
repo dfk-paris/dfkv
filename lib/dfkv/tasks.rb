@@ -203,8 +203,9 @@ module Dfkv::Tasks
         tags[id]
       end
 
-      is_book = (record['editor_id'] || record['location_id']) && record['journal_id']
+      is_book = (record['editor_id'] || record['location_id']) && !record['journal_id']
       record['contribution_type'] = (is_book ? 'book' : 'journal')
+      # puts "#{record['id']}: #{record['contribution_type']}"
 
       # # binding.pry
       # binding.pry if record['id'] == 10053

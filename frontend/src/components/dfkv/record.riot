@@ -55,6 +55,13 @@
         </span>
       </div>
 
+      <div if={state.item.location()}>
+        {state.item.location()}, {state.item.year()}
+      </div>
+      <div if={state.item.editor()}>
+        {cap(t('editor'))}: {state.item.editor()}
+      </div>
+
       <div class="volumes">
         <div
           each={volume in state.item.volumes()}

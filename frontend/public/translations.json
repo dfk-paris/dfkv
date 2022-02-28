@@ -274,5 +274,9 @@
   "contribution_type_book": {
     "id": "contribution_type_book",
     "de": "Buchbeitrag"
+  },
+  "editor": {
+    "id": "editor",
+    "de": "Verlag"
   }
 }

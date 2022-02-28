@@ -60,6 +60,20 @@ export default class Item {
     return this.involved().map(e => e.display_name[0]).join(', ')
   }
 
+  location() {
+    const r = this.data['_source']['location']
+    return r ? l(r) : null
+  }
+
+  editor() {
+    const r = this.data['_source']['editor']
+    return r ? l(r) : null
+  }
+
+  year() {
+    return this.date().split('-')[0]
+  }
+
   textTypes() {
     return this.data['_source']['text_types'].
       map(e => l(e)).join(', ')
