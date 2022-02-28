@@ -1,333 +1,225 @@
 {
   "fulltext_search": {
     "id": "fulltext_search",
-    "de": "Volltextsuche",
-    "en": null,
-    "fr": null
+    "de": "Volltextsuche"
   },
   "search_criteria": {
     "id": "search_criteria",
-    "de": "Suchkriterien",
-    "en": null,
-    "fr": null
+    "de": "Suchkriterien"
   },
   "next_page": {
     "id": "next_page",
-    "de": "nächste Seite",
-    "en": null,
-    "fr": null
+    "de": "nächste Seite"
   },
   "prev_page": {
     "id": "prev_page",
-    "de": "vorherige Seite",
-    "en": null,
-    "fr": null
+    "de": "vorherige Seite"
   },
   "first_page": {
     "id": "first_page",
-    "de": "erste Seite",
-    "en": null,
-    "fr": null
+    "de": "erste Seite"
   },
   "last_page": {
     "id": "last_page",
-    "de": "letzte Seite",
-    "en": null,
-    "fr": null
+    "de": "letzte Seite"
   },
   "search_results": {
     "id": "search_results",
-    "de": "Suchergebnisse",
-    "en": null,
-    "fr": null
+    "de": "Suchergebnisse"
   },
   "sort_by": {
     "id": "sort_by",
-    "de": "sortieren nach",
-    "en": null,
-    "fr": null
+    "de": "sortieren nach"
   },
   "title": {
     "id": "title",
-    "de": "Titel",
-    "en": null,
-    "fr": null
+    "de": "Titel"
   },
   "date": {
     "id": "date",
-    "de": "Datum",
-    "en": null,
-    "fr": null
+    "de": "Datum"
   },
   "author": {
     "id": "author",
-    "de": "Autor",
-    "en": null,
-    "fr": null
+    "de": "Autor"
   },
   "authors": {
     "id": "authors",
-    "de": "Autoren",
-    "en": null,
-    "fr": null
+    "de": "Autoren"
   },
   "show_all": {
     "id": "show_all",
-    "de": "alle anzeigen",
-    "en": null,
-    "fr": null
+    "de": "alle anzeigen"
   },
   "filters": {
     "id": "filters",
-    "de": "Filter",
-    "en": null,
-    "fr": null
+    "de": "Filter"
   },
   "your_selection": {
     "id": "your_selection",
-    "de": "Ihre Auswahl",
-    "en": null,
-    "fr": null
+    "de": "Ihre Auswahl"
   },
   "journals": {
     "id": "journals",
-    "de": "Zeitschriften",
-    "en": null,
-    "fr": null
+    "de": "Zeitschriften"
   },
   "id": {
     "id": "id",
-    "de": "Id",
-    "en": null,
-    "fr": null
+    "de": "Id"
   },
   "involved_people": {
     "id": "involved_people",
-    "de": "beteiligte Personen",
-    "en": null,
-    "fr": null
+    "de": "beteiligte Personen"
   },
   "watchlist": {
     "id": "watchlist",
-    "de": "Merkliste",
-    "en": null,
-    "fr": null
+    "de": "Merkliste"
   },
   "legend": {
     "id": "legend",
-    "de": "Legende",
-    "en": null,
-    "fr": null
+    "de": "Legende"
   },
   "help": {
     "id": "help",
     "de": "Hilfe",
-    "en": "help",
-    "fr": null
+    "en": "help"
   },
   "transcription": {
     "id": "transcription",
-    "de": "Transkription",
-    "en": null,
-    "fr": null
+    "de": "Transkription"
   },
   "search_feature": {
     "id": "search_feature",
-    "de": "Suchfunktion",
-    "en": null,
-    "fr": null
+    "de": "Suchfunktion"
   },
   "tags": {
     "id": "tags",
-    "de": "Themen",
-    "en": null,
-    "fr": null
+    "de": "Themen"
   },
   "text_type": {
     "id": "text_type",
-    "de": "Textart",
-    "en": null,
-    "fr": null
+    "de": "Textart"
   },
   "people": {
     "id": "people",
-    "de": "Personen",
-    "en": null,
-    "fr": null
+    "de": "Personen"
   },
   "help_quote": {
     "id": "help_quote",
-    "de": "Zitat aus der angegebenen Quelle. Zitate spiegeln das Interesse der Bearbeiter/in wieder, sind aber wortwörtliche Übernahmen.",
-    "en": null,
-    "fr": null
+    "de": "Zitat aus der angegebenen Quelle. Zitate spiegeln das Interesse der Bearbeiter/in wieder, sind aber wortwörtliche Übernahmen."
   },
   "help_viewer": {
     "id": "help_viewer",
-    "de": "Ansicht des zitierten Beitrags bzw. der zitierten Beiträge  in einem Viewer. Die Digitalisate werden von BnF (Gallica) und der Universitätsbibliothek Heidelberg angeboten und 2021 eingebunden.",
-    "en": null,
-    "fr": null
+    "de": "Ansicht des zitierten Beitrags bzw. der zitierten Beiträge  in einem Viewer. Die Digitalisate werden von BnF (Gallica) und der Universitätsbibliothek Heidelberg angeboten und 2021 eingebunden."
   },
   "help_title": {
     "id": "help_title",
-    "de": "Der Titel entspricht dem Werktitel/ der Quelle oder ist vom Projekt vergeben worden, um Abschnitte in Artikeln und Kolumnen zu kennzeichnen.",
-    "en": null,
-    "fr": null
+    "de": "Der Titel entspricht dem Werktitel/ der Quelle oder ist vom Projekt vergeben worden, um Abschnitte in Artikeln und Kolumnen zu kennzeichnen."
   },
   "help_transcription": {
     "id": "help_transcription",
-    "de": "Die Transkription ist eine Beschreibung der aus Sicht des Forschungsprojekts relevanten Inhalte des Beitrags. Die Transktiptionen sind somit Inhaltswiedergaben und/oder Interpretationen der Bearbeiter/innen.",
-    "en": null,
-    "fr": null
+    "de": "Die Transkription ist eine Beschreibung der aus Sicht des Forschungsprojekts relevanten Inhalte des Beitrags. Die Transktiptionen sind somit Inhaltswiedergaben und/oder Interpretationen der Bearbeiter/innen."
   },
   "help_people": {
     "id": "help_people",
-    "de": "Alle in der Quelle genannten Personen, meist in der Schreibweise des Quelltextes. Die Personen wurden durch die Bearbeiter/innen erfasst. 2021 wurden sie soweit möglich mit Normdaten referenziert (mehr...).",
-    "en": null,
-    "fr": null
+    "de": "Alle in der Quelle genannten Personen, meist in der Schreibweise des Quelltextes. Die Personen wurden durch die Bearbeiter/innen erfasst. 2021 wurden sie soweit möglich mit Normdaten referenziert (mehr...)."
   },
   "help_text_type": {
     "id": "help_text_type",
-    "de": "Klassifizierung des Texttyps durch die Bearbeiter/in. Insgesamt wurden ## Textarten herausgestellt, davon ## französischsprachig, ## deutschsprachig.",
-    "en": null,
-    "fr": null
+    "de": "Klassifizierung des Texttyps durch die Bearbeiter/in. Insgesamt wurden ## Textarten herausgestellt, davon ## französischsprachig, ## deutschsprachig."
   },
   "help_tags": {
     "id": "help_tags",
-    "de": "Stichpunkte, mit denen die jeweilige Bearbeiter/in markiert hat, welche für das Forschungsprojekt interessanten Themenbereiche im Beitrag behandelt werden. Die Angabe von Themen ergänzen oder ersetzen auch die Beschreibung.",
-    "en": null,
-    "fr": null
+    "de": "Stichpunkte, mit denen die jeweilige Bearbeiter/in markiert hat, welche für das Forschungsprojekt interessanten Themenbereiche im Beitrag behandelt werden. Die Angabe von Themen ergänzen oder ersetzen auch die Beschreibung."
   },
   "help_search_feature": {
     "id": "help_search_feature",
-    "de": "Projektbalken ermöglicht neben der Suche in allen Datenbanken auch die separate Auswahl einer einzelnen und macht die ursprünglichen Zugehörigkeiten sichtbar.\n\nDie Volltextsuche fragt alle Informationen ab und beeinflusst die Filtervorschläge.\n\nDer Zeitbalken grnezt nach Erscheinungsdatum ein; Achtung: für die Jahre 1941-1944 wurden keine Daten erhoben.\n\nPersonen, Autoren, Zeitschriften, Bucheinträge...",
-    "en": null,
-    "fr": null
+    "de": "Projektbalken ermöglicht neben der Suche in allen Datenbanken auch die separate Auswahl einer einzelnen und macht die ursprünglichen Zugehörigkeiten sichtbar.\n\nDie Volltextsuche fragt alle Informationen ab und beeinflusst die Filtervorschläge.\n\nDer Zeitbalken grnezt nach Erscheinungsdatum ein; Achtung: für die Jahre 1941-1944 wurden keine Daten erhoben.\n\nPersonen, Autoren, Zeitschriften, Bucheinträge..."
   },
   "datamodel_and_data_curation": {
     "id": "datamodel_and_data_curation",
-    "de": "Datenmodell & Anreicherung",
-    "en": null,
-    "fr": null
+    "de": "Datenmodell & Anreicherung"
   },
   "publications": {
     "id": "publications",
-    "de": "Publikationen",
-    "en": null,
-    "fr": null
+    "de": "Publikationen"
   },
   "reuse_question": {
     "id": "reuse_question",
-    "de": "Reuse?",
-    "en": null,
-    "fr": null
+    "de": "Reuse?"
   },
   "description_comment": {
     "id": "description_comment",
-    "de": "Kommentar",
-    "en": null,
-    "fr": null
+    "de": "Kommentar"
   },
   "project_affiliation": {
     "id": "project_affiliation",
-    "de": "Projekt",
-    "en": null,
-    "fr": null
+    "de": "Projekt"
   },
   "citation_format": {
     "id": "citation_format",
     "de": "Wenn Sie auf diese Ressource verweisen möchten, schlagen wir Ihnen folgendes Zitationsformat vor:",
-    "en": null,
     "fr": "Si vous souhaitez faire référence à cette ressource, nous vous invitons à la citer sous cette forme :"
   },
   "watchlist_only": {
     "id": "watchlist_only",
-    "de": "nur Einträge in der Merkliste anzeigen",
-    "en": null,
-    "fr": null
+    "de": "nur Einträge in der Merkliste anzeigen"
   },
   "records": {
     "id": "records",
-    "de": "Einträge",
-    "en": null,
-    "fr": null
+    "de": "Einträge"
   },
   "record": {
     "id": "record",
-    "de": "Eintrag",
-    "en": null,
-    "fr": null
+    "de": "Eintrag"
   },
   "journal_facet_text": {
     "id": "journal_facet_text",
-    "de": "Insgesamt wurden gut 350 Zeitschriftenreihen systematisch auf Beiträge hin durchgesehen. Für einige dieser Zeitschriften sind zwischenzeitliche Namensänderungen bekannt (meist in Form von Zusätzen). In Übereinstimmung mit ihrer Erfassung durch die Bibliotheken (hier insbesondere die Bibliotheque National de la France und die Deutsche National Bibliothek) werden die verschiedenen Varianten unter einem Titel geführt. Hinter dem Titel wird in Klammern die Zahl der Dateneinträge gennant, die auf die Zeitschrift referenzieren.",
-    "en": null,
-    "fr": null
+    "de": "Insgesamt wurden gut 350 Zeitschriftenreihen systematisch auf Beiträge hin durchgesehen. Für einige dieser Zeitschriften sind zwischenzeitliche Namensänderungen bekannt (meist in Form von Zusätzen). In Übereinstimmung mit ihrer Erfassung durch die Bibliotheken (hier insbesondere die Bibliotheque National de la France und die Deutsche National Bibliothek) werden die verschiedenen Varianten unter einem Titel geführt. Hinter dem Titel wird in Klammern die Zahl der Dateneinträge gennant, die auf die Zeitschrift referenzieren."
   },
   "people_facet_text": {
     "id": "people_facet_text",
-    "de": "Insgesamt wurden gut 9000 Personennamen erfasst, darunter gibt es Nennungen einer Person unter verschiedenen Namen oder auch in verschiedenen Schreibweisen.  2021 sind diese Varianten, soweit sie eindeutig waren, zusammengeführt worden, ohne die Schreibweise in den Datensätzen zu verändern.  Unter \"BeispielÄ\" lassen sich damit die selben Datensätze aufrufen wie unter \"BeispielAE\".  ",
-    "en": null,
-    "fr": null
+    "de": "Insgesamt wurden gut 9000 Personennamen erfasst, darunter gibt es Nennungen einer Person unter verschiedenen Namen oder auch in verschiedenen Schreibweisen.  2021 sind diese Varianten, soweit sie eindeutig waren, zusammengeführt worden, ohne die Schreibweise in den Datensätzen zu verändern.  Unter \"BeispielÄ\" lassen sich damit die selben Datensätze aufrufen wie unter \"BeispielAE\".  "
   },
   "journal_facet_tag_line": {
     "id": "journal_facet_tag_line",
-    "de": "in die Untersuchung einbezogene Zeitschriften",
-    "en": null,
-    "fr": null
+    "de": "in die Untersuchung einbezogene Zeitschriften"
   },
   "people_facet_tag_line": {
     "id": "people_facet_tag_line",
-    "de": "aus dem Quelltext erfasste",
-    "en": null,
-    "fr": null
+    "de": "aus dem Quelltext erfasste"
   },
   "empty_watchlist": {
     "id": "empty_watchlist",
-    "de": "Merkliste leeren",
-    "en": null,
-    "fr": null
+    "de": "Merkliste leeren"
   },
   "person_details": {
     "id": "person_details",
-    "de": "Personendetails",
-    "en": null,
-    "fr": null
+    "de": "Personendetails"
   },
   "authority_data": {
     "id": "authority_data",
-    "de": "Normdatenverknüpfung",
-    "en": null,
-    "fr": null
+    "de": "Normdatenverknüpfung"
   },
   "from_wikidata": {
     "id": "from_wikidata",
-    "de": "aus Wikidata",
-    "en": null,
-    "fr": null
+    "de": "aus Wikidata"
   },
   "born": {
     "id": "born",
-    "de": "geboren",
-    "en": null,
-    "fr": null
+    "de": "geboren"
   },
   "died": {
     "id": "died",
-    "de": "verstorben",
-    "en": null,
-    "fr": null
+    "de": "verstorben"
   },
   "journal_details": {
     "id": "journal_details",
-    "de": "Quellendetails",
-    "en": null,
-    "fr": null
+    "de": "Quellendetails"
   },
   "source_wikidata": {
     "id": "source_wikidata",
-    "de": "aus Wikidata",
-    "en": null,
-    "fr": null
+    "de": "aus Wikidata"
   },
   "json": {
     "id": "json",
@@ -337,62 +229,50 @@
   },
   "data": {
     "id": "data",
-    "de": "data",
-    "en": null,
-    "fr": null
+    "de": "data"
   },
   "print_too_many_results": {
     "id": "print_too_many_results",
-    "de": "Ihre Suchanfrage liefert zu viele Resultate, die Druckfunktion steht nur für bis zu 100 Einträge zur Verfügung",
-    "en": null,
-    "fr": null
+    "de": "Ihre Suchanfrage liefert zu viele Resultate, die Druckfunktion steht nur für bis zu 100 Einträge zur Verfügung"
   },
   "reset": {
     "id": "reset",
-    "de": "zurücksetzen",
-    "en": null,
-    "fr": null
+    "de": "zurücksetzen"
   },
   "project": {
     "id": "project",
-    "de": "Projekt",
-    "en": null,
-    "fr": null
+    "de": "Projekt"
   },
   "people_other_forms": {
     "id": "people_other_forms",
-    "de": "Weitere in der Datenbank vorkommende Schreibweise / Benennung:",
-    "en": null,
-    "fr": null
+    "de": "Weitere in der Datenbank vorkommende Schreibweise / Benennung:"
   },
   "filter_involved": {
     "id": "filter_involved",
-    "de": "Person",
-    "en": null,
-    "fr": null
+    "de": "Person"
   },
   "filter_creator": {
     "id": "filter_creator",
-    "de": "Autor",
-    "en": null,
-    "fr": null
+    "de": "Autor"
   },
   "filter_journal": {
     "id": "filter_journal",
-    "de": "Zeitschrift",
-    "en": null,
-    "fr": null
+    "de": "Zeitschrift"
   },
   "filter_type": {
     "id": "filter_type",
-    "de": "Textart",
-    "en": null,
-    "fr": null
+    "de": "Textart"
   },
   "expand_all": {
     "id": "expand_all",
-    "de": "alle ausklappen",
-    "en": null,
-    "fr": null
+    "de": "alle ausklappen"
+  },
+  "contribution_type_journal": {
+    "id": "contribution_type_journal",
+    "de": "Zeitschriftenbeitrag"
+  },
+  "contribution_type_book": {
+    "id": "contribution_type_book",
+    "de": "Buchbeitrag"
   }
 }

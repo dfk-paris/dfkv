@@ -93,4 +93,8 @@ export default class Item {
   json() {
     return JSON.stringify(this.data['_source'], null, 2)
   }
+
+  contributionType() {
+    return this.data['_source']['contribution_type']
+  }
 }

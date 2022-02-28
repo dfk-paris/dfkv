@@ -1,12 +1,18 @@
 <dfkv-watchlist-trigger>
-  <template if={watchlist.count() > 0}>
-    <a
-      class="p-2 text-decoration-none"
-      href={watchlistPath()}
-    >
-      <dfk-icon type="folder" /> ({watchlist.count()})
-    </a>
-  </template>
+  |
+  <a
+    class="p-2 text-decoration-none"
+    href={watchlistPath()}
+  >
+    <template if={watchlist.count() > 0}>
+      <dfk-icon type="folder-filled" />
+    </template>
+    <template if={watchlist.count() == 0}>
+      <dfk-icon type="folder" />
+    </template>
+    {t('watchlist')}
+    ({watchlist.count()})
+  </a>
 
   <script>
     import {Url} from '@wendig/lib'

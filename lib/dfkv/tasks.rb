@@ -203,7 +203,11 @@ module Dfkv::Tasks
         tags[id]
       end
 
-      # binding.pry
+      is_book = (record['editor_id'] || record['location_id']) && record['journal_id']
+      record['contribution_type'] = (is_book ? 'book' : 'journal')
+
+      # # binding.pry
+      # binding.pry if record['id'] == 10053
 
       elastic.bulk([
         {'index' => {'_id' => record['id'], '_index' => "#{elastic.config[:prefix]}-records"}},
@@ -227,11 +231,13 @@ module Dfkv::Tasks
     book = Roo::Spreadsheet.open(file)
     sheet = book.sheet_for(sheet_name)
 
-    headers = sheet.row(1).map.with_index{|e, i| sheet.row(2)[i] ||sheet.row(1)[i] }
+    headers = sheet.row(1).map.with_index{|e, i| sheet.row(2)[i] || sheet.row(1)[i] }
     results = {}
     (3..sheet.last_row).each do |i|
       values = sheet.row(i)
-      record = headers.zip(values).to_h
+      record = headers.zip(values).to_h.reject do |k, v|
+        k.nil? || v.nil? || v == ''
+      end
       # binding.pry if sheet_name == 'Data_complet'
       results[record[primary_key]] = record
     end

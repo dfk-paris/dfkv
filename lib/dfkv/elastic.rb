@@ -41,6 +41,7 @@ class Dfkv::Elastic
             'type' => 'date',
             'format' => 'strict_date_optional_time_nanos'
           },
+          'contribution_type' => {'type' => 'keyword'},
           'creators' => {
             'properties' => {
               'display_name' => {
@@ -314,6 +315,11 @@ class Dfkv::Elastic
 
     def require_ok!
       if @response.status < 200 || @response.status >= 400
+        binding.pry
+      end
+
+      data = JSON.parse(@response.body)
+      if data['errors']
         binding.pry
       end
     end
