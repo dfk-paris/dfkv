@@ -81,6 +81,12 @@ module Dfkv::Tasks
     projects = read_excel(ENV['DATA_FILE_MASTER'], 'Projets')
     translations = read_excel(ENV['DATA_TRANSLATIONS'], "translations")
 
+    # orders = {}
+    # with_csv '/path/to/record_sujet_order.csv' do |row|
+    #   orders[row['ID']] ||= []
+    #   orders[row['ID']] << row.to_h
+    # end
+
     self.dump_json(translations, 'frontend/public/translations.json')
     self.dump_json(projects, 'frontend/public/projects.json')
 
@@ -132,10 +138,15 @@ module Dfkv::Tasks
       end
     end
 
+    # new_tags = []
+
     # records
     pb = Dfkv.progress_bar('indexing records', records.size)
     records.each do |record_id, record|
       record['tags'] = to_id_list(record['tags'])
+      # new_tags << [record['id']] + (orders[record['id']] || []).
+      #   sort_by{|e| e['order']}.
+      #   map{|e| e['Sujet']}
       record['involved'] = to_id_list(record['involved'])
       record['creators'] = to_id_list(record['creators'])
       record['translators'] = to_id_list(record['translators'])
@@ -224,6 +235,8 @@ module Dfkv::Tasks
 
     elastic.bulk_commit
     elastic.refresh
+
+    # binding.pry
   end
 
   def self.read_excel(file, sheet_name, primary_key = 'id')
@@ -247,10 +260,10 @@ module Dfkv::Tasks
     results
   end
 
-  def with_csv(file, &block)
+  def self.with_csv(file, &block)
     puts "reading CSV from '#{file}'"
 
-    CSV.read(read).each do |row|
+    CSV.read(file, headers: true, converters: [:numeric]).each do |row|
       yield row
     end
   end
