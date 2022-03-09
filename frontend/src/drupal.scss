@@ -26,6 +26,13 @@ body {
   font-family: $sans-serif;
   line-height: calc(24 / 18 * 1em);
   padding-left: 60px;
+  padding-right: 120px;
+  // margin-right: 120px;
+}
+
+dfk-routed-modal {
+  padding-left: 60px;
+  padding-right: 120px;
 }
 
 // h2 {
@@ -45,6 +52,6 @@ a {
   cursor: pointer;
 }
 
-[is='dfkv-watchlist-trigger'] {
-  margin-right: 185px;
-}
+// [is='dfkv-watchlist-trigger'] {
+//   margin-right: 185px;
+// }

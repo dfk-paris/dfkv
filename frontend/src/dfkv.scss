@@ -1,11 +1,4 @@
 [is='dfkv'], dfk-routed-modal {
-  padding-right: 100px;
-
-  .close {
-    top: 40px !important;
-    right: 80px !important;
-  }
-
   pre {
     white-space: pre-wrap;
   }
@@ -53,9 +46,11 @@ dfkv-fly-in {
 
 dfkv-record, [is='dfkv-record'] {
   display: block;
+  position: relative;
   break-before: page;
   font-family: $serif;
   font-size: 18px;
+  margin-top: 30px;
 
   &:first-child {
     break-before: avoid;
@@ -74,7 +69,7 @@ dfkv-record, [is='dfkv-record'] {
 
   .close {
     top: 20px;
-    right: 20px;
+    right: 0px;
   }
 
   .previous {
@@ -182,7 +177,7 @@ a.type-journal {
   }
 }
 
-dfkv-watchlist-trigger {
+[is='dfkv-watchlist-trigger'] {
   position: relative;
   top: -3px;
 

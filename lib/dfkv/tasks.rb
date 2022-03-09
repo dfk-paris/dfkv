@@ -93,23 +93,17 @@ module Dfkv::Tasks
     elastic = Dfkv::Elastic.new
     elastic.reset!
 
-    # link people by identify (id_2)
-    lookup = {}
-    people.each do |id, person|
-      lookup[person['id_2']] ||= []
-      lookup[person['id_2']] << person['display_name']
-    end
-    people.each do |id, person|
-      others = lookup[person['id_2']].select{|e| e != person['display_name']}
-      person['display_name'] = ([person['display_name']] + others).uniq
-    end
-
     # get wikidata for people
     puts "fetching and parsing wikidata entities ..."
     system 'mkdir', '-p', ENV['WIKIDATA_CACHE_DIR']
     people.each do |id, person|
       next unless person['wikidata_id']
       entity = wikidata_for(person['wikidata_id'])
+
+      # binding.pry
+      # if v = try{entity['labels']['de']['value']}
+      #   person['canonical'] = 
+      # end
 
       if v = try{entity['claims']['P569'].first['mainsnak']['datavalue']['value']['time']}
         person['birth_date'] = v
@@ -136,6 +130,17 @@ module Dfkv::Tasks
           'name' => label_for(place)
         }
       end
+    end
+
+    # link people by identity (id_2)
+    lookup = {}
+    people.each do |id, person|
+      lookup[person['id_2']] ||= []
+      lookup[person['id_2']] << person['display_name']
+    end
+    people.each do |id, person|
+      others = lookup[person['id_2']].select{|e| e != person['display_name']}
+      person['display_name'] = ([person['display_name']] + others).uniq
     end
 
     # new_tags = []
