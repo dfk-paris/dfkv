@@ -51,7 +51,6 @@ dfkv-fly-in {
 
 dfkv-record, [is='dfkv-record'] {
   display: block;
-  position: relative;
   break-before: page;
   font-family: $serif;
   font-size: 18px;
@@ -74,7 +73,7 @@ dfkv-record, [is='dfkv-record'] {
 
   .close {
     top: 20px;
-    right: 0px;
+    right: 60px;
   }
 
   .previous {
@@ -168,7 +167,7 @@ a.type-journal {
   .close {
     position: absolute;
     top: 20px;
-    right: 20px;
+    right: 60px;
   }
 }
 
