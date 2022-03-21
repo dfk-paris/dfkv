@@ -73,7 +73,7 @@ dfkv-record, [is='dfkv-record'] {
 
   .close {
     top: 20px;
-    right: 60px;
+    right: calc(3.5vw + 20px);
   }
 
   .previous {
