@@ -136,11 +136,16 @@ module Dfkv::Tasks
     lookup = {}
     people.each do |id, person|
       lookup[person['id_2']] ||= []
-      lookup[person['id_2']] << person['display_name']
+      lookup[person['id_2']] << person
     end
     people.each do |id, person|
-      others = lookup[person['id_2']].select{|e| e != person['display_name']}
-      person['display_name'] = ([person['display_name']] + others).uniq
+      others = lookup[person['id_2']].select{|e| e['display_name'] != person['display_name']}
+      person['other_names'] = ([person['display_name']] + others.map{|e| e['display_name']}).uniq
+      person['display_name_search'] =
+        lookup[person['id_2']].
+        select{|person| person['label'] != 0}.
+        map{|person| person['display_name']}
+      puts person['id_2'] if person['display_name_search'].empty?
     end
 
     # new_tags = []

@@ -51,7 +51,7 @@
           <a
             class="text-decoration-underline"
             onclick={event => openPerson(person, event)}
-          >{person.display_name[0]}</a>
+          >{person.other_names[0]}</a>
         </span>
       </div>
 
@@ -107,7 +107,7 @@
                 each={(person, i) in state.item.involved()}
                 class="d-block text-decoration-underline"
                 onclick={event => openPerson(person, event)}
-              >{person.display_name[0]}</a>
+              >{person.other_names[0]}</a>
             </div>
           </template>
 
@@ -151,7 +151,7 @@
             <dfk-icon type="cross" />
           </a>
         </div>
-        <h2 class="mt-1">{state.person.display_name[0]}</h2>
+        <h2 class="mt-1">{state.person.other_names[0]}</h2>
         <div class="body">
           <div class="attribute-list mt-7">
             <template if={state.person.birth_date || state.person.death_date}>
@@ -195,10 +195,10 @@
               <dfk-authority-link type="wikidata" id={state.person.wikidata_id} />
             </div>
 
-            <template if={state.person.display_name.length > 1}>
+            <template if={state.person.other_names.length > 1}>
               <div class="attribute">{cap(t('people_other_forms'))}</div>
               <div class="value">
-                <div each={name in state.person.display_name.slice(1)}>{name}</div>
+                <div each={name in state.person.other_names.slice(1)}>{name}</div>
               </div>
             </template>
           </div>

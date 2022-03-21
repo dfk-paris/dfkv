@@ -44,7 +44,7 @@ class Dfkv::Elastic
           'contribution_type' => {'type' => 'keyword'},
           'creators' => {
             'properties' => {
-              'display_name' => {
+              'display_name_search' => {
                 'type' => 'text',
                 'fields' => {
                   'keyword' => {
@@ -107,13 +107,13 @@ class Dfkv::Elastic
 
     to_array(params['creator']).each do |v|
       filters << {
-        'term' => {'creators.display_name.keyword' => v}
+        'term' => {'creators.display_name_search.keyword' => v}
       }
     end
 
     to_array(params['involved']).each do |v|
       filters << {
-        'term' => {'involved.display_name.keyword' => v}
+        'term' => {'involved.display_name_search.keyword' => v}
       }
     end
 
@@ -179,14 +179,14 @@ class Dfkv::Elastic
         },
         "creator" => {
           "terms" => {
-            "field" => "creators.display_name.keyword",
+            "field" => "creators.display_name_search.keyword",
             "size" => 10000,
             "exclude" => to_array(params['creator'])
           }
         },
         "involved" => {
           "terms" => {
-            "field" => "involved.display_name.keyword",
+            "field" => "involved.display_name_search.keyword",
             "size" => 10000,
             "exclude" => to_array(params['involved'])
           }
@@ -210,7 +210,7 @@ class Dfkv::Elastic
 
     if s = params['sort']
       field = {
-        'creator' => 'creators.display_name.sort',
+        'creator' => 'creators.display_name_search.sort',
         'title' => 'title.keyword'
       }[s] || s
 

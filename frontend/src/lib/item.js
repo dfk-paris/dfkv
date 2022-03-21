@@ -42,22 +42,22 @@ export default class Item {
 
   creators() {
     const data = this.data['_source']['creators']
-    return util.sortBy(data, e => e.display_name[0])
+    return util.sortBy(data, e => e.other_names[0])
   }
 
   authors() {
     return this.creators().
-      map(e => e.display_name[0]).
+      map(e => e.other_names[0]).
       join('; ')
   }
 
   involved() {
     const data = this.data['_source']['involved']
-    return util.sortBy(data, e => e.display_name[0])
+    return util.sortBy(data, e => e.other_names[0])
   }
 
   involvedStr() {
-    return this.involved().map(e => e.display_name[0]).join(', ')
+    return this.involved().map(e => e.other_names[0]).join(', ')
   }
 
   location() {
