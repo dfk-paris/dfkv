@@ -119,7 +119,7 @@ class Dfkv::Elastic
 
     to_array(params['journal']).each do |v|
       filters << {
-        'term' => {"volumes.journal.#{locale}.keyword" => v}
+        'term' => {"volumes.journal.label.keyword" => v}
       }
     end
 
@@ -193,7 +193,7 @@ class Dfkv::Elastic
         },
         "journal" => {
           "terms" => {
-            "field" => "volumes.journal.#{locale}.keyword",
+            "field" => "volumes.journal.label.keyword",
             "size" => 500,
             "exclude" => to_array(params['journal'])
           }

@@ -35,7 +35,7 @@
             each={volume in props.item.volumes()}
             class="volume"
           >
-            <div if={volume.journal}>{l(volume.journal)}</div>
+            <div if={volume.journal}>{volume.journal.label}</div>
             <div class="d-flex justify-content-between">
               <div>{volume.bibliography}</div>
             </div>
