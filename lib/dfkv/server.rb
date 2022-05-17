@@ -62,53 +62,6 @@ class Dfkv::Server
       @elastic = Dfkv::Elastic.new
     end
 
-    # def person(id)
-    #   @person = Dfkv::Person.find(id)
-    #   render @person.to_json
-    # end
-
-    # def attrib(id)
-    #   @attrib = Dfkv::Attrib.find(id)
-    #   render @attrib.to_json
-    # end
-
-    # def search
-    #   return render({dummy: true}.to_json)
-      
-      
-    #   @records = Dfkv::Record.
-    #     # includes(
-    #     #   # :journal, :volume, :project, :rubric, :location, :editor,
-    #     #   contributions: :person,
-    #     #   attribs: :kind,
-    #     # ).
-    #     by_person(request.params['role'], request.params['person']).
-    #     by_attrib(request.params['attrib']).
-    #     by_journal(request.params['journal']).
-    #     by_volume(request.params['volume']).
-    #     by_rubric(request.params['rubric']).
-    #     by_location(request.params['location']).
-    #     by_editor(request.params['editor']).
-    #     search(request.params['terms']).
-    #     order(sort => direction)
-
-    #   puts @records.to_sql
-
-    #   now = Time.now
-    #   result = {
-    #     'total' => @records.count,
-    #     'records' => @records.pageit(page, per_page).as_json(
-    #       include: [:journal, :volume, :project, :rubric, :location, :editor],
-    #       methods: [:people_by_role, :attribs_by_kind, :human_date]
-    #     ),
-    #     'per_page' => per_page,
-    #     'page' => page
-    #   }
-    #   p Time.now - now
-
-    #   render result.to_json
-    # end
-
     def to_ids(string)
       (string || '').split(/\s*,\s*/).map{|e| e.to_i}
     end
