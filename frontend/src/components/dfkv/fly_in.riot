@@ -13,6 +13,14 @@
 
           <table class="mt-6">
             <tr>
+              <td>{cap(t('search_feature'))}</td>
+              <td>{t('help_search_feature')}</td>
+            </tr>
+            <tr>
+              <td><dfk-icon type="bookmark"/></td>
+              <td>{cap(t('help_watchlist'))}</td>
+            </tr>
+            <tr>
               <td><dfk-icon type="quotes"/></td>
               <td>{cap(t('help_quote'))}</td>
             </tr>
@@ -21,7 +29,7 @@
               <td>{t('help_viewer')}</td>
             </tr>
             <tr>
-              <td><h1>{cap(t('title'))}</h1></td>
+              <td>{cap(t('title'))}</td>
               <td>{t('help_title')}</td>
             </tr>
             <tr>
@@ -40,13 +48,11 @@
               <td>{cap(t('tags'))}</td>
               <td>{t('help_tags')}</td>
             </tr>
-            <tr>
-              <td>{cap(t('search_feature'))}</td>
-              <td>{t('help_search_feature')}</td>
-            </tr>
           </table>
 
-          <div class="mt-5 mb-5 d-flex flex-column align-items-center">
+          <!-- spacer, not needed when buttons are visible -->
+          <div class="my-5"></div>
+          <!-- div class="mt-5 mb-5 d-flex flex-column align-items-center">
             <button class="w-75 mb-3 d-block default large">
               {cap(t('datamodel_and_data_curation'))}
             </button>
@@ -56,7 +62,7 @@
             <button class="w-75 mb-3 d-block green large">
               {cap(t('reuse_question'))}
             </button>
-          </div>
+          </div -->
         </div>
       </div>
     </div>
