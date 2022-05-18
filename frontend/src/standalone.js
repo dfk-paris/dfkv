@@ -8,7 +8,7 @@ import Search from './components/dfkv/search.riot'
 import WatchlistTrigger from './components/dfkv/watchlist_trigger.riot'
 
 i18n.fetch(`${staticUrl}/translations.json`).then(() => {
-  i18n.setLocale('fr')
+  i18n.setLocale('de')
   i18n.setFallbacks(['fr', 'de', 'en'])
 
   RiotPlugins.setup(riot)

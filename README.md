@@ -30,7 +30,7 @@ Install required libraries
     npm install
 
 Start elastichsearch so that it accepts connections at `http://127.0.0.1:9200`.
-You may install (docker)[https://docker.com] and run
+You may install [docker](https://docker.com) and run
 
     npm run elastic
 
