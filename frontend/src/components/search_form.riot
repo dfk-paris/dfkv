@@ -4,11 +4,11 @@
     href="#"
   >{t('reset')}</a>
   <div class="dfk-sans-serif fw-bold mb-4">
-    {t('search_criteria')}
+    {cap(t('search_criteria'))}
   </div>
 
   <dfk-input
-    placeholder={t('fulltext_search')}
+    placeholder={cap(t('fulltext_search'))}
     type="text"
     name="terms"
     update-handler={this.delayedUpdateUrl}
@@ -28,7 +28,7 @@
 
   <div if={hasActiveFilters()} class="dfkv-active-filters">
     <div class="dfkv-bar"></div>
-    <div class="dfk-sans-serif fw-bold my-4 fs-2">{t('your_selection')}</div>
+    <div class="dfk-sans-serif fw-bold my-4 fs-2">{cap(t('your_selection'))}</div>
 
     <dfk-active-filters
       criteria={props.criteria}
@@ -37,13 +37,13 @@
     />
   </div>
 
-  <div class="dfk-sans-serif fw-bold my-6 fs-2">{t('filters')}</div>
+  <div class="dfk-sans-serif fw-bold my-6 fs-2">{cap(t('filters'))}</div>
 
   <dfk-facet
     if={props.results}
     tag_line={t('people_facet_tag_line')}
-    name={t('people')}
-    text={t('people_facet_text')}
+    name={cap(t('people'))}
+    text={cap(t('people_facet_text'))}
     criteria={props.criteria}
     aggregation={props.results.aggregations().involved}
     add-filter={newFilter => addFilter('involved', newFilter)}
@@ -53,7 +53,7 @@
 
   <dfk-facet
     if={props.results}
-    name={t('authors')}
+    name={cap(t('authors'))}
     aggregation={props.results.aggregations().creator}
     add-filter={newFilter => addFilter('creator', newFilter)}
     type={'creator'}
@@ -63,8 +63,8 @@
   <dfk-facet
     if={props.results}
     tag_line={t('journal_facet_tag_line')}
-    name={t('journals')}
-    text={t('journal_facet_text')}
+    name={cap(t('journals'))}
+    text={cap(t('journal_facet_text'))}
     criteria={props.criteria}
     aggregation={props.results.aggregations().journal}
     add-filter={newFilter => addFilter('journal', newFilter)}
@@ -74,7 +74,7 @@
 
   <dfk-facet
     if={props.results}
-    name={t('text_type')}
+    name={cap(t('text_type'))}
     criteria={props.criteria}
     aggregation={props.results.aggregations().type}
     add-filter={newFilter => addFilter('type', newFilter)}

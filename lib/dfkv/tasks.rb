@@ -262,7 +262,6 @@ module Dfkv::Tasks
       record = headers.zip(values).to_h.reject do |k, v|
         k.nil? || v.nil? || v == ''
       end
-      # binding.pry if sheet_name == 'Data_complet'
       results[record[primary_key]] = record
     end
     
