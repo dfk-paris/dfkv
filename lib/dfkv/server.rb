@@ -92,7 +92,11 @@ class Dfkv::Server
         content_type: 'application/json'
       }.merge(options)
 
+      headers = {
+        'content-type' => options[:content_type],
+        'access-control-allow-origin' => '*'
+      }
       body = (body == nil ? [] : [body])
-      [options[:status], {'content-type' => options[:content_type]}, body]
+      [options[:status], headers, body]
     end
 end
