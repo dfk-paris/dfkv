@@ -1,7 +1,8 @@
 # Deutsch-Französische Kunstvermittlung 1871–1940 und 1945-1960 (database)
 
 This is the database project for 
-[Deutsch-Französische Kunstvermittlung 1871–1940 und 1945-1960](https://dfk-paris.org/de/page/deutsch-französische-kunstvermittlung-1871–1940-und-1945-1960-datenbank-2391.html) at the [DFK Paris](https://dfk-paris.org).
+[Deutsch-Französische Kunstvermittlung 1871–1940 und 1945-1960](https://dfk-paris.org/de/node/2391)
+at the [DFK Paris](https://dfk-paris.org).
 
 The application is implemented as a set of
 [riot.js v6.1](https://riot.js.org/) widgets and a backend
