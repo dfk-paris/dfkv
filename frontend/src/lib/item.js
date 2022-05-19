@@ -67,7 +67,7 @@ export default class Item {
 
   editor() {
     const r = this.data['_source']['editor']
-    return r ? l['label'] : null
+    return r ? r['label'] : null
   }
 
   year() {
