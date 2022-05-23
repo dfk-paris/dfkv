@@ -93,8 +93,7 @@ class Dfkv::Server
       }.merge(options)
 
       headers = {
-        'content-type' => options[:content_type],
-        'access-control-allow-origin' => '*'
+        'content-type' => options[:content_type]
       }
       body = (body == nil ? [] : [body])
       [options[:status], headers, body]
