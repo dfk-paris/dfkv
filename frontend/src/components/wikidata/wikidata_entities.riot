@@ -1,0 +1,66 @@
+<wikidata-entities>
+  <template if={state.records}>
+    <h1 style="text-transform: uppercase;">
+      {state.initial}
+    </h1>
+
+    <small>{state.records.length}</small>
+
+    <ul>
+      <li each={record in state.records}>
+        {record['label']}
+
+        <div>
+          <dfk-authority-link
+            each={k in Object.keys(record['refs'])}
+            type={k}
+            id={record['refs'][k]}
+          />
+        </div>
+      </li>
+    </ul>
+  </template>
+
+  <script>
+    import Search from '../../lib/wikidata/search'
+    import {Url} from '@wendig/lib'
+
+    import AuthorityLink from '../authority_link.riot'
+
+    export default class {
+      static components = {
+        'dfk-authority-link': AuthorityLink
+      }
+
+      constructor() {
+        this.urlChanged = this.urlChanged.bind(this)
+      }
+
+      onBeforeMount(props, state) {
+        this.search = new Search()
+
+        window.addEventListener('hashchange', this.urlChanged)
+        this.urlChanged()
+      }
+
+      onUnmounted() {
+        window.removeEventListener('hashchange', this.urlChanged)
+      }
+
+      urlChanged(event) {
+        const url = Url.current()
+        const initial = url.hashParams()['initial']
+
+        this.search.register(initial).then(data => {
+          console.log('RECEIVED', data)
+
+          this.update({
+            initial: data.initial,
+            records: data.records
+          })
+        })
+      }
+
+    }
+  </script>
+</wikidata-entities>

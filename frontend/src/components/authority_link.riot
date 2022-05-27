@@ -1,43 +1,52 @@
 <dfk-authority-link>
-  <template if={props.id}>
+  <template if={active()}>
     <a
-      if={props.type == 'wikidata'}
-      href="https://www.wikidata.org/wiki/{props.id}"
+      href={url()}
       class="d-block"
       target="_blank"
       rel="noopener"
-    >Wikidata</a>
-
-    <a
-      if={props.type == 'ulan'}
-      href="http://vocab.getty.edu/page/{props.id}"
-      class="d-block"
-      target="_blank"
-      rel="noopener"
-    >Getty ULAN</a>
-
-    <a
-      if={props.type == 'gnd'}
-      href="https://d-nb.info/gnd/{props.id}"
-      class="d-block"
-      target="_blank"
-      rel="noopener"
-    >GND</a>
-
-    <a
-      if={props.type == 'viaf'}
-      href="https://viaf.org/viaf/{props.id}"
-      class="d-block"
-      target="_blank"
-      rel="noopener"
-    >VIAF</a>
-
-    <a
-      if={props.type == 'bnf'}
-      href="https://catalogue.bnf.fr/ark:/12148/{props.id}"
-      class="d-block"
-      target="_blank"
-      rel="noopener"
-    >BNF</a>
+    >{label()}</a>
   </template>
+
+  <script>
+    const labels = {
+      'wikidata': 'Wikidata',
+      'ulan': 'Getty ULAN',
+      'gnd': 'GND',
+      'viaf': 'VIAF',
+      'bnf': 'BNF',
+      'dfk': 'DFK',
+      'pb': 'Palais Beauharnais',
+      'or': 'OwnReality',
+      'dfkv': 'DFKV'
+    }
+
+    const urls = {
+      'wikidata': (id) => `https://www.wikidata.org/wiki/${id}`,
+      'ulan': (id) => `http://vocab.getty.edu/page/${id}`,
+      'gnd': (id) => `https://d-nb.info/gnd/${id}`,
+      'viaf': (id) => `https://viaf.org/viaf/${id}`,
+      'bnf': (id) => `https://catalogue.bnf.fr/ark:/12148/${id}`,
+      'dfk': (id) => `https://dfk-paris.org/people/${id}`,
+      'pb': (id) => `https://dfk-paris.org/pb/people/${id}`,
+      'or': (id) => `https://dfk-paris.org/or/people/${id}`,
+      'dfkv': (id) => `https://dfk-paris.org/dfkv/people/${id}`
+    }
+
+    export default class {
+      label() {
+        return labels[this.props.type]
+      }
+
+      url() {
+        return urls[this.props.type](this.props.id)
+      }
+
+      active() {
+        if (!this.props.id) {return false}
+
+        return true
+      }
+    }    
+  </script>
 </dfk-authority-link>

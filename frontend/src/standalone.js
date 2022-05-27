@@ -6,6 +6,7 @@ import {i18n, RiotPlugins} from '@wendig/lib'
 
 import Search from './components/dfkv/search.riot'
 import WatchlistTrigger from './components/dfkv/watchlist_trigger.riot'
+import WikidataEntities from './components/wikidata/wikidata_entities.riot'
 
 i18n.fetch(`${staticUrl}/translations.json`).then(() => {
   i18n.setLocale('de')
@@ -18,6 +19,7 @@ i18n.fetch(`${staticUrl}/translations.json`).then(() => {
   riot.install(BusRiotPlugin)
 
   riot.register('dfkv', Search)
+  riot.register('wikidata-entities', WikidataEntities)
   riot.register('dfkv-watchlist-trigger', WatchlistTrigger)
 
   riot.mount('[is]')
