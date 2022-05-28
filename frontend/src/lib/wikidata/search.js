@@ -11,37 +11,52 @@ worker.onmessage = event => {
   }
 }
 
-export default class Search {
+class Search {
   constructor() {
     instanceRegistry.push(this)
 
-    this.listeners = {}
+    // this.listeners = {}
     this.resolveMap = {}
+  }
+
+  destruct() {
+    const index = instanceRegistry.indexOf(this)
+    if (index != -1) {
+      instanceRegistry.splice(index, 1)
+    }
   }
 
   onResponse(event) {
     const data = event.data
-    const action = data.action
-    const listeners = this.listeners[action] || []
+    // const action = data.action
+    // const listeners = this.listeners[action] || []
 
-    for (const l of listeners) {
-      l(data)
-    }
+    // for (const l of listeners) {
+      // l(data)
+    // }
 
     const resolve = this.resolveMap[data.messageId]
     if (resolve) {
-      resolve(data)
       delete this.resolveMap[data.messageId]
+      resolve(data)
     }
   }
 
-  register(initial) {
-    return this.postMessage({action: 'register', initial: initial})
+  counts() {
+    return this.postMessage({action: 'counts'})
   }
 
-  lookup(id) {
-    return this.postMessage({action: 'lookup', id: id})
+  // register(initial) {
+  //   return this.postMessage({action: 'register', initial: initial})
+  // }
+
+  query(criteria) {
+    return this.postMessage({action: 'query', criteria})
   }
+
+  // lookup(id) {
+  //   return this.postMessage({action: 'lookup', id: id})
+  // }
 
   postMessage(data) {
     const newId = messageId
@@ -56,9 +71,8 @@ export default class Search {
 
     return promise
   }
-
-  addListener(action, f) {
-    this.listeners[action] = this.listeners[action] || []
-    this.listeners[action].push(f)
-  }
 }
+
+const search = new Search()
+
+export default search

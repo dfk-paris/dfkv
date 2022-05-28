@@ -1,0 +1,29 @@
+<wikidata-pie-chart>
+  <pie-chart
+    if={state.data}
+    size="200px"
+    hole-size="50%"
+    data={state.data}
+  />
+
+  <script>
+    import search from '../../lib/wikidata/search'
+
+    import PieChart from '../pie_chart.riot'
+
+    export default class {
+      static components = {
+        'pie-chart': PieChart
+      }
+
+      onBeforeMount(props, state) {
+        search.counts().then(data => {
+          this.update({data: {
+            'Wikidata': {value: data.noRef, color: '#333333'},
+            'no reference': {value: data.wikidata, color: '#eeeeee'}
+          }})
+        })
+      }
+    }
+  </script>
+</wikidata-pie-chart>

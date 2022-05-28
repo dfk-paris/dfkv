@@ -106,17 +106,17 @@
         this.t = i18n.translate
       }
 
-      updateUrl() {
-        const newParams = {...this.inputValues(), page: 1}
-        this.props.onInputsChanged(newParams)
-      }
-
       inputValues() {
         const result = {}
         for (const input of this.tags['dfk-input']) {
           result[input.getName()] = input.getValue()
         }
         return result
+      }
+
+      updateUrl() {
+        const newParams = {...this.inputValues(), page: 1}
+        this.props.onInputsChanged(newParams)
       }
 
       delayedUpdateUrl(event) {

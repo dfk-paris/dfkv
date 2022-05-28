@@ -1,0 +1,32 @@
+pie-chart, [is='pie-chart'] {
+  .chart {
+    display: flex;
+    align-items: center;
+  }
+
+  .pie {
+    width: var(--size);
+    height: var(--size);
+
+    background: var(--gradient-data);
+    border-radius: 50%;
+
+    mask-image: radial-gradient(transparent var(--hole-size), white var(--hole-size));
+    -webkit-mask-image: radial-gradient(transparent var(--hole-size), white var(--hole-size));
+  }
+
+  .legend {
+    margin-left: 3%;
+  }
+
+  .item {
+    margin-bottom: 5px;
+  }
+
+  .dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+  }
+}

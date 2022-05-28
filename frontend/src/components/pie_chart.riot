@@ -1,0 +1,61 @@
+<pie-chart>
+  <div class="chart">
+    <div class="pie"></div>
+    <div class="legend">
+      <div
+        each={k in Object.keys(props.data)}
+        class="item"
+      >
+        <span
+          class="dot"
+          style="background-color: {props.data[k]['color']}"
+        ></span>
+        {k}
+      </div>
+    </div>
+  </div>
+
+  <script>
+    export default class {
+      onMounted() {
+        this.setCssProperties()
+      }
+
+      onUpdated(props, state) {
+        this.setCssProperties()
+      }
+
+      total() {
+        let result = 0
+        for (const d of Object.values(this.props.data)) {
+          result += d['value']
+        }
+        return result
+      }
+
+      setCssProperties() {
+        this.root.style.setProperty('--size', this.props.size || '300px')
+        this.root.style.setProperty('--hole-size', this.props.holeSize || '50%')
+        this.root.style.setProperty('--gradient-data', this.gradient())
+      }
+
+      gradient() {
+        let ranges = []
+        let current = 0
+        const t = this.total()
+
+        for (const [k, d] of Object.entries(this.props.data)) {
+          const v = parseInt(d['value']) / t * 360
+          ranges.push(`${d['color']} ${current}deg ${current + v}deg`)
+          current += v
+        }
+
+        return [
+          "conic-gradient(",
+          ranges.join(', '),
+          ")"
+        ].join('')
+      }
+    }
+  </script>
+</pie-chart>

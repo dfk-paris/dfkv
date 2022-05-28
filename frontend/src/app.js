@@ -9,6 +9,7 @@ import {i18n, RiotPlugins} from '@wendig/lib'
 import Search from './components/dfkv/search.riot'
 import WatchlistTrigger from './components/dfkv/watchlist_trigger.riot'
 import WikidataEntities from './components/wikidata/wikidata_entities.riot'
+import WikidataPieChart from './components/wikidata/pie_chart.riot'
 
 i18n.fetch(`${staticUrl}/translations.json`).then(() => {
   const url = document.location.href
@@ -24,6 +25,7 @@ i18n.fetch(`${staticUrl}/translations.json`).then(() => {
 
   riot.register('dfkv', Search)
   riot.register('wikidata-entities', WikidataEntities)
+  riot.register('wikidata-pie-chart', WikidataPieChart)
   riot.register('dfkv-watchlist-trigger', WatchlistTrigger)
 
   riot.mount('[is]')

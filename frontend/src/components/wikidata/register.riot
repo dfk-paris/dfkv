@@ -1,0 +1,56 @@
+<wikidata-register class="d-flex justify-content-between">
+  <a
+    each={letter in letters()}
+    class="me-1 {activeClass(letter)}"
+    onclick={event => toLetter(letter, event)}
+  >{letter.toUpperCase()}</a>
+
+  <script>
+    import {Url} from '@wendig/lib'
+
+    export default class {
+      constructor() {
+        this.urlChanged = this.urlChanged.bind(this)
+      }
+
+      onBeforeMount(props, state) {
+        window.addEventListener('hashchange', this.urlChanged)
+        this.urlChanged(null, false)
+      }
+
+      onUnmounted() {
+        window.removeEventListener('hashchange', this.urlChanged)
+      }
+
+      urlChanged(event, update = true) {
+        const url = Url.current()
+        const letter = url.hashParams()['letter'] || 'a'
+        this.state.current = letter
+        if (update) {this.update()}
+      }
+
+      toLetter(letter, event) {
+        event.preventDefault()
+
+        const url = Url.current()
+        url.updateHashParams({letter, page: 1})
+        url.apply()
+      }
+
+      letters() {
+        if (!this.props.aggs) {return []}
+
+        console.log(this.props.aggs)
+        return Object.keys(this.props.aggs.letters).sort()
+      }
+
+      activeClass(letter) {
+        return (
+          letter == this.state.current ?
+          'text-decoration-underline fw-bold' :
+          'text-decoration-none'
+        )
+      }
+    }
+  </script>
+</wikidata-register>

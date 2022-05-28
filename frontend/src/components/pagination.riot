@@ -3,7 +3,7 @@
     <a
       onclick={event => pageTo(1, event)}
       href="#"
-      class="dfkv-first text-decoration-none dfk-sans-serif {show(!isFirst())}"
+      class="first text-decoration-none dfk-sans-serif {show(!isFirst())}"
     >
       <dfk-icon type="arrow-left" />
       <dfk-icon type="arrow-left" />
@@ -12,16 +12,16 @@
     <a
       onclick={event => pageTo(this.props.page - 1, event)}
       href="#"
-      class="dfkv-previous text-decoration-none dfk-sans-serif {show(!isFirst())}"
+      class="previous text-decoration-none dfk-sans-serif {show(!isFirst())}"
     >
       <dfk-icon type="arrow-left" />
       <span class="text">vorherige Seite</span>
     </a>
-    <div class="mx-4 pt-1">{this.props.page}/{totalPages()}</div>
+    <div class="pt-1 indicator">{this.props.page}/{totalPages()}</div>
     <a
       onclick={event => pageTo(this.props.page + 1, event)}
       href="#"
-      class="dfkv-next text-decoration-none dfk-sans-serif {show(!isLast())}"
+      class="next text-decoration-none dfk-sans-serif {show(!isLast())}"
     >
       <span class="text">nächste Seite</span>
       <dfk-icon type="arrow-right" />
@@ -29,7 +29,7 @@
     <a
       onclick={event => pageTo(totalPages(), event)}
       href="#"
-      class="dfkv-last text-decoration-none dfk-sans-serif {show(!isLast())}"
+      class="last text-decoration-none dfk-sans-serif {show(!isLast())}"
     >
       <span class="text">letzte Seite</span>
       <dfk-icon type="arrow-right" />
@@ -76,7 +76,7 @@
         if (event) {
           event.preventDefault()
         }
-        
+
         if (this.props.pageTo) {
           this.props.pageTo(newPage)
         }

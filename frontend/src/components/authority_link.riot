@@ -1,11 +1,22 @@
 <dfk-authority-link>
   <template if={active()}>
-    <a
-      href={url()}
-      class="d-block"
-      target="_blank"
-      rel="noopener"
-    >{label()}</a>
+    <template if={props.linkifyId}>
+      {label()} ID&nbsp;
+      <a
+        href={url()}
+        target="_blank"
+        rel="noopener"
+      >{this.props.id}</a>
+    </template>
+
+    <template if={!props.linkifyId}>
+      <a
+        href={url()}
+        class="d-block"
+        target="_blank"
+        rel="noopener"
+      >{label()}</a>
+    </template>
   </template>
 
   <script>
