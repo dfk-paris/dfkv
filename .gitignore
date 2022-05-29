@@ -1,4 +1,5 @@
 /.env.production
+/.env.ng
 
 /node_modules/
 
