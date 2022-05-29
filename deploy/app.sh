@@ -38,5 +38,5 @@ function configure {
   source deploy/lib.sh
 }
 
-configure
+configure $1
 deploy
