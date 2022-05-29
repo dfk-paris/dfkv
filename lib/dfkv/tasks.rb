@@ -67,19 +67,21 @@ module Dfkv::Tasks
   end
 
   def self.index
-    records = read_excel(ENV['DATA_FILE_RECORDS'], 'Data_complet')
-    volumes = read_excel(ENV['DATA_FILE_MASTER'], 'Volume_ID')
-    journals = read_excel(ENV['DATA_FILE_MASTER'], 'Journal')
-    text_types = read_excel(ENV['DATA_FILE_MASTER'], 'Type de texte')
-    tags = read_excel(ENV['DATA_FILE_MASTER'], 'Sujets')
-    categories = read_excel(ENV['DATA_FILE_MASTER'], 'Rubrique')
-    locations = read_excel(ENV['DATA_FILE_MASTER'], 'Lieu de publication')
-    editors = read_excel(ENV['DATA_FILE_MASTER'], "editeurs")
-    people = read_excel(ENV['DATA_FILE_MASTER'], "Personnes")
-    roles = read_excel(ENV['DATA_FILE_MASTER'], "Rôles de personnes")
-    attribs = read_excel(ENV['DATA_FILE_MASTER'], "Attributs")
-    projects = read_excel(ENV['DATA_FILE_MASTER'], 'Projets')
-    translations = read_excel(ENV['DATA_TRANSLATIONS'], "translations")
+    records = read_excel('data/DFKV_Data_complet.xlsx', 'Data_complet')
+    volumes = read_excel('data/DFKV_Master.xlsx', 'Volume_ID')
+    journals = read_excel('data/DFKV_Master.xlsx', 'Journal')
+    text_types = read_excel('data/DFKV_Master.xlsx', 'Type de texte')
+    tags = read_excel('data/DFKV_Master.xlsx', 'Sujets')
+    categories = read_excel('data/DFKV_Master.xlsx', 'Rubrique')
+    locations = read_excel('data/DFKV_Master.xlsx', 'Lieu de publication')
+    editors = read_excel('data/DFKV_Master.xlsx', "editeurs")
+    people = read_excel('data/DFKV_Master.xlsx', "Personnes")
+    roles = read_excel('data/DFKV_Master.xlsx', "Rôles de personnes")
+    attribs = read_excel('data/DFKV_Master.xlsx', "Attributs")
+    projects = read_excel('data/DFKV_Master.xlsx', 'Projets')
+    translations = 
+      read_excel('data/translations.dfkv.xlsx', "translations").
+      merge(read_excel('data/translations.wikidata.xlsx', "translations"))
 
     # orders = {}
     # with_csv '/path/to/record_sujet_order.csv' do |row|

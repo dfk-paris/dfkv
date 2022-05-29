@@ -425,5 +425,9 @@
   "wikidata": {
     "id": "wikidata",
     "de": "Wikdata"
+  },
+  "": {
+    "filter_ref": "wikidata",
+    "Normdatenbank": "Wikdata"
   }
 }

@@ -40,7 +40,7 @@
       page={props.criteria.page || 1}
       per-page={props.criteria.per_page || 10}
       total={props.results.total()}
-      page-to={page => this.toPage(page)}
+      page-to={values => this.onInput(values)}
     />
   </div>
 
@@ -94,8 +94,8 @@
         })
       }
 
-      toPage(newPage) {
-        this.props.onInputsChanged({page: newPage}, false)
+      onInput(values) {
+        this.props.onInputsChanged(values, false)
       }
 
       toTab(newTab) {

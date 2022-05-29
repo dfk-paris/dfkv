@@ -33,7 +33,7 @@
     <dfk-active-filters
       criteria={props.criteria}
       params={['creator', 'journal', 'involved', 'type']}
-      remove-filter={(param, value) => removeFilter(param, value)}
+      remove-filter={values => updateFilters(values)}
     />
   </div>
 
@@ -46,7 +46,7 @@
     text={cap(t('people_facet_text'))}
     criteria={props.criteria}
     aggregation={props.results.aggregations().involved}
-    add-filter={newFilter => addFilter('involved', newFilter)}
+    add-filter={values => updateFilters(values)}
     type={'involved'}
     class="d-block mb-6"
   />
@@ -55,7 +55,7 @@
     if={props.results}
     name={cap(t('authors'))}
     aggregation={props.results.aggregations().creator}
-    add-filter={newFilter => addFilter('creator', newFilter)}
+    add-filter={values => updateFilters(values)}
     type={'creator'}
     class="d-block mb-6"
   />
@@ -67,7 +67,7 @@
     text={cap(t('journal_facet_text'))}
     criteria={props.criteria}
     aggregation={props.results.aggregations().journal}
-    add-filter={newFilter => addFilter('journal', newFilter)}
+    add-filter={values => updateFilters(values)}
     type={'journal'}
     class="d-block mb-6"
   />
@@ -77,7 +77,7 @@
     name={cap(t('text_type'))}
     criteria={props.criteria}
     aggregation={props.results.aggregations().type}
-    add-filter={newFilter => addFilter('type', newFilter)}
+    add-filter={values => updateFilters(values)}
     type={'type'}
     class="d-block mb-6"
   />
@@ -139,28 +139,34 @@
         return last ? parseInt(last.key_as_string) : 1978
       }
 
-      addFilter(param, value) {
-        let current = this.props.criteria[param]
-        current = current ? current.split('|') : []
-        const index = current.indexOf(value)
+      updateFilters(values) {
+        const url = Url.current()
+        url.updateHashParams(values)
+        url.apply()
 
-        if (index == -1) {
-          current.push(value)
-          this.props.onInputsChanged({[param]: current.join('|')})
-        }
+        // for (const [param, value] of Object.entries(values)) {
+        //   let current = this.props.criteria[param]
+        //   current = current ? current.split('|') : []
+        //   const index = current.indexOf(value)
+
+        //   if (index == -1) {
+        //     current.push(value)
+        //     this.props.onInputsChanged({[param]: current.join('|')})
+        //   }
+        // }
       }
 
-      removeFilter(param, value) {
-        let current = this.props.criteria[param]
-        current = (current ? current.split('|') : [])
-        const index = current.indexOf(value)
+      // removeFilter(param, value) {
+      //   let current = this.props.criteria[param]
+      //   current = (current ? current.split('|') : [])
+      //   const index = current.indexOf(value)
 
-        if (index != -1) {
-          current.splice(index, 1)
-          const newValue = (current.length == 0 ? null : current.join('|'))
-          this.props.onInputsChanged({[param]: newValue})
-        }
-      }
+      //   if (index != -1) {
+      //     current.splice(index, 1)
+      //     const newValue = (current.length == 0 ? null : current.join('|'))
+      //     this.props.onInputsChanged({[param]: newValue})
+      //   }
+      // }
 
       hasActiveFilters() {
         for (const k of ['creator', 'journal', 'involved', 'type']) {
