@@ -18,7 +18,12 @@
     export default class {
       onChange(event) {
         if (this.props.updateHandler) {
-          this.props.updateHandler(event, this.getValue())
+          let values = {[this.props.name]: this.getValue()}
+          if (this.props.resetPage) {
+            values['page'] = null
+          }
+
+          this.props.updateHandler(values)
         }
       }
 

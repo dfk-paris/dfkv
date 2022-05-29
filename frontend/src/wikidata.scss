@@ -1,7 +1,25 @@
 wikidata-entities, [is='wikidata-entities'] {
-  // dfk-pagination {
-  //   .dfkv-first {
-  //     margin-left: 0;
-  //   }
-  // }
+  wikidata-register {
+    a {
+      padding-left: 4px;
+      padding-right: 4px;
+      margin-left: 3px;
+      margin-right: 3px
+    }
+
+    a:first-child {
+      margin-left: 0;
+      padding-left: 0;
+    }
+
+    a:last-child {
+      margin-rignt: 0;
+      padding-right: 0;
+    }
+  }
+
+}
+
+a.type-ref {
+  background-color: $tag-gray;
 }

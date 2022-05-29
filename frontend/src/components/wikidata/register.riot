@@ -1,7 +1,7 @@
-<wikidata-register class="d-flex justify-content-between">
+<wikidata-register class="d-flex justify-content-start">
   <a
     each={letter in letters()}
-    class="me-1 {activeClass(letter)}"
+    class="{activeClass(letter)}"
     onclick={event => toLetter(letter, event)}
   >{letter.toUpperCase()}</a>
 
@@ -9,44 +9,33 @@
     import {Url} from '@wendig/lib'
 
     export default class {
-      constructor() {
-        this.urlChanged = this.urlChanged.bind(this)
-      }
-
-      onBeforeMount(props, state) {
-        window.addEventListener('hashchange', this.urlChanged)
-        this.urlChanged(null, false)
-      }
-
-      onUnmounted() {
-        window.removeEventListener('hashchange', this.urlChanged)
-      }
-
-      urlChanged(event, update = true) {
-        const url = Url.current()
-        const letter = url.hashParams()['letter'] || 'a'
-        this.state.current = letter
-        if (update) {this.update()}
-      }
-
       toLetter(letter, event) {
-        event.preventDefault()
+        if (event) {
+          event.preventDefault()
+        }
 
-        const url = Url.current()
-        url.updateHashParams({letter, page: 1})
-        url.apply()
+        this.props.onChange({letter, page: 1})
       }
 
       letters() {
-        if (!this.props.aggs) {return []}
+        if (!this.props.aggregation) {return []}
 
-        console.log(this.props.aggs)
-        return Object.keys(this.props.aggs.letters).sort()
+        return Object.keys(this.props.aggregation).sort()
+      }
+
+      current() {
+        const candidate = this.props.value
+
+        if (this.letters().includes(candidate)) {
+          return candidate
+        } else {
+          return this.letters()[0]
+        }
       }
 
       activeClass(letter) {
         return (
-          letter == this.state.current ?
+          letter == this.current() ?
           'text-decoration-underline fw-bold' :
           'text-decoration-none'
         )

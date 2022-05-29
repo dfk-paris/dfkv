@@ -59,7 +59,7 @@
     >
       <div class="d-flex">
         <div>+</div>
-        <div class="ml-1">{bucket.key} ({bucket.doc_count})</div>
+        <div class="ml-1">{labelFor(bucket.key)} ({bucket.doc_count})</div>
       </div>
     </a>
   </div>
@@ -105,7 +105,17 @@
         event.preventDefault()
 
         if (this.props.addFilter) {
-          this.props.addFilter(newFilter)
+          let c = this.props.value
+          if (c) {
+            c = c.split('|')
+          } else {
+            c = []
+          }
+          c.push(newFilter)
+
+          this.props.addFilter({
+            [this.props.type]: c.join('|')
+          })
         }
       }
 
@@ -162,6 +172,14 @@
           this.update({popup: !this.state.popup})
         } else {
           this.update({expanded: !this.state.open})
+        }
+      }
+
+      labelFor(key) {
+        if (this.props.translateKeys) {
+          return this.t(key)
+        } else {
+          return key
         }
       }
 

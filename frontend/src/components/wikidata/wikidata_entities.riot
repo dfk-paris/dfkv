@@ -5,22 +5,51 @@
         placeholder="Search for Wikidata Q Number or Name"
         type="text"
         name="terms"
-        update-handler={this.delayedUpdateUrl}
-        value={state.terms}
+        update-handler={onDelayedInput}
+        value={state.criteria.terms}
+      />
+
+      <div if={hasActiveFilters()} class="dfkv-active-filters">
+        <div class="dfkv-bar"></div>
+        <div class="dfk-sans-serif fw-bold my-4 fs-2">{cap(t('your_selection'))}</div>
+
+        <dfk-active-filters
+          criteria={state.criteria}
+          params={['ref']}
+          remove-filter={onInput}
+          translate-keys={true}
+        />
+      </div>
+
+      <div class="dfk-sans-serif fw-bold my-6 fs-2">{cap(t('filters'))}</div>
+
+      <dfk-facet
+        if={state.records}
+        name={cap(t('refs'))}
+        type="ref"
+        value={state.criteria.ref}
+        aggregation={state.aggs.refs}
+        add-filter={onInput}
+        class="d-block mb-6"
+        translate-keys={true}
       />
     </div>
     <div class="w-60">
       <template if={state.records}>
-        <wikidata-register aggs={state.aggs} />
+        <wikidata-register
+          aggregation={state.aggs.letters}
+          value={state.criteria.letter}
+          on-change={onInput}
+        />
 
         <small class="d-block my-4">{state.total}</small>
 
         <dfk-pagination
           class="mt-3 pb-3 border-bottom justify-content-start"
-          page={state.page}
+          page={state.criteria.page}
           total={state.total}
           per-page={20}
-          page-to={pageTo}
+          page-to={onInput}
         />
 
         <ul class="list-unstyled">
@@ -41,6 +70,7 @@
                 type={k}
                 id={record['refs'][k]}
                 linkify-id={true}
+                class="d-block"
               />
             </div>
           </li>
@@ -53,6 +83,10 @@
     import search from '../../lib/wikidata/search'
     import {Url} from '@wendig/lib'
 
+    import {UrlSearch, params} from '../../lib/url_search'
+
+    import DfkActiveFilters from '../active_filters.riot'
+    import DfkFacet from '../facet.riot'
     import DfkInput from '../input.riot'
     import DfkAuthorityLink from '../authority_link.riot'
     import DfkPagination from '../pagination.riot'
@@ -60,6 +94,8 @@
 
     export default class {
       static components = {
+        'dfk-active-filters': DfkActiveFilters,
+        'dfk-facet': DfkFacet,
         'dfk-input': DfkInput,
         'dfk-authority-link': DfkAuthorityLink,
         'dfk-pagination': DfkPagination,
@@ -67,60 +103,33 @@
       }
 
       constructor() {
-        this.urlChanged = this.urlChanged.bind(this)
-        this.delayedUpdateUrl = this.delayedUpdateUrl.bind(this)
-        this.onInput = this.onInput.bind(this)
+        this.urlSearch = new UrlSearch(this)
       }
 
       onBeforeMount(props, state) {
-        window.addEventListener('hashchange', this.urlChanged)
-        this.urlChanged()
+        this.urlSearch.setup()
       }
 
       onUnmounted() {
-        window.removeEventListener('hashchange', this.urlChanged)
+        this.urlSearch.teardown()
       }
 
-      onInput() {
-        const terms = this.root.querySelector('input').value
-
-        const url = Url.current()
-        url.updateHashParams({terms})
-        url.apply()
+      hasActiveFilters() {
+        return !!this.state.criteria['ref']
       }
 
-      delayedUpdateUrl(event) {
-        if (this.timeout) {
-          window.clearTimeout(this.timeout)
-          this.timeout = null
-        }
+      onSearch(p) {
+        p['letter'] = p['letter'] || 'a'
 
-        this.timeout = window.setTimeout(this.onInput, 300)
-      }
-
-      pageTo(newPage) {
-        const url = Url.current()
-        url.updateHashParams({page: newPage})
-        url.apply()
-      }
-
-      urlChanged(event) {
-        const url = Url.current()
-        const {letter, page, terms} = url.hashParams()
-
-        search.query({letter, page, terms}).then(data => {
+        search.query(p).then(data => {
           console.log(data)
-
           this.update({
             records: data.results,
             aggs: data.aggs,
-            page: data.page,
-            terms: data.terms,
             total: data.total
           })
         })
       }
-
     }
   </script>
 </wikidata-entities>

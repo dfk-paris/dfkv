@@ -7,7 +7,7 @@
     >
       <div class="d-flex">
         <div>×</div>
-        <div class="ml-1">{t(`filter_${filter.param}`)}: {filter.value}</div>
+        <div class="ml-1">{t(`filter_${filter.param}`)}: {labelFor(filter.value)}</div>
       </div>
     </a>
   </div>
@@ -18,7 +18,19 @@
         event.preventDefault()
 
         if (this.props.removeFilter) {
-          this.props.removeFilter(param, value)
+          let c = this.props.criteria[param]
+          if (c) {
+            c = c.split('|')
+          } else {
+            c = []
+          }
+
+          const i = c.indexOf(value)
+          c.splice(i, 1)
+
+          this.props.removeFilter({
+            [param]: (c.length ? c.join('|') : null)
+          })
         }
       }
 
@@ -35,6 +47,14 @@
       values(param) {
         const str = this.props.criteria[param]
         return str ? str.split('|') : []
+      }
+
+      labelFor(key) {
+        if (this.props.translateKeys) {
+          return this.t(key)
+        } else {
+          return key
+        }
       }
     }
   </script>

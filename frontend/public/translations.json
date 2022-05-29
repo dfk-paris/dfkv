@@ -401,5 +401,29 @@
     "de": "Ihre Auswahl",
     "fr": "votre sélection",
     "en": "your selection"
+  },
+  "filter_ref": {
+    "id": "filter_ref",
+    "de": "Normdatenbank"
+  },
+  "refs": {
+    "id": "refs",
+    "de": "Normdatenbanken"
+  },
+  "or": {
+    "id": "or",
+    "de": "OwnReality"
+  },
+  "pb": {
+    "id": "pb",
+    "de": "Palais Beauharnais"
+  },
+  "dfkv": {
+    "id": "dfkv",
+    "de": "DFKV"
+  },
+  "wikidata": {
+    "id": "wikidata",
+    "de": "Wikdata"
   }
 }

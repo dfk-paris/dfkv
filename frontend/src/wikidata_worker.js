@@ -35,11 +35,13 @@ db.action('register', (data) => {
 //   return {}
 // })
 
-db.action('query', (data) => {
+const query = (data) => {
   let results = storage['records']
 
   const c = data.criteria
   const terms = util.fold(c['terms'])
+  let ref = data.criteria['ref']
+  ref = (ref ? ref.split('|') : [])
 
   results = results.filter(record => {
     if (terms) {
@@ -54,18 +56,26 @@ db.action('query', (data) => {
       }
     }
 
+    for (const r of ref) {
+      if (!record[`${r}_id`]) {
+        return false
+      }
+    }
+
     return true
   })
 
   // aggregate
-  const refs = {}
-  const letters = {}
+  let refs = {}
+  let letters = {}
   for (const record of results) {
-    for (const ref of ['or', 'dfkv', 'pb', 'wikidata']) {
-      const id = record[`${ref}_id`]
+    for (const r of ['or', 'dfkv', 'pb', 'wikidata']) {
+      if (ref.includes(r)) {continue}
+
+      const id = record[`${r}_id`]
       if (id) {
-        refs[ref] = refs[ref] || 0
-        refs[ref] += 1
+        refs[r] = refs[r] || 0
+        refs[r] += 1
       }
     }
 
@@ -73,6 +83,7 @@ db.action('query', (data) => {
     letters[l] = letters[l] || 0
     letters[l] += 1
   }
+  refs = elastify(refs)
 
   // filter
   results = results.filter(record => {
@@ -88,21 +99,28 @@ db.action('query', (data) => {
 
   // paginate
   const total = results.length
-  const perPage = 20
+  const perPage = parseInt(c['per_page'] || '20')
   const page = parseInt(c['page'] || '1')
   results = results.slice((page - 1) * perPage, page * perPage)
 
+  // consistency checks
+  if (c['letter'] && !letters[c['letter']]) {
+    // we are selecting for a letter that would yield no results, so we repeat
+    // the search with the first letter that WOULD yield results
+    data['criteria']['letter'] = Object.keys(letters)[0]
+    return query(data)
+  }
+
   const response = {
-    page,
     total,
     results,
-    terms,
     aggs: {refs, letters}
   }
   
   console.log(response)
   return response
-})
+}
+db.action('query', query)
 
 db.action('counts', (data) => {
   return {
@@ -110,6 +128,18 @@ db.action('counts', (data) => {
     noRef: storage.records.length
   }
 })
+
+const elastify = (agg) => {
+  let result = []
+
+  for (const k of Object.keys(agg)) {
+    result.push({key: k, doc_count: agg[k]})
+  }
+
+  return {
+    buckets: util.sortBy(result, e => e.doc_count).reverse()
+  }
+}
 
 // const rootUrl = () => {
 //   const u = `${location.href}`
