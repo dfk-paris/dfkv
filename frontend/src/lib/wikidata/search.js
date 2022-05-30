@@ -1,10 +1,9 @@
 import Item from '../item'
-import {baseUrl} from '../../lib/util'
 
 let messageId = 10000
 let instanceRegistry = []
 
-const worker = new Worker(baseUrl + '/wikidata_worker.js', {credentials: 'same-origin'})
+const worker = new Worker(staticUrl + '/wikidata_worker.js', {credentials: 'same-origin'})
 worker.onmessage = event => {
   for (const instance of instanceRegistry) {
     instance.onResponse(event)

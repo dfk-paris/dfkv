@@ -156,8 +156,6 @@
 
 
   <script>
-    import {baseUrl} from '../lib/util'
-
     export default class {
       png() {
         const pngs = []
@@ -165,7 +163,7 @@
       }
 
       url() {
-        return `${baseUrl}/icons/${this.props.type}.png`
+        return `${staticUrl}/icons/${this.props.type}.png`
       }
     }
   </script>
