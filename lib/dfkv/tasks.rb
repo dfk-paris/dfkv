@@ -76,8 +76,6 @@ module Dfkv::Tasks
     locations = read_excel(ENV['DATA_FILE_MASTER'], 'Lieu de publication')
     editors = read_excel(ENV['DATA_FILE_MASTER'], "editeurs")
     people = read_excel(ENV['DATA_FILE_MASTER'], "Personnes")
-    roles = read_excel(ENV['DATA_FILE_MASTER'], "Rôles de personnes")
-    attribs = read_excel(ENV['DATA_FILE_MASTER'], "Attributs")
     projects = read_excel(ENV['DATA_FILE_MASTER'], 'Projets')
     translations = read_excel(ENV['DATA_TRANSLATIONS'], "translations")
 
