@@ -79,6 +79,7 @@ module Dfkv::Tasks
     roles = read_excel('data/DFKV_Master.xlsx', "Rôles de personnes")
     attribs = read_excel('data/DFKV_Master.xlsx', "Attributs")
     projects = read_excel('data/DFKV_Master.xlsx', 'Projets')
+
     translations = 
       read_excel('data/translations.dfkv.xlsx', "translations").
       merge(read_excel('data/translations.wikidata.xlsx', "translations"))
@@ -153,6 +154,7 @@ module Dfkv::Tasks
     # new_tags = []
 
     # records
+    out = []
     pb = Dfkv.progress_bar('indexing records', records.size)
     records.each do |record_id, record|
       record['tags'] = to_id_list(record['tags'])
@@ -238,11 +240,19 @@ module Dfkv::Tasks
         record
       ], batch_size: 500)
 
+      out << record
+
       pb.increment
     rescue => e
       puts e
       puts e.backtrace
       binding.pry
+    end
+
+    if ENV['DUMP_DATA_TO_DESKTOP'] == 'true'
+      File.open "#{ENV['HOME']}/Desktop/data.complete.json", 'w+' do |f|
+        f.write JSON.pretty_generate(out)
+      end
     end
 
     elastic.bulk_commit

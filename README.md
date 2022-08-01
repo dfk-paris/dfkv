@@ -8,6 +8,10 @@ The application is implemented as a set of
 [riot.js v6.1](https://riot.js.org/) widgets and a backend
 [rack](https://rack.github.io) application with Elasticsearch 7.16.
 
+# Data
+
+The data is stored as tabular data and alternatively as one JSON-document in the folder "data". An illustration (data.usage.pdf) shows the relations between the tabular data.
+
 # Development
 
 The application consists of a small ruby web API and a frontend to be embedded
