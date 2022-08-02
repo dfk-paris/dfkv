@@ -5,7 +5,9 @@ const path = require('path')
 
 module.exports = (env, argv) => {
   const mode = argv.mode || 'development'
+  const app_env = process.env.APP_ENV || 'development'
   dotenv.config({path: `.env.local`})
+  dotenv.config({path: `.env.${app_env}`})
   dotenv.config({path: '.env'})
   const useSsl = (process.env.USE_SSL == 'true')
 

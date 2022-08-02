@@ -10,9 +10,11 @@ export KEEP=5
 function ng {
   export DEPLOY_TO="/var/storage/host/dfkv-ng"
   export COMMIT="ng"
+  export APP_ENV="ng"
 }
 
 function production {
   export DEPLOY_TO="/var/storage/host/dfkv"
   export COMMIT="master"
+  export APP_ENV="production"
 }
