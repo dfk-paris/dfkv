@@ -53,6 +53,10 @@ class Search {
     return this.postMessage({action: 'query', criteria})
   }
 
+  ready() {
+    return this.postMessage({action: 'counts'})
+  }
+
   // lookup(id) {
   //   return this.postMessage({action: 'lookup', id: id})
   // }

@@ -1,0 +1,30 @@
+<wikidata-loading class="d-flex flex-column align-items-center">
+  <template if={!state.ready}>
+    <div class="lds-roller">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="mt-3">loading database ...</div>
+  </template>
+
+  <script>
+    import search from '../../lib/wikidata/search'
+
+    export default class {
+      onBeforeMount() {
+        this.state = {ready: false}
+
+        return
+        search.ready().then(() => {
+          this.update({ready: true})
+        })
+      }
+    }
+  </script>
+</wikidata-loading>

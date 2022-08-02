@@ -11,23 +11,23 @@ function deploy {
 
   # frontend
   local "npm run build"
+  local "bundle exec bin/index"
 
   # app
-  remote "ln -sfn $SHARED_PATH/env $CURRENT_PATH/.env.local"
-  remote "echo $RUBY_VERSION > $CURRENT_PATH/.ruby-version"
-  within_do $CURRENT_PATH "bundle config set --local clean 'true'"
-  within_do $CURRENT_PATH "bundle config set --local path '$SHARED_PATH/bundle.$RUBY_VERSION'"
-  within_do $CURRENT_PATH "bundle config set --local without 'test development'"
-  within_do $CURRENT_PATH "bundle --quiet"
+  # remote "ln -sfn $SHARED_PATH/env $CURRENT_PATH/.env.local"
+  # remote "echo $RUBY_VERSION > $CURRENT_PATH/.ruby-version"
+  # within_do $CURRENT_PATH "bundle config set --local clean 'true'"
+  # within_do $CURRENT_PATH "bundle config set --local path '$SHARED_PATH/bundle.$RUBY_VERSION'"
+  # within_do $CURRENT_PATH "bundle config set --local without 'test development'"
+  # within_do $CURRENT_PATH "bundle --quiet"
   remote "mkdir $CURRENT_PATH/public"
-  remote "mkdir $CURRENT_PATH/tmp"
+  # remote "mkdir $CURRENT_PATH/tmp"
   upload "frontend/public/" "$CURRENT_PATH/public/"
-  remote "touch $CURRENT_PATH/tmp/restart.txt"
+  # remote "touch $CURRENT_PATH/tmp/restart.txt"
 
-  remote "mkdir -p $SHARED_PATH/wikidata_cache"
-  remote "ln -sfn $SHARED_PATH/wikidata_cache $CURRENT_PATH/data/wikidata_cache"
-  upload "data/wikidata_cache/" "$CURRENT_PATH/data/wikidata_cache/"
-  within_do $CURRENT_PATH "bundle exec bin/index"
+  # remote "mkdir -p $SHARED_PATH/wikidata_cache"
+  # remote "ln -sfn $SHARED_PATH/wikidata_cache $CURRENT_PATH/data/wikidata_cache"
+  # upload "data/wikidata_cache/" "$CURRENT_PATH/data/wikidata_cache/"
 
   finalize
 }
