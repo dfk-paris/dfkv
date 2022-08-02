@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require './lib/dfkv'
+require './lib/wikidata'
 
-Dfkv::Tasks.index
+Wikidata::Tasks.index

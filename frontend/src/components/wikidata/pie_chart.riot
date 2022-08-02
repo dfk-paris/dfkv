@@ -7,8 +7,8 @@
   />
 
   <script>
+    import {i18n} from '@wendig/lib'
     import search from '../../lib/wikidata/search'
-
     import PieChart from '../pie_chart.riot'
 
     export default class {
@@ -16,11 +16,15 @@
         'pie-chart': PieChart
       }
 
+      constructor() {
+        this.t = i18n.translate
+      }
+
       onBeforeMount(props, state) {
         search.counts().then(data => {
           this.update({data: {
-            'Wikidata': {value: data.noRef, color: '#333333'},
-            'no reference': {value: data.wikidata, color: '#eeeeee'}
+            [this.t('no_reference')]: {value: data.noRef, color: '#333333'},
+            [this.t('wikidata')]: {value: data.wikidata, color: '#eeeeee'}
           }})
         })
       }

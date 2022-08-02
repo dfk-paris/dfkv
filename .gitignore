@@ -10,3 +10,7 @@
 /frontend/public/*.css
 /frontend/public/*.js
 /frontend/public/*.txt
+
+/frontend/public/translations.json
+/frontend/public/translations.json
+/frontend/public/entities.json

@@ -1,8 +1,6 @@
 import Database from './lib/database/database'
 import {util} from '@wendig/lib'
 
-import records from '../../data/entities.js'
-
 const db = new Database()
 onmessage = db.handler
 
@@ -42,6 +40,7 @@ const query = (data) => {
   const terms = util.fold(c['terms'])
   let ref = data.criteria['ref']
   ref = (ref ? ref.split('|') : [])
+  const dfkId = data.criteria['dfk_id']
 
   results = results.filter(record => {
     if (terms) {
@@ -62,6 +61,12 @@ const query = (data) => {
       }
     }
 
+    if (dfkId) {
+      if (record['dfk_id'] != dfkId) {
+        return false
+      }
+    }
+
     return true
   })
 
@@ -69,7 +74,7 @@ const query = (data) => {
   let refs = {}
   let letters = {}
   for (const record of results) {
-    for (const r of ['or', 'dfkv', 'pb', 'wikidata']) {
+    for (const r of storage['projects']) {
       if (ref.includes(r)) {continue}
 
       const id = record[`${r}_id`]
@@ -164,26 +169,43 @@ setTimeout(() => {init()}, 0)
 // functions
 
 const init = () => {
-  storage['records'] = enrich(records)
-  storage['register'] = toRegister(storage['records'])
-  storage['wikidataCount'] = countWikidata(storage['records'])
+  fetch('entities.json').then(r => r.json()).then(records => {
+    storage['projects'] = collectProjects(records)
+    storage['records'] = enrich(records, storage['projects'])
+    storage['register'] = toRegister(storage['records'])
+    storage['wikidataCount'] = countWikidata(storage['records'])
 
-  console.log(storage)
-  db.loaded()
+    console.log(storage)
+    db.loaded()
+  })
 }
 
-const enrich = (records) => {
+const collectProjects = (records) => {
+  const keys = {}
+  for (const r of records) {
+    for (const k of Object.keys(r)) {
+      keys[k] = true
+    }
+  }
+
+  return Object.keys(keys).
+    filter(e => e.match(/^[a-z]+_label$/)).
+    map(e => e.split('_')[0])
+}
+
+const enrich = (records, projects) => {
   return records.map(record => {
     // calc label
-    record['label'] = 
-      record['label'] ||
-      record['dfkv_label'] ||
-      record['or_label'] ||
-      record['pb_label']
+    let labels = [
+      record['label'],
+      ...projects.map(e => record[`${e}_label`])
+    ]
+
+    record['label'] = labels.filter(e => e)[0]
 
     // compile refs
     record['refs'] = {}
-    for (const k of ['or', 'pb', 'dfkv']) {
+    for (const k of projects) {
       const v = record[`${k}_id`]
       if (v) {
         record['refs'][k] = v
