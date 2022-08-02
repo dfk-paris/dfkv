@@ -8,6 +8,8 @@ import WikidataLoading from './components/wikidata/loading.riot'
 import WikidataEntities from './components/wikidata/wikidata_entities.riot'
 import WikidataPieChart from './components/wikidata/pie_chart.riot'
 
+// import FlyIn from '@dfk-paris/dfkv/frontend/src/components/fly_in.riot'
+
 i18n.fetch(`${staticUrl}/translations.json`).then(() => {
   i18n.setLocale('de')
   i18n.setFallbacks(['fr', 'de', 'en'])

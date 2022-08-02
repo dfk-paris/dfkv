@@ -42,7 +42,6 @@ module.exports = (env, argv) => {
       rules: [
         {
           test: /\.riot$/,
-          exclude: /node_modules/,
           use: [
             {
               loader: 'babel-loader',
