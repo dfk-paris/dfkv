@@ -121,6 +121,7 @@
       }
 
       onSearch(p) {
+        window.c = this
         p['letter'] = p['letter'] || 'a'
 
         search.query(p).then(data => {

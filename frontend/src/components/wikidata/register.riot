@@ -9,6 +9,12 @@
     import {Url} from '@wendig/lib'
 
     export default class {
+      onUpdated() {
+        if (!this.letters().includes(this.props.value)) {
+          this.toLetter(this.letters()[0])
+        }
+      }
+
       toLetter(letter, event) {
         if (event) {
           event.preventDefault()

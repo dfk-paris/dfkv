@@ -71,33 +71,12 @@ const params = () => {
   const result = {
     page: 1,
     perPage: 10,
+    letter: null,
     ...url.hashParams(defaults)
   }
 
   return result
 }
-
-// class UrlSearch {
-//   constructor(opts = {}) {
-//     this.opts = {...defaults, ...opts}
-
-
-//   }
-
-//   controlsChanged(newParams) {
-
-//   }
-
-//   urlChanged() {
-//     search.search(this.params())
-//   }
-
-//   updateParams(newParams) {
-//     const url = Url.current()
-//     url.updateHashParams(newParams)
-//     url.apply()
-//   }
-// }
 
 export {
   UrlSearch,

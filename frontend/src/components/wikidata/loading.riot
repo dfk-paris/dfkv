@@ -20,7 +20,6 @@
       onBeforeMount() {
         this.state = {ready: false}
 
-        return
         search.ready().then(() => {
           this.update({ready: true})
         })

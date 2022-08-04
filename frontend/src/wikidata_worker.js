@@ -15,24 +15,6 @@ db.action('register', (data) => {
   }
 })
 
-// db.action('lookup', (data) => {
-//   const id = data.id
-
-//   for (const record of storage['records']) {
-//     const match =
-//       (record['wikidata_id'] == id) ||
-//       (record['dfk_id'] == id) ||
-//       (record['or_id'] == id) ||
-//       (record['pb_id'] == id)
-
-//     if (match) {
-//       return {record: record}
-//     }
-//   }
-
-//   return {}
-// })
-
 const query = (data) => {
   let results = storage['records']
 
@@ -145,23 +127,6 @@ const elastify = (agg) => {
     buckets: util.sortBy(result, e => e.doc_count).reverse()
   }
 }
-
-// const rootUrl = () => {
-//   const u = `${location.href}`
-//   return u.replace(/\/wikidata_worker\.js/, '')
-// }
-// const promise = fetch(`${rootUrl()}/data/entities.json`).
-//   then(response => response.json()).
-//   then(data => {
-//     storage['entities'] = data
-//     console.log(`loaded entities`)
-
-//     ready = true
-//     for (const job of queue) {
-//       handler(job)
-//     }
-//     queue = []
-//   })
 
 setTimeout(() => {init()}, 0)
 
