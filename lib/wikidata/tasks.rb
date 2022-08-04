@@ -29,13 +29,13 @@ class Wikidata::Tasks
     headers = sheet.row(1).map.with_index{|e, i| sheet.row(2)[i] || sheet.row(1)[i] }
     results = []
     (3..sheet.last_row).each do |i|
-      values = sheet.row(i)
+      values = sheet.row(i).map(&:to_s)
       record = headers.zip(values).to_h.reject do |k, v|
         k.nil? || v.nil? || v == ''
       end
       results << record
     end
-    
+
     book.close
     results
   end
@@ -54,7 +54,7 @@ class Wikidata::Tasks
         failed = true
       end
 
-      unless (record.keys - ['dfk_id', 'wikidata_id']).any?{|k| k.match?(/^[a-z]+_id/)}
+      unless (record.keys - ['dfk_id', 'wikidata_id']).any?{|k| k.to_s.match?(/^[a-z]+_id/)}
         puts "record '#{JSON.dump(record)}' isn't associated with any project"
         failed = true
       end
