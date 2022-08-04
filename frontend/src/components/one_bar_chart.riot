@@ -1,0 +1,39 @@
+<one-bar-chart>
+  <div class="chart d-flex" style="height: {props.height}">
+    <div
+      class="section"
+      each={e in props.data}
+      style={styleFor(e)}
+    >{e['label']}</div>
+  </div>
+
+  <script>
+    export default class {
+      onBeforeMount() {
+        this.state = {total: this.total()}
+      }
+
+      onBeforeUpdate() {
+        this.state.total = this.total()
+        console.log(this.props.data)
+      }
+
+      styleFor(e) {
+        const base = [`width: ${e.value / this.state.total * 100}%`]
+        for (const [k, v] of Object.entries(e.style || {})) {
+          base.push(`${k}: ${v}`)
+        }
+        return base.join('; ')
+      }
+
+      total() {
+        console.log(this.props)
+        let result = 0.0
+        for (const e of this.props.data) {
+          result += e['value']
+        }
+        return result
+      }
+    }
+  </script>
+</one-bar-chart>
