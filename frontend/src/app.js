@@ -1,20 +1,24 @@
-document.querySelector('article').classList.remove('node--unpublished')
+import DfkFrontend from '@dfk-paris/frontend'
+
+DfkFrontend.configure({
+  staticUrl: staticUrl,
+  apiUrl: apiUrl
+})
 
 import './app.scss'
 
 import * as riot from 'riot'
-import {bus, BusRiotPlugin} from './lib/bus'
+import {bus, BusRiotPlugin} from '@dfk-paris/frontend/src/lib/bus'
 import {i18n, RiotPlugins} from '@wendig/lib'
 
-import Search from './components/dfkv/search.riot'
-import WatchlistTrigger from './components/dfkv/watchlist_trigger.riot'
-import WikidataEntities from './components/wikidata/wikidata_entities.riot'
-import WikidataChart from './components/wikidata/chart.riot'
+import Loading from './components/loading.riot'
+import WikidataEntities from './components/wikidata_entities.riot'
+import WikidataChart from './components/chart.riot'
 
-i18n.fetch(`${staticUrl}/translations.json`).then(() => {
-  const url = document.location.href
-  const locale = url.match(/^https:\/\/dfk-paris\.org\/([a-z]{2})/)[1]
-  i18n.setLocale(locale)
+// import FlyIn from '@dfk-paris/dfkv/frontend/src/components/fly_in.riot'
+
+i18n.fetch(`${DfkFrontend.config().staticUrl}/translations.json`).then(() => {
+  i18n.setLocale('de')
   i18n.setFallbacks(['fr', 'de', 'en'])
 
   RiotPlugins.setup(riot)
@@ -23,10 +27,9 @@ i18n.fetch(`${staticUrl}/translations.json`).then(() => {
   riot.install(RiotPlugins.setTitle)
   riot.install(BusRiotPlugin)
 
-  riot.register('dfkv', Search)
+  riot.register('wikidata-loading', Loading)
   riot.register('wikidata-entities', WikidataEntities)
-  riot.register('wikidata-chart', WikidataPieChart)
-  riot.register('dfkv-watchlist-trigger', WatchlistTrigger)
+  riot.register('wikidata-chart', WikidataChart)
 
   riot.mount('[is]')
 

@@ -82,16 +82,16 @@
   </div>
 
   <script>
-    import search from '../../lib/wikidata/search'
+    import search from '../lib/search'
     import {i18n, Url} from '@wendig/lib'
 
-    import {UrlSearch, params} from '../../lib/url_search'
+    import {UrlSearch, params} from '@dfk-paris/frontend/src/lib/url_search'
 
-    import DfkActiveFilters from '../active_filters.riot'
-    import DfkFacet from '../facet.riot'
-    import DfkInput from '../input.riot'
-    import DfkAuthorityLink from '../authority_link.riot'
-    import DfkPagination from '../pagination.riot'
+    import DfkActiveFilters from '@dfk-paris/frontend/src/components/active_filters.riot'
+    import DfkFacet from '@dfk-paris/frontend/src/components/facet.riot'
+    import DfkInput from '@dfk-paris/frontend/src/components/input.riot'
+    import DfkAuthorityLink from '@dfk-paris/frontend/src/components/authority_link.riot'
+    import Pagination from '@dfk-paris/frontend/src/components/pagination.riot'
     import WikidataRegister from './register.riot'
 
     export default class {
@@ -100,7 +100,7 @@
         'dfk-facet': DfkFacet,
         'dfk-input': DfkInput,
         'dfk-authority-link': DfkAuthorityLink,
-        'dfk-pagination': DfkPagination,
+        'dfk-pagination': Pagination,
         'wikidata-register': WikidataRegister
       }
 

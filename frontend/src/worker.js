@@ -1,4 +1,4 @@
-import Database from './lib/database/database'
+import Database from '@dfk-paris/frontend/src/lib/database'
 import {util} from '@wendig/lib'
 
 const db = new Database()

@@ -15,8 +15,7 @@ module.exports = (env, argv) => {
     mode: mode,
     entry: {
       app: __dirname + '/src/app.js',
-      standalone: __dirname + '/src/standalone.js',
-      wikidata_worker: __dirname + '/src/wikidata_worker.js'
+      worker: __dirname + '/src/worker.js'
     },
     output: {
       path: __dirname + '/public',
@@ -100,16 +99,7 @@ module.exports = (env, argv) => {
           'viewport': 'width=device-width, initial-scale=1',
         },
         'hash': true,
-        'chunks': ['standalone']
-      }),
-      new HtmlWebpackPlugin({
-        template: 'frontend/src/wikidata.ejs',
-        filename: 'wikidata.html',
-        meta: {
-          'viewport': 'width=device-width, initial-scale=1',
-        },
-        'hash': true,
-        'chunks': ['standalone']
+        'chunks': ['app']
       })
     ]
   }

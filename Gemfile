@@ -2,10 +2,6 @@ source 'https://rubygems.org'
 
 gem 'dotenv'
 
-gem 'puma'
-gem 'rack'
-gem 'rack-cors'
-
 gem 'roo'
 gem 'ruby-progressbar'
 gem 'faraday'
