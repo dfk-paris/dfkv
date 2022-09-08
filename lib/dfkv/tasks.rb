@@ -85,7 +85,16 @@ module Dfkv::Tasks
     #   orders[row['ID']] << row.to_h
     # end
 
-    self.dump_json(translations, 'frontend/public/translations.json')
+    out = {'de' => {}, 'fr' => {}, 'en' => {}}
+    translations.each do |key, data|
+      data.each do |locale, translation|
+        next if locale == 'id'
+
+        out[locale][key] = translation
+      end
+    end
+
+    self.dump_json(out, 'frontend/public/translations.json')
     self.dump_json(projects, 'frontend/public/projects.json')
 
     elastic = Dfkv::Elastic.new
