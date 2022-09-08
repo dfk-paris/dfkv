@@ -10,7 +10,9 @@ The application is implemented as a set of
 
 # Data
 
-The data is stored as tabular data and alternatively as one JSON-document in the folder "data". An illustration (data.usage.pdf) shows the relations between the tabular data.
+The data is stored as tabular data and alternatively as one JSON-document in the
+folder "data". An illustration (data.usage.pdf) shows the relations between the
+tabular data.
 
 # Development
 
