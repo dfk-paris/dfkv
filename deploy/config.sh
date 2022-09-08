@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export REPO="."
-export HOST="app@192.168.30.213"
+export HOST="app@10.10.1.33"
 export SSH_KEY="$HOME/.ssh/id_rsa"
 export PORT="22"
 export RUBY_VERSION="2.7.5"
@@ -14,6 +14,6 @@ function ng {
 
 function production {
   export DEPLOY_TO="/var/storage/host/dfkv"
-  export COMMIT="master"
+  export COMMIT="dev"
   export RUBY_VERSION="3.0.4"
 }

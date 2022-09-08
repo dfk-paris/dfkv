@@ -7,7 +7,7 @@
     >
       <div class="d-flex">
         <div>×</div>
-        <div class="ml-1">{t(`filter_${filter.param}`)}: {label(filter)}</div>
+        <div class="ml-1">{prefix(filter)}{label(filter)}</div>
       </div>
     </a>
   </div>
@@ -16,6 +16,11 @@
     export default class {
       onBeforeMount() {
         console.log(this.props)
+      }
+
+      prefix(filter) {
+        const r = this.t(`filter_${filter.param}`)
+        return r ? `${r}: ` : ''
       }
 
       label(filter) {
