@@ -82,8 +82,6 @@ class Dfkv::Elastic
     require_ok!
     result = JSON.parse(@response.body)
 
-    # binding.pry
-
     ['year', 'project_id'].each do |a|
       query = build_query(params, without: a)
       request 'post', "/#{config[:prefix]}-records/_search", nil, query
@@ -102,6 +100,18 @@ class Dfkv::Elastic
     unless params['id'].empty?
       filters << {
         'terms' => {'id' => params['id']}
+      }
+    end
+
+    to_array(params['person_id']).each do |v|
+      filters << {
+        'bool' => {
+          'should' => [
+            {'term' => {'creators.id_2' => v}},
+            {'term' => {'involved.id_2' => v}}
+          ],
+          'minimum_should_match' => 1
+        }
       }
     end
 

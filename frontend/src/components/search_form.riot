@@ -32,7 +32,8 @@
 
     <dfk-active-filters
       criteria={props.criteria}
-      params={['creator', 'journal', 'involved', 'type']}
+      params={['creator', 'journal', 'involved', 'type', 'person_id']}
+      labels={[null, null, null, null, personIdLabel]}
       remove-filter={(param, value) => removeFilter(param, value)}
     />
   </div>
@@ -102,6 +103,7 @@
       constructor() {
         this.delayedUpdateUrl = this.delayedUpdateUrl.bind(this)
         this.updateUrl = this.updateUrl.bind(this)
+        this.personIdLabel = this.personIdLabel.bind(this)
 
         this.t = i18n.translate
       }
@@ -163,13 +165,17 @@
       }
 
       hasActiveFilters() {
-        for (const k of ['creator', 'journal', 'involved', 'type']) {
+        for (const k of ['creator', 'journal', 'involved', 'type', 'person_id']) {
           if (this.props.criteria[k]) {
             return true
           }
         }
 
         return false
+      }
+
+      personIdLabel(value) {
+        return this.props.criteria.person_id_label
       }
 
       clearSearch(event) {
