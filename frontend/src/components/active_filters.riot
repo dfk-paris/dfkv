@@ -7,13 +7,25 @@
     >
       <div class="d-flex">
         <div>×</div>
-        <div class="ml-1">{t(`filter_${filter.param}`)}: {filter.value}</div>
+        <div class="ml-1">{prefix(filter)}{label(filter)}</div>
       </div>
     </a>
   </div>
 
   <script>
     export default class {
+      prefix(filter) {
+        const r = this.t(`filter_${filter.param}`)
+        return r ? `${r}: ` : ''
+      }
+
+      label(filter) {
+        const i = this.props.params.indexOf(filter.param)
+        const generator = this.props.labels[i]
+
+        return generator ? generator(filter.value) : filter.value
+      }
+
       removeFilter(event, param, value) {
         event.preventDefault()
 

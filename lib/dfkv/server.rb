@@ -51,6 +51,7 @@ class Dfkv::Server
         'project_id' => request.params['project'],
         'creator' => request.params['creator'],
         'involved' => request.params['involved'],
+        'person_id' => request.params['person_id'],
         'journal' => request.params['journal'],
         'type' => request.params['type'],
         'sort' => sort,

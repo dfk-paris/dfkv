@@ -9,4 +9,5 @@
 /frontend/public/*.html
 /frontend/public/*.css
 /frontend/public/*.js
+/frontend/public/*.json
 /frontend/public/*.txt

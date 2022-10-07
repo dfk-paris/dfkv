@@ -85,7 +85,16 @@ module Dfkv::Tasks
     #   orders[row['ID']] << row.to_h
     # end
 
-    self.dump_json(translations, 'frontend/public/translations.json')
+    out = {'de' => {}, 'fr' => {}, 'en' => {}}
+    translations.each do |key, data|
+      data.each do |locale, translation|
+        next if locale == 'id'
+
+        out[locale][key] = translation
+      end
+    end
+
+    self.dump_json(out, 'frontend/public/translations.json')
     self.dump_json(projects, 'frontend/public/projects.json')
 
     elastic = Dfkv::Elastic.new
@@ -136,16 +145,6 @@ module Dfkv::Tasks
       lookup[person['id_2']] ||= []
       lookup[person['id_2']] << person
     end
-
-    # verify there is (exactly one) label for each identity
-    lookup.each do |id_2, people|
-      count = people.select{|p| p['label'] == 1}.size
-      next if count == 1
-
-      puts "WARNING: person #{id_2} (id_2) does not have exactly one label"
-    end
-
-    # compile display_name and other_names as well as search name
     people.each do |id, person|
       others = lookup[person['id_2']].select{|e| e['display_name'] != person['display_name']}
       person['other_names'] = ([person['display_name']] + others.map{|e| e['display_name']}).uniq
@@ -155,7 +154,6 @@ module Dfkv::Tasks
         map{|person| person['display_name']}
       puts person['id_2'] if person['display_name_search'].empty?
     end
-
 
     # new_tags = []
 
