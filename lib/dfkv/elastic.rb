@@ -233,25 +233,6 @@ class Dfkv::Elastic
   def create_index(name, options = {})
     request 'put', "/#{config[:prefix]}-#{name}", nil, options
     require_ok!
-
-    # {
-    #   "settings" => {
-    #     # "number_of_shards" => 1,
-    #     # 'max_result_window' => 50000,
-    #     # "analysis" => {
-    #     #   "analyzer" => {
-    #     #     "folding" => {
-    #     #       "tokenizer" => "standard",
-    #     #       "filter" => ["lowercase", "asciifolding"]
-    #     #     },
-    #     #     'case_insensitive_sort' => {
-    #     #       'tokenizer' => 'keyword',
-    #     #       'filter' => ['lowercase']
-    #     #     }
-    #     #   }
-    #     # }
-    #   }
-    # }
   end
 
   def index_exists?(name)

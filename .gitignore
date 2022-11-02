@@ -10,4 +10,5 @@
 /frontend/public/*.css
 /frontend/public/*.js
 /frontend/public/*.json
+/frontend/public/*.json.gz
 /frontend/public/*.txt

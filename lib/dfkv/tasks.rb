@@ -253,11 +253,11 @@ module Dfkv::Tasks
       binding.pry
     end
 
-    if ENV['DUMP_DATA_TO_DESKTOP'] == 'true'
-      File.open "#{ENV['HOME']}/Desktop/data.complete.json", 'w+' do |f|
-        f.write JSON.pretty_generate(out)
-      end
+    file = 'frontend/public/data.complete.json'
+    File.open file, 'w' do |f|
+      f.write JSON.pretty_generate(out)
     end
+    system 'gzip', '-k', file
 
     elastic.bulk_commit
     elastic.refresh
