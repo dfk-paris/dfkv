@@ -39,7 +39,7 @@ module Dfkv::Tasks
     id = id.strip
 
     cache_file = "#{ENV['WIKIDATA_CACHE_DIR']}/#{id}.json"
-    return JSON.load(File.read cache_file) if File.exists?(cache_file)
+    return JSON.load(File.read cache_file) if File.exist?(cache_file)
 
     url = "https://www.wikidata.org/wiki/Special:EntityData/#{id}.json"
     puts "retrieving '#{url}'"
@@ -257,7 +257,7 @@ module Dfkv::Tasks
     File.open file, 'w' do |f|
       f.write JSON.pretty_generate(out)
     end
-    system 'gzip', '-k', file
+    system 'gzip', '-f', '-k', file
 
     elastic.bulk_commit
     elastic.refresh
