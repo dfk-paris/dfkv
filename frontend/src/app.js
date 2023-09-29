@@ -11,7 +11,7 @@ import WatchlistTrigger from './components/dfkv/watchlist_trigger.riot'
 
 i18n.fetch(`${staticUrl}/translations.json`).then(() => {
   const url = document.location.href
-  const locale = url.match(/^https:\/\/dfk-paris\.org\/([a-z]{2})/)[1]
+  const locale = url.match(/\/(de|fr|en)\//)[1]
   i18n.setLocale(locale)
   i18n.setFallbacks(['fr', 'de', 'en'])
 
