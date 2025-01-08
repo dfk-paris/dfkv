@@ -15,5 +15,5 @@ function ng {
 function production {
   export DEPLOY_TO="/var/storage/host/dfkv"
   export COMMIT="master"
-  export RUBY_VERSION="3.0.4"
+  export RUBY_VERSION="3.3.6"
 }

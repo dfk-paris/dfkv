@@ -4,4 +4,4 @@ docker run --rm -ti \
   -p 9200:9200 \
   -e 'discovery.type=single-node' \
   -e 'ES_JAVA_OPTS=-Xms1g -Xmx1g' \
-  elasticsearch:7.16.2
+  elasticsearch:7.17.26

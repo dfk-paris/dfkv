@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+gem 'logger'
+gem 'base64'
+gem 'csv'
+gem 'ostruct'
+
 gem 'dotenv'
 
 gem 'puma'
