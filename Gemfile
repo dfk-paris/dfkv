@@ -4,6 +4,7 @@ gem 'logger'
 gem 'base64'
 gem 'csv'
 gem 'ostruct'
+gem 'uri'
 
 gem 'dotenv'
 
